@@ -15,7 +15,10 @@
 // -----------------------------------------------------------------------
 
 @implementation EnterWorldScene
-@synthesize zombiePirate, player, bullet, zombiePirateWalking, background, physicsWorldNode;
+{
+    bool alreadyHit;
+}
+@synthesize zombiePirate, player, bullet, background, physicsWorldNode;
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
@@ -32,7 +35,8 @@
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
-    
+    alreadyHit = NO;
+
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
@@ -49,7 +53,7 @@
     [self addChild:self.physicsWorldNode];
 
     // Adding the Zombie Pirate Enemy
-    self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate-front.png"];
+    self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate1.png"];
     self.zombiePirate.position  = ccp(525,205);
     self.zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.zombiePirate.contentSize} cornerRadius:0];
     self.zombiePirate.physicsBody.collisionGroup = @"groupMonster";
@@ -106,6 +110,19 @@
     self.bullet.physicsBody.collisionType  = @"collisionAmmo";
     // Adding Bullet to the Physics World
     [self.physicsWorldNode addChild: self.bullet];
+    
+    //
+    int minimumTime = 10.0;
+    int maximumTime = 25.0;
+    int rangeDuration = maximumTime - minimumTime;
+    int randomDuration = (arc4random() % rangeDuration) + (minimumTime * 0.8);
+    
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(405, 205)];
+    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(430, 205)];
+    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(390, 205)];
+    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(445, 205)];
+    CCAction *actionRemove = [CCActionRemove action];
+    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4, actionRemove]]];
 
 }
 
@@ -122,7 +139,6 @@
 // -----------------------------------------------------------------------
 
 - (void)touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    
     // Setting the touchLocation CGPoint to user touched location
     CGPoint touchLocation = [touch locationInNode:self];
     // Obtaining the difference between the touchLocation CGPoint and the main characters position
@@ -157,10 +173,26 @@
 // Method to call when there is a collision between ammo  & a monster npc!
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionMonster:(CCNode *)monster collisionAmmo:(CCNode *)ammo
 {
-    // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
-    [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+    [monster stopAllActions];
+
+    if (alreadyHit == NO)
+    {
+        // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
+
+        [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+
+        CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
+        [monster runAction:actionSpin];
+        alreadyHit = YES;
+    }
+    CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
+    CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
+    
+    CCActionRemove *removeElement = [CCActionRemove action];
+    CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
+    [monster runAction:monsterDeathSequence];
     // Removing monster node from parent completely
-    [monster removeFromParent];
+   // [monster removeFromParent];
     
     return YES;
 }

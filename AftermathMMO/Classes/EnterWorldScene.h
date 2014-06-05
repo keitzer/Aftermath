@@ -24,7 +24,6 @@
 @property (nonatomic, strong) CCSprite *background;
 @property (nonatomic, strong) CCSprite *bullet;
 @property (nonatomic, strong) CCSprite *zombiePirate;
-@property (nonatomic, strong) CCSprite *zombiePirateWalking;
 @property (nonatomic, strong) CCSprite *player;
 @property (nonatomic, assign) CGPoint targetPosition;
 @property (nonatomic, assign) CCPhysicsNode *physicsWorldNode;
