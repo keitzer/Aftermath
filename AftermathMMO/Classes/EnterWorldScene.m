@@ -15,7 +15,7 @@
 // -----------------------------------------------------------------------
 
 @implementation EnterWorldScene
-@synthesize zombiePirate, player, bullet, zombiePirateWalking, background;
+@synthesize zombiePirate, player, bullet, zombiePirateWalking, background, physicsWorldNode;
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
@@ -38,16 +38,28 @@
     self.userInteractionEnabled = YES;
     
     
+    
     // Adding the Background for the Aftermath Map
     // Created Map using Tileset in app called 'Tiled' //
     self.background = [CCSprite spriteWithImageNamed:@"AftermathMap.png"];
     self.background.anchorPoint = CGPointMake(0, 0);
     [self addChild: self.background];
     
+    self.physicsWorldNode = [CCPhysicsNode node];
+    self.physicsWorldNode.collisionDelegate = self;
+    self.physicsWorldNode.debugDraw = NO;
+    self.physicsWorldNode.gravity = ccp(0,0);
+    [self addChild:self.physicsWorldNode];
+
+    
     // Adding the Zombie Pirate Enemy
     self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate-front.png"];
     self.zombiePirate.position  = ccp(525,205);
-    [self addChild: self.zombiePirate];
+    self.zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.zombiePirate.contentSize} cornerRadius:0];
+    self.zombiePirate.physicsBody.collisionGroup = @"groupMonster";
+    self.zombiePirate.physicsBody.collisionType  = @"collisionMonster";
+    [self.physicsWorldNode addChild: self.zombiePirate];
+
     
     // Adding the Player
     self.player = [CCSprite spriteWithImageNamed:@"mainCharacterInitial.png"];
@@ -83,7 +95,7 @@
 {
     // always call super onEnter first
     [super onEnter];
-    [[OALSimpleAudio sharedInstance] playBg:@"SceneTrack.mp3" loop:YES];
+    [[OALSimpleAudio sharedInstance] playBg:@"SceneTrack.mp3" volume:0.3f pan:0.5f loop:YES];
 
     // Adding the bullet projectile
     self.bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
@@ -91,8 +103,11 @@
     self.bullet.position = self.player.position;
     // Setting it visible to false, until fired (screen tapped)
     self.bullet.visible = FALSE;
-    // Adding bullet as child element
-    [self addChild: self.bullet];
+    self.bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.bullet.contentSize} cornerRadius:0];
+    self.bullet.physicsBody.collisionGroup = @"groupAmmo";
+    self.bullet.physicsBody.collisionType  = @"collisionAmmo";
+    [self.physicsWorldNode addChild: self.bullet];
+
     
 
 }
@@ -126,7 +141,7 @@
     if (!self.bullet.numberOfRunningActions)
     {
         // Playing GunShot sound when bullet is fired
-        [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3"];
+        [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
         // Moving bullet projectile to the target's tapped position
         CCActionShow *showBullet = [CCActionShow action];
         CCActionMoveTo *moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:self.targetPosition];
@@ -140,6 +155,14 @@
         [self.bullet runAction: bulletSequence];
     }
 
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionMonster:(CCNode *)monster collisionAmmo:(CCNode *)ammo
+{
+
+    [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+
+    [monster removeFromParent];
+    return YES;
 }
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks

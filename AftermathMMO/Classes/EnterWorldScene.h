@@ -16,7 +16,7 @@
 /**
  *  The main scene
  */
-@interface EnterWorldScene : CCScene
+@interface EnterWorldScene : CCScene <CCPhysicsCollisionDelegate>
 
 // -----------------------------------------------------------------------
 + (EnterWorldScene *)scene;
@@ -27,6 +27,7 @@
 @property (nonatomic, strong) CCSprite *zombiePirateWalking;
 @property (nonatomic, strong) CCSprite *player;
 @property (nonatomic, assign) CGPoint targetPosition;
+@property (nonatomic, assign) CCPhysicsNode *physicsWorldNode;
 
 // -----------------------------------------------------------------------
 @end

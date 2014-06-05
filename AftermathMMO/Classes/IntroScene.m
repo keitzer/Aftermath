@@ -60,7 +60,7 @@
 - (void) onEnter
 {
     [super onEnter];
-    [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" loop:YES];
+    [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" volume:0.3f pan:0.5f loop:YES];
 
 }
 // -----------------------------------------------------------------------
