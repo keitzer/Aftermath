@@ -22,7 +22,6 @@
 
 + (EnterWorldScene *)scene
 {
-    
     return [[self alloc] init];
 }
 
@@ -37,8 +36,6 @@
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
     
-    
-    
     // Adding the Background for the Aftermath Map
     // Created Map using Tileset in app called 'Tiled' //
     self.background = [CCSprite spriteWithImageNamed:@"AftermathMap.png"];
@@ -51,7 +48,6 @@
     self.physicsWorldNode.gravity = ccp(0,0);
     [self addChild:self.physicsWorldNode];
 
-    
     // Adding the Zombie Pirate Enemy
     self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate-front.png"];
     self.zombiePirate.position  = ccp(525,205);
@@ -60,7 +56,6 @@
     self.zombiePirate.physicsBody.collisionType  = @"collisionMonster";
     [self.physicsWorldNode addChild: self.zombiePirate];
 
-    
     // Adding the Player
     self.player = [CCSprite spriteWithImageNamed:@"mainCharacterInitial.png"];
     self.player.position  = ccp(185,205);
@@ -72,9 +67,7 @@
     backButton.position = ccp(0.85f, 0.95f); // Top Right of screen
     [backButton setTarget:self selector:@selector(onBackClicked:)];
     [self addChild: backButton];
-    
-
-    
+  
     // done
 	return self;
 }
@@ -83,8 +76,10 @@
 
 - (void)dealloc
 {
-    // clean up code goes here
-    
+    // Cleaning up code here
+    self.player = nil;
+    self.zombiePirate = nil;
+    self.bullet = nil;
 }
 
 // -----------------------------------------------------------------------
@@ -95,6 +90,8 @@
 {
     // always call super onEnter first
     [super onEnter];
+    
+    // Playing the Scene Track in the background on loop with a minimized volume from the original.
     [[OALSimpleAudio sharedInstance] playBg:@"SceneTrack.mp3" volume:0.3f pan:0.5f loop:YES];
 
     // Adding the bullet projectile
@@ -104,11 +101,11 @@
     // Setting it visible to false, until fired (screen tapped)
     self.bullet.visible = FALSE;
     self.bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.bullet.contentSize} cornerRadius:0];
+    // Setting the Collison Group & Type for further comparison later on...
     self.bullet.physicsBody.collisionGroup = @"groupAmmo";
     self.bullet.physicsBody.collisionType  = @"collisionAmmo";
+    // Adding Bullet to the Physics World
     [self.physicsWorldNode addChild: self.bullet];
-
-    
 
 }
 
@@ -116,8 +113,6 @@
 
 - (void)onExit
 {
-
-    
     // always call super onExit last
     [super onExit];
 }
@@ -135,13 +130,15 @@
     float ratio = difference.y / difference.x;
     int x = self.player.contentSize.width / 2 + self.contentSize.width;
     int y = (x * ratio) + self.player.position.y;
-    self.targetPosition = ccp(x, y);  // Or can use self.zombiePirate.position to just have it target the zombie itself, rather then where the user clicks, maybe for a newbie mode??
+    self.targetPosition = ccp(x, y);
+    // Or can use  self.targetPosition = self.zombiePirate.position to just have it target the zombie itself, rather then where the user clicks, maybe for a newbie mode?
    
     // Checking to see if the bullet current has no actions running, if so then run this sequence of events on the bullet projectile
     if (!self.bullet.numberOfRunningActions)
     {
         // Playing GunShot sound when bullet is fired
         [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+        
         // Moving bullet projectile to the target's tapped position
         CCActionShow *showBullet = [CCActionShow action];
         CCActionMoveTo *moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:self.targetPosition];
@@ -150,18 +147,21 @@
         CCActionDelay *returnBullet = [CCActionMoveTo actionWithDuration:0 position:self.player.position];
         // Action to simply delay the spam of bullets
         CCActionDelay *bulletDelay = [CCActionDelay actionWithDuration:0.6];
+        
         // Running actions in sequence, as opposed to all at the same time
         CCActionSequence* bulletSequence = [CCActionSequence actions:showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
         [self.bullet runAction: bulletSequence];
     }
 
 }
+// Method to call when there is a collision between ammo  & a monster npc!
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionMonster:(CCNode *)monster collisionAmmo:(CCNode *)ammo
 {
-
+    // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
     [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
-
+    // Removing monster node from parent completely
     [monster removeFromParent];
+    
     return YES;
 }
 // -----------------------------------------------------------------------
