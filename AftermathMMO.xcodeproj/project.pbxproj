@@ -14,6 +14,9 @@
 		9642828E193FD5C700052430 /* mainCharacterInitial.png in Resources */ = {isa = PBXBuildFile; fileRef = 9642828D193FD5C700052430 /* mainCharacterInitial.png */; };
 		96428290193FD95500052430 /* AftermathMap.png in Resources */ = {isa = PBXBuildFile; fileRef = 9642828F193FD95500052430 /* AftermathMap.png */; };
 		96428292193FE59A00052430 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 96428291193FE59A00052430 /* bullet.png */; };
+		964282951940CFFC00052430 /* Gunshot.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282931940CFFC00052430 /* Gunshot.mp3 */; };
+		964282961940CFFC00052430 /* SceneTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282941940CFFC00052430 /* SceneTrack.mp3 */; };
+		964282981940E23D00052430 /* MenuTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282971940E23D00052430 /* MenuTrack.mp3 */; };
 		96B2F10B193E673A00DF6FBD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10A193E673A00DF6FBD /* QuartzCore.framework */; };
 		96B2F10D193E673A00DF6FBD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10C193E673A00DF6FBD /* OpenGLES.framework */; };
 		96B2F10F193E673A00DF6FBD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10E193E673A00DF6FBD /* OpenAL.framework */; };
@@ -239,6 +242,9 @@
 		9642828D193FD5C700052430 /* mainCharacterInitial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainCharacterInitial.png; sourceTree = "<group>"; };
 		9642828F193FD95500052430 /* AftermathMap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AftermathMap.png; sourceTree = "<group>"; };
 		96428291193FE59A00052430 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		964282931940CFFC00052430 /* Gunshot.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Gunshot.mp3; sourceTree = "<group>"; };
+		964282941940CFFC00052430 /* SceneTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SceneTrack.mp3; sourceTree = "<group>"; };
+		964282971940E23D00052430 /* MenuTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MenuTrack.mp3; sourceTree = "<group>"; };
 		96B2F107193E673A00DF6FBD /* AftermathMMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AftermathMMO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B2F10A193E673A00DF6FBD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		96B2F10C193E673A00DF6FBD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -693,6 +699,9 @@
 		96B2F0FE193E673A00DF6FBD = {
 			isa = PBXGroup;
 			children = (
+				964282971940E23D00052430 /* MenuTrack.mp3 */,
+				964282931940CFFC00052430 /* Gunshot.mp3 */,
+				964282941940CFFC00052430 /* SceneTrack.mp3 */,
 				9642828F193FD95500052430 /* AftermathMap.png */,
 				96B2F122193E673A00DF6FBD /* AftermathMMO */,
 				96B2F109193E673A00DF6FBD /* Frameworks */,
@@ -1656,12 +1665,15 @@
 				96B2F13E193E673A00DF6FBD /* Icon-Small-50.png in Resources */,
 				96B2F327193E673C00DF6FBD /* LICENSE_Kazmath.txt in Resources */,
 				96428286193FD3E300052430 /* zombie-pirate-front.png in Resources */,
+				964282951940CFFC00052430 /* Gunshot.mp3 in Resources */,
 				96B2F132193E673A00DF6FBD /* Icon-72.png in Resources */,
 				96B2F280193E673C00DF6FBD /* LICENSE_cocos2d.txt in Resources */,
 				9642828B193FD3EB00052430 /* zombie-pirate2.png in Resources */,
 				96B2F129193E673A00DF6FBD /* Default-568h@2x.png in Resources */,
 				96B2F149193E673A00DF6FBD /* iTunesArtwork in Resources */,
 				96428290193FD95500052430 /* AftermathMap.png in Resources */,
+				964282961940CFFC00052430 /* SceneTrack.mp3 in Resources */,
+				964282981940E23D00052430 /* MenuTrack.mp3 in Resources */,
 				96B2F144193E673A00DF6FBD /* Icon-Spotlight-iOS7.png in Resources */,
 				96B2F138193E673A00DF6FBD /* Icon-76@2x.png in Resources */,
 				96B2F3AC193E673C00DF6FBD /* LICENSE_Chipmunk.txt in Resources */,

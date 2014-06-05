@@ -34,6 +34,8 @@
     self = [super init];
     if (!self) return(nil);
     
+
+    
     // Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
@@ -55,7 +57,12 @@
     // done
 	return self;
 }
+- (void) onEnter
+{
+    [super onEnter];
+    [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" loop:YES];
 
+}
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
