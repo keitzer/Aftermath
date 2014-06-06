@@ -18,6 +18,8 @@
 		964282961940CFFC00052430 /* SceneTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282941940CFFC00052430 /* SceneTrack.mp3 */; };
 		964282981940E23D00052430 /* MenuTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282971940E23D00052430 /* MenuTrack.mp3 */; };
 		9642829C1940EF3600052430 /* Zombie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9642829B1940EF3600052430 /* Zombie.mp3 */; };
+		9642829F194128C400052430 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9642829E194128C400052430 /* GameOverScene.m */; };
+		964282A119412C9300052430 /* DeathByZombie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 964282A019412C9300052430 /* DeathByZombie.mp3 */; };
 		96B2F10B193E673A00DF6FBD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10A193E673A00DF6FBD /* QuartzCore.framework */; };
 		96B2F10D193E673A00DF6FBD /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10C193E673A00DF6FBD /* OpenGLES.framework */; };
 		96B2F10F193E673A00DF6FBD /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96B2F10E193E673A00DF6FBD /* OpenAL.framework */; };
@@ -247,6 +249,9 @@
 		964282941940CFFC00052430 /* SceneTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SceneTrack.mp3; sourceTree = "<group>"; };
 		964282971940E23D00052430 /* MenuTrack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = MenuTrack.mp3; sourceTree = "<group>"; };
 		9642829B1940EF3600052430 /* Zombie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Zombie.mp3; sourceTree = "<group>"; };
+		9642829D194128C400052430 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
+		9642829E194128C400052430 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		964282A019412C9300052430 /* DeathByZombie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = DeathByZombie.mp3; sourceTree = "<group>"; };
 		96B2F107193E673A00DF6FBD /* AftermathMMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AftermathMMO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B2F10A193E673A00DF6FBD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		96B2F10C193E673A00DF6FBD /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -701,6 +706,7 @@
 		96B2F0FE193E673A00DF6FBD = {
 			isa = PBXGroup;
 			children = (
+				964282A019412C9300052430 /* DeathByZombie.mp3 */,
 				9642829B1940EF3600052430 /* Zombie.mp3 */,
 				964282971940E23D00052430 /* MenuTrack.mp3 */,
 				964282931940CFFC00052430 /* Gunshot.mp3 */,
@@ -1577,6 +1583,8 @@
 				96B2F3B3193E673C00DF6FBD /* AppDelegate.m */,
 				96B2F3B5193E673C00DF6FBD /* EnterWorldScene.h */,
 				96B2F3B6193E673C00DF6FBD /* EnterWorldScene.m */,
+				9642829D194128C400052430 /* GameOverScene.h */,
+				9642829E194128C400052430 /* GameOverScene.m */,
 				96B2F3B8193E673C00DF6FBD /* IntroScene.h */,
 				96B2F3B9193E673C00DF6FBD /* IntroScene.m */,
 			);
@@ -1653,6 +1661,7 @@
 			files = (
 				96B2F127193E673A00DF6FBD /* Default@2x.png in Resources */,
 				9642828A193FD3EB00052430 /* zombie-pirate1.png in Resources */,
+				964282A119412C9300052430 /* DeathByZombie.mp3 in Resources */,
 				9642829C1940EF3600052430 /* Zombie.mp3 in Resources */,
 				96B2F13A193E673A00DF6FBD /* Icon-120.png in Resources */,
 				96428292193FE59A00052430 /* bullet.png in Resources */,
@@ -1815,6 +1824,7 @@
 				96B2F16D193E673B00DF6FBD /* CCAnimationCache.m in Sources */,
 				96B2F2F1193E673C00DF6FBD /* CCTableView.m in Sources */,
 				96B2F3B4193E673C00DF6FBD /* AppDelegate.m in Sources */,
+				9642829F194128C400052430 /* GameOverScene.m in Sources */,
 				96B2F184193E673B00DF6FBD /* CCDrawingPrimitives.m in Sources */,
 				96B2F275193E673B00DF6FBD /* TGAlib.m in Sources */,
 				96B2F241193E673B00DF6FBD /* UITouch+CC.m in Sources */,

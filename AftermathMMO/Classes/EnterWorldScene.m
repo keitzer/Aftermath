@@ -9,15 +9,14 @@
 
 #import "EnterWorldScene.h"
 #import "IntroScene.h"
+#import "GameOverScene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - EnterWorldScene
 // -----------------------------------------------------------------------
 
 @implementation EnterWorldScene
-{
-    bool alreadyHit;
-}
+
 @synthesize zombiePirate, player, bullet, background, physicsWorldNode;
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
@@ -35,7 +34,6 @@
     // Apple recommend assigning self with supers return value
     self = [super init];
     if (!self) return(nil);
-    alreadyHit = NO;
 
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
@@ -52,18 +50,14 @@
     self.physicsWorldNode.gravity = ccp(0,0);
     [self addChild:self.physicsWorldNode];
 
-    // Adding the Zombie Pirate Enemy
-    self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate1.png"];
-    self.zombiePirate.position  = ccp(525,205);
-    self.zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.zombiePirate.contentSize} cornerRadius:0];
-    self.zombiePirate.physicsBody.collisionGroup = @"groupMonster";
-    self.zombiePirate.physicsBody.collisionType  = @"collisionMonster";
-    [self.physicsWorldNode addChild: self.zombiePirate];
-
     // Adding the Player
     self.player = [CCSprite spriteWithImageNamed:@"mainCharacterInitial.png"];
     self.player.position  = ccp(185,205);
-    [self addChild: self.player];
+    self.player.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.player.contentSize} cornerRadius:0];
+    self.player.physicsBody.collisionGroup = @"groupPlayer";
+    self.player.physicsBody.collisionType  = @"collisionPlayer";
+    [self.physicsWorldNode addChild: self.player];
+
     
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
@@ -101,29 +95,17 @@
     // Adding the bullet projectile
     self.bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
     // Positioning the bullet
-    self.bullet.position = self.player.position;
+    self.bullet.position = ccp(0,0);
     // Setting it visible to false, until fired (screen tapped)
     self.bullet.visible = FALSE;
     self.bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.bullet.contentSize} cornerRadius:0];
     // Setting the Collison Group & Type for further comparison later on...
-    self.bullet.physicsBody.collisionGroup = @"groupAmmo";
+    self.bullet.physicsBody.collisionGroup = @"groupPlayer";
     self.bullet.physicsBody.collisionType  = @"collisionAmmo";
     // Adding Bullet to the Physics World
     [self.physicsWorldNode addChild: self.bullet];
     
-    //
-    int minimumTime = 10.0;
-    int maximumTime = 25.0;
-    int rangeDuration = maximumTime - minimumTime;
-    int randomDuration = (arc4random() % rangeDuration) + (minimumTime * 0.8);
-    
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(405, 205)];
-    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(430, 205)];
-    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(390, 205)];
-    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(445, 205)];
-    CCAction *actionRemove = [CCActionRemove action];
-    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4, actionRemove]]];
-
+    [self schedule:@selector(spawnMonster) interval:2.5];
 }
 
 // -----------------------------------------------------------------------
@@ -156,6 +138,7 @@
         [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
         
         // Moving bullet projectile to the target's tapped position
+        CCActionMoveTo *repositionBullet = [CCActionMoveTo actionWithDuration:0 position:self.player.position];
         CCActionShow *showBullet = [CCActionShow action];
         CCActionMoveTo *moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:self.targetPosition];
         CCActionRemove *hideBullet = [CCActionHide action];
@@ -165,7 +148,7 @@
         CCActionDelay *bulletDelay = [CCActionDelay actionWithDuration:0.6];
         
         // Running actions in sequence, as opposed to all at the same time
-        CCActionSequence* bulletSequence = [CCActionSequence actions:showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
+        CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
         [self.bullet runAction: bulletSequence];
     }
 
@@ -175,27 +158,58 @@
 {
     [monster stopAllActions];
 
-    if (alreadyHit == NO)
-    {
+    
         // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
 
         [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
 
         CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
         [monster runAction:actionSpin];
-        alreadyHit = YES;
-    }
+
     CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
     CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
     
     CCActionRemove *removeElement = [CCActionRemove action];
     CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
     [monster runAction:monsterDeathSequence];
-    // Removing monster node from parent completely
-   // [monster removeFromParent];
-    
     return YES;
 }
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionPlayer:(CCNode *)user collisionMonster:(CCNode *)monster
+{
+    [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
+
+    CCActionRemove *removeElement = [CCActionRemove action];
+    [user runAction:removeElement];
+  
+    [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+    return YES;
+}
+- (void)spawnMonster {
+    // Adding the Zombie Pirate Enemy
+    self.zombiePirate = [CCSprite spriteWithImageNamed:@"zombie-pirate1.png"];
+    self.zombiePirate.position  = ccp(525,205);
+    self.zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.zombiePirate.contentSize} cornerRadius:0];
+    self.zombiePirate.physicsBody.collisionGroup = @"groupMonster";
+    self.zombiePirate.physicsBody.collisionType  = @"collisionMonster";
+    [self.physicsWorldNode addChild: self.zombiePirate];
+
+    
+    int minimumTime = 10.0;
+    int maximumTime = 25.0;
+    int rangeDuration = maximumTime - minimumTime;
+    int randomDuration = (arc4random() % rangeDuration) + (minimumTime * 0.8);
+    
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(100, 205)];
+    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(430, 205)];
+    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(390, 205)];
+    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(445, 205)];
+    CCAction *actionRemove = [CCActionRemove action];
+    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4, actionRemove]]];
+
+}
+
+
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
