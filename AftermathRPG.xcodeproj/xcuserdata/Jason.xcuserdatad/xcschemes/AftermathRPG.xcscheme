@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96B2F106193E673A00DF6FBD"
-               BuildableName = "AftermathMMO.app"
-               BlueprintName = "AftermathMMO"
-               ReferencedContainer = "container:AftermathMMO.xcodeproj">
+               BlueprintIdentifier = "96C3A37C1946C83E001D40D4"
+               BuildableName = "AftermathRPG.app"
+               BlueprintName = "AftermathRPG"
+               ReferencedContainer = "container:AftermathRPG.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96B2F106193E673A00DF6FBD"
-            BuildableName = "AftermathMMO.app"
-            BlueprintName = "AftermathMMO"
-            ReferencedContainer = "container:AftermathMMO.xcodeproj">
+            BlueprintIdentifier = "96C3A37C1946C83E001D40D4"
+            BuildableName = "AftermathRPG.app"
+            BlueprintName = "AftermathRPG"
+            ReferencedContainer = "container:AftermathRPG.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -51,10 +51,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96B2F106193E673A00DF6FBD"
-            BuildableName = "AftermathMMO.app"
-            BlueprintName = "AftermathMMO"
-            ReferencedContainer = "container:AftermathMMO.xcodeproj">
+            BlueprintIdentifier = "96C3A37C1946C83E001D40D4"
+            BuildableName = "AftermathRPG.app"
+            BlueprintName = "AftermathRPG"
+            ReferencedContainer = "container:AftermathRPG.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -69,10 +69,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "96B2F106193E673A00DF6FBD"
-            BuildableName = "AftermathMMO.app"
-            BlueprintName = "AftermathMMO"
-            ReferencedContainer = "container:AftermathMMO.xcodeproj">
+            BlueprintIdentifier = "96C3A37C1946C83E001D40D4"
+            BuildableName = "AftermathRPG.app"
+            BlueprintName = "AftermathRPG"
+            ReferencedContainer = "container:AftermathRPG.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

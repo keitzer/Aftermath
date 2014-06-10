@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  AftermathMMO
+//  AftermathRPG
 //
-//  Created by Jason Woolard on 6/3/14.
+//  Created by Jason Woolard on 6/10/14.
 //  Copyright Jason Woolard 2014. All rights reserved.
 //
 // -----------------------------------------------------------------------

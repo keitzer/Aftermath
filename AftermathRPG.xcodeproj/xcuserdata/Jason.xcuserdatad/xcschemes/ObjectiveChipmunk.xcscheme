@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "96B2F11D193E673A00DF6FBD"
+               BlueprintIdentifier = "96C3A3931946C83E001D40D4"
                BuildableName = "libObjectiveChipmunk.a"
                BlueprintName = "ObjectiveChipmunk"
-               ReferencedContainer = "container:AftermathMMO.xcodeproj">
+               ReferencedContainer = "container:AftermathRPG.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

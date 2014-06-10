@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AftermathMMO.xcscheme</key>
+		<key>AftermathRPG.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -17,12 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>96B2F106193E673A00DF6FBD</key>
+		<key>96C3A37C1946C83E001D40D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>96B2F11D193E673A00DF6FBD</key>
+		<key>96C3A3931946C83E001D40D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

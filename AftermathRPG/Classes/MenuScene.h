@@ -1,8 +1,8 @@
 //
-//  IntroScene.h
-//  AftermathMMO
+//  MenuScene.h
+//  AftermathRPG
 //
-//  Created by Jason Woolard on 6/3/14.
+//  Created by Jason Woolard on 6/10/14.
 //  Copyright Jason Woolard 2014. All rights reserved.
 //
 // -----------------------------------------------------------------------
@@ -14,16 +14,16 @@
 // -----------------------------------------------------------------------
 
 /**
- *  The intro scene
+ *  The menu scene
  *  Note, that scenes should now be based on CCScene, and not CCLayer, as previous versions
  *  Main usage for CCLayer now, is to make colored backgrounds (rectangles)
  *
  */
-@interface IntroScene : CCScene
+@interface MenuScene : CCScene
 
 // -----------------------------------------------------------------------
 
-+ (IntroScene *)scene;
++ (MenuScene *)scene;
 - (id)init;
 
 // -----------------------------------------------------------------------

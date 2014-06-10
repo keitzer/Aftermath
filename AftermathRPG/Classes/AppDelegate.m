@@ -1,15 +1,15 @@
 //
 //  AppDelegate.m
-//  AftermathMMO
+//  AftermathRPG
 //
-//  Created by Jason Woolard on 6/3/14.
+//  Created by Jason Woolard on 6/10/14.
 //  Copyright Jason Woolard 2014. All rights reserved.
 //
 // -----------------------------------------------------------------------
 
 #import "AppDelegate.h"
-#import "IntroScene.h"
-#import "EnterWorldScene.h"
+#import "MenuScene.h"
+#import "Level1Scene.h"
 
 @implementation AppDelegate
 
@@ -49,7 +49,7 @@
 -(CCScene *)startScene
 {
 	// This method should return the very first scene to be run when your app starts.
-	return [IntroScene scene];
+	return [MenuScene scene];
 }
 
 @end

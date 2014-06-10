@@ -1,27 +1,27 @@
 //
-//  IntroScene.m
-//  AftermathMMO
+//  MenuScene.m
+//  AftermathRPG
 //
-//  Created by Jason Woolard on 6/3/14.
+//  Created by Jason Woolard on 6/10/14.
 //  Copyright Jason Woolard 2014. All rights reserved.
 //
 // -----------------------------------------------------------------------
 
 // Import the interfaces
-#import "IntroScene.h"
-#import "EnterWorldScene.h"
+#import "MenuScene.h"
+#import "Level1Scene.h"
 
 // -----------------------------------------------------------------------
-#pragma mark - IntroScene
+#pragma mark - MenuScene
 // -----------------------------------------------------------------------
 
-@implementation IntroScene
+@implementation MenuScene
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (IntroScene *)scene
++ (MenuScene *)scene
 {
 	return [[self alloc] init];
 }
@@ -34,21 +34,19 @@
     self = [super init];
     if (!self) return(nil);
     
-
-    
     // Create a colored background (Dark Grey)
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
     
     // Hello world
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Aftermath:MMO" fontName:@"Chalkduster" fontSize:36.0f];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
     label.position = ccp(0.5f, 0.5f); // Middle of screen
     [self addChild:label];
     
     // Helloworld scene button
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Enter World ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
     helloWorldButton.position = ccp(0.5f, 0.35f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
@@ -57,12 +55,7 @@
     // done
 	return self;
 }
-- (void) onEnter
-{
-    [super onEnter];
-    [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" volume:0.3f pan:0.5f loop:YES];
 
-}
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
@@ -70,7 +63,7 @@
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[EnterWorldScene scene]
+    [[CCDirector sharedDirector] replaceScene:[Level1Scene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
