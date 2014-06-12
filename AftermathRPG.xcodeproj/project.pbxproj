@@ -222,6 +222,8 @@
 		9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EA194A4CF100D42DB1 /* zombieBoss.png */; };
 		9627A2F5194A4CF100D42DB1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EB194A4CF100D42DB1 /* zombieHuman.png */; };
 		9627A2F6194A4CF100D42DB1 /* zombieHumanTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */; };
+		9627A2FB194A636100D42DB1 /* Level1GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2FA194A636100D42DB1 /* Level1GameLayer.m */; };
+		9627A2FE194A636D00D42DB1 /* HudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2FD194A636D00D42DB1 /* HudLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -673,6 +675,10 @@
 		9627A2EA194A4CF100D42DB1 /* zombieBoss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieBoss.png; sourceTree = "<group>"; };
 		9627A2EB194A4CF100D42DB1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
 		9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHumanTwo.png; sourceTree = "<group>"; };
+		9627A2F9194A636100D42DB1 /* Level1GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1GameLayer.h; sourceTree = "<group>"; };
+		9627A2FA194A636100D42DB1 /* Level1GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1GameLayer.m; sourceTree = "<group>"; };
+		9627A2FC194A636D00D42DB1 /* HudLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HudLayer.h; sourceTree = "<group>"; };
+		9627A2FD194A636D00D42DB1 /* HudLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HudLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1566,6 +1572,10 @@
 				9627A2D3194A4B8400D42DB1 /* AppDelegate.m */,
 				9627A2D5194A4B8400D42DB1 /* Level1Scene.h */,
 				9627A2D6194A4B8400D42DB1 /* Level1Scene.m */,
+				9627A2F9194A636100D42DB1 /* Level1GameLayer.h */,
+				9627A2FA194A636100D42DB1 /* Level1GameLayer.m */,
+				9627A2FC194A636D00D42DB1 /* HudLayer.h */,
+				9627A2FD194A636D00D42DB1 /* HudLayer.m */,
 				9627A2D8194A4B8400D42DB1 /* IntroScene.h */,
 				9627A2D9194A4B8400D42DB1 /* IntroScene.m */,
 			);
@@ -1769,6 +1779,7 @@
 				9627A15E194A4B8300D42DB1 /* CCGLView.m in Sources */,
 				9627A121194A4B8300D42DB1 /* CCSprite.m in Sources */,
 				9627A07D194A4B8200D42DB1 /* CCActionInterval.m in Sources */,
+				9627A2FE194A636D00D42DB1 /* HudLayer.m in Sources */,
 				9627A0EC194A4B8200D42DB1 /* CCPhysicsJoint.m in Sources */,
 				9627A0CA194A4B8200D42DB1 /* CCMotionStreak.m in Sources */,
 				9627A07A194A4B8200D42DB1 /* CCActionInstant.m in Sources */,
@@ -1781,6 +1792,7 @@
 				9627A239194A4B8300D42DB1 /* plane.c in Sources */,
 				9627A1BC194A4B8300D42DB1 /* OALSimpleAudio.m in Sources */,
 				9627A0AE194A4B8200D42DB1 /* CCGLProgram.m in Sources */,
+				9627A2FB194A636100D42DB1 /* Level1GameLayer.m in Sources */,
 				9627A2D0194A4B8400D42DB1 /* main.m in Sources */,
 				9627A1E3194A4B8300D42DB1 /* OALAudioSession.m in Sources */,
 				9627A25A194A4B8300D42DB1 /* CCBLocalizationManager.m in Sources */,
