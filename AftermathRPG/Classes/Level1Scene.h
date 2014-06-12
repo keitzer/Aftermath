@@ -1,5 +1,5 @@
 //
-//  GameScene.h
+//  Level1Scene.h
 //  AftermathRPG
 //
 //  Created by Jason Woolard on 6/12/14.
@@ -16,18 +16,23 @@
 /**
  *  The main scene
  */
-@interface GameScene : CCScene
+@interface Level1Scene : CCScene
 {
-    CCTiledMap *theMap;
+    // Maps & Layers
+    CCTiledMap *levelOneMap;
+    CCTiledMapLayer *metaTileLayer;
+    
+    // Sprites
     CCSprite *mainChar;
-
-
 }
 // -----------------------------------------------------------------------
 
-+ (GameScene *)scene;
++ (Level1Scene *)scene;
 - (id)init;
-@property (nonatomic, retain) CCTiledMap *theMap;
+
+// Properties
+@property (nonatomic, retain) CCTiledMap *levelOneMap;
+@property (nonatomic, retain) CCTiledMapLayer *metaTileLayer;
 @property (nonatomic, retain) CCSprite *mainChar;
 
 // -----------------------------------------------------------------------

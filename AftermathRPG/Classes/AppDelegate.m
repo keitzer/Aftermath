@@ -9,7 +9,7 @@
 
 #import "AppDelegate.h"
 #import "IntroScene.h"
-#import "GameScene.h"
+#import "Level1Scene.h"
 
 @implementation AppDelegate
 

@@ -210,9 +210,9 @@
 		9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2CB194A4B8400D42DB1 /* LICENSE_Chipmunk.txt */; };
 		9627A2D0194A4B8400D42DB1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2CF194A4B8400D42DB1 /* main.m */; };
 		9627A2D4194A4B8400D42DB1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2D3194A4B8400D42DB1 /* AppDelegate.m */; };
-		9627A2D7194A4B8400D42DB1 /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2D6194A4B8400D42DB1 /* GameScene.m */; };
+		9627A2D7194A4B8400D42DB1 /* Level1Scene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2D6194A4B8400D42DB1 /* Level1Scene.m */; };
 		9627A2DA194A4B8400D42DB1 /* IntroScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2D9194A4B8400D42DB1 /* IntroScene.m */; };
-		9627A2ED194A4CF100D42DB1 /* AftermathRpg.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E3194A4CF100D42DB1 /* AftermathRpg.tmx */; };
+		9627A2ED194A4CF100D42DB1 /* Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E3194A4CF100D42DB1 /* Level1.tmx */; };
 		9627A2EE194A4CF100D42DB1 /* dagger.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E4194A4CF100D42DB1 /* dagger.png */; };
 		9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E5194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png */; };
 		9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E6194A4CF100D42DB1 /* mainChar.png */; };
@@ -659,11 +659,11 @@
 		9627A2CF194A4B8400D42DB1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		9627A2D2194A4B8400D42DB1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
 		9627A2D3194A4B8400D42DB1 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = Classes/AppDelegate.m; sourceTree = "<group>"; };
-		9627A2D5194A4B8400D42DB1 /* GameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GameScene.h; path = Classes/GameScene.h; sourceTree = "<group>"; };
-		9627A2D6194A4B8400D42DB1 /* GameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GameScene.m; path = Classes/GameScene.m; sourceTree = "<group>"; };
+		9627A2D5194A4B8400D42DB1 /* Level1Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Level1Scene.h; path = Classes/Level1Scene.h; sourceTree = "<group>"; };
+		9627A2D6194A4B8400D42DB1 /* Level1Scene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Level1Scene.m; path = Classes/Level1Scene.m; sourceTree = "<group>"; };
 		9627A2D8194A4B8400D42DB1 /* IntroScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IntroScene.h; path = Classes/IntroScene.h; sourceTree = "<group>"; };
 		9627A2D9194A4B8400D42DB1 /* IntroScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = IntroScene.m; path = Classes/IntroScene.m; sourceTree = "<group>"; };
-		9627A2E3194A4CF100D42DB1 /* AftermathRpg.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = AftermathRpg.tmx; sourceTree = "<group>"; };
+		9627A2E3194A4CF100D42DB1 /* Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Level1.tmx; sourceTree = "<group>"; };
 		9627A2E4194A4CF100D42DB1 /* dagger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dagger.png; sourceTree = "<group>"; };
 		9627A2E5194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DungeonCrawl_ProjectUtumnoTileset.png; sourceTree = "<group>"; };
 		9627A2E6194A4CF100D42DB1 /* mainChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainChar.png; sourceTree = "<group>"; };
@@ -699,16 +699,6 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
-				9627A2E3194A4CF100D42DB1 /* AftermathRpg.tmx */,
-				9627A2E4194A4CF100D42DB1 /* dagger.png */,
-				9627A2E5194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png */,
-				9627A2E6194A4CF100D42DB1 /* mainChar.png */,
-				9627A2E7194A4CF100D42DB1 /* meta_tiles.png */,
-				9627A2E8194A4CF100D42DB1 /* PathAndObjects_0.png */,
-				9627A2E9194A4CF100D42DB1 /* zombiePirate.png */,
-				9627A2EA194A4CF100D42DB1 /* zombieBoss.png */,
-				9627A2EB194A4CF100D42DB1 /* zombieHuman.png */,
-				9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */,
 				9627A042194A4B8200D42DB1 /* AftermathRPG */,
 				9627A029194A4B8200D42DB1 /* Frameworks */,
 				9627A028194A4B8200D42DB1 /* Products */,
@@ -743,9 +733,9 @@
 		9627A042194A4B8200D42DB1 /* AftermathRPG */ = {
 			isa = PBXGroup;
 			children = (
+				9627A2D1194A4B8400D42DB1 /* Classes */,
 				9627A043194A4B8200D42DB1 /* Resources */,
 				9627A06C194A4B8200D42DB1 /* Libraries */,
-				9627A2D1194A4B8400D42DB1 /* Classes */,
 				9627A2CD194A4B8400D42DB1 /* Supporting Files */,
 			);
 			path = AftermathRPG;
@@ -754,6 +744,8 @@
 		9627A043194A4B8200D42DB1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9627A2F7194A4F9C00D42DB1 /* Image Assets */,
+				9627A2F8194A4FA400D42DB1 /* Maps */,
 				9627A044194A4B8200D42DB1 /* Default.png */,
 				9627A046194A4B8200D42DB1 /* Default@2x.png */,
 				9627A048194A4B8200D42DB1 /* Default-568h@2x.png */,
@@ -1572,12 +1564,38 @@
 			children = (
 				9627A2D2194A4B8400D42DB1 /* AppDelegate.h */,
 				9627A2D3194A4B8400D42DB1 /* AppDelegate.m */,
-				9627A2D5194A4B8400D42DB1 /* GameScene.h */,
-				9627A2D6194A4B8400D42DB1 /* GameScene.m */,
+				9627A2D5194A4B8400D42DB1 /* Level1Scene.h */,
+				9627A2D6194A4B8400D42DB1 /* Level1Scene.m */,
 				9627A2D8194A4B8400D42DB1 /* IntroScene.h */,
 				9627A2D9194A4B8400D42DB1 /* IntroScene.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		9627A2F7194A4F9C00D42DB1 /* Image Assets */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2E4194A4CF100D42DB1 /* dagger.png */,
+				9627A2E5194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png */,
+				9627A2E6194A4CF100D42DB1 /* mainChar.png */,
+				9627A2E7194A4CF100D42DB1 /* meta_tiles.png */,
+				9627A2E8194A4CF100D42DB1 /* PathAndObjects_0.png */,
+				9627A2E9194A4CF100D42DB1 /* zombiePirate.png */,
+				9627A2EA194A4CF100D42DB1 /* zombieBoss.png */,
+				9627A2EB194A4CF100D42DB1 /* zombieHuman.png */,
+				9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */,
+			);
+			name = "Image Assets";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		9627A2F8194A4FA400D42DB1 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2E3194A4CF100D42DB1 /* Level1.tmx */,
+			);
+			name = Maps;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1655,7 +1673,7 @@
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
-				9627A2ED194A4CF100D42DB1 /* AftermathRpg.tmx in Resources */,
+				9627A2ED194A4CF100D42DB1 /* Level1.tmx in Resources */,
 				9627A050194A4B8200D42DB1 /* Icon@2x.png in Resources */,
 				9627A062194A4B8200D42DB1 /* Icon-Small@2x.png in Resources */,
 				9627A054194A4B8200D42DB1 /* Icon-72@2x.png in Resources */,
@@ -1787,7 +1805,7 @@
 				9627A11D194A4B8300D42DB1 /* ccShaders.m in Sources */,
 				9627A231194A4B8300D42DB1 /* matrix.c in Sources */,
 				9627A143194A4B8300D42DB1 /* CCTiledMapLayer.m in Sources */,
-				9627A2D7194A4B8400D42DB1 /* GameScene.m in Sources */,
+				9627A2D7194A4B8400D42DB1 /* Level1Scene.m in Sources */,
 				9627A237194A4B8300D42DB1 /* neon_matrix_impl.c in Sources */,
 				9627A0BC194A4B8200D42DB1 /* CCLabelTTF.m in Sources */,
 				9627A171194A4B8300D42DB1 /* NSEvent+CC.m in Sources */,
@@ -2029,6 +2047,7 @@
 				9627A2DF194A4B8400D42DB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9627A2E0194A4B8400D42DB1 /* Build configuration list for PBXNativeTarget "AftermathRPG" */ = {
 			isa = XCConfigurationList;
@@ -2037,6 +2056,7 @@
 				9627A2E2194A4B8400D42DB1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,5 +1,5 @@
 //
-//  GameScene.m
+//  Level1Scene.m
 //  AftermathRPG
 //
 //  Created by Jason Woolard on 6/12/14.
@@ -7,21 +7,21 @@
 //
 // -----------------------------------------------------------------------
 
-#import "GameScene.h"
+#import "Level1Scene.h"
 #import "IntroScene.h"
 
 // -----------------------------------------------------------------------
-#pragma mark - GameScene
+#pragma mark - Level1Scene
 // -----------------------------------------------------------------------
 
-@implementation GameScene
-@synthesize  theMap, mainChar;
+@implementation Level1Scene
+@synthesize  levelOneMap, mainChar, metaTileLayer;
 
 // -----------------------------------------------------------------------
 #pragma mark - Create & Destroy
 // -----------------------------------------------------------------------
 
-+ (GameScene *)scene
++ (Level1Scene *)scene
 {
     return [[self alloc] init];
 }
@@ -36,10 +36,12 @@
     
     // Enable touch handling on scene node
     self.userInteractionEnabled = YES;
-    self.theMap     =   [CCTiledMap tiledMapWithFile:@"AftermathRpg.tmx"];
+    self.levelOneMap = [CCTiledMap tiledMapWithFile:@"Level1.tmx"];
+    self.metaTileLayer = [levelOneMap layerNamed:@"Meta"];
+    metaTileLayer.visible = NO;
 
     
-    CCTiledMapObjectGroup *objects  =    [theMap objectGroupNamed:@"mainChar"];
+    CCTiledMapObjectGroup *objects  =    [levelOneMap objectGroupNamed:@"mainChar"];
     NSMutableDictionary *startPoint =    [objects objectNamed:@"startPosition"];
     int x = [[startPoint valueForKey:@"x"] intValue];
     int y = [[startPoint valueForKey:@"y"] intValue];
@@ -48,7 +50,7 @@
     mainChar.position = ccp(x,y);
     [self addChild:mainChar];
     
-    [self addChild:theMap z:-1];
+    [self addChild:levelOneMap z:-1];
 
     // Create a back button
     CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];

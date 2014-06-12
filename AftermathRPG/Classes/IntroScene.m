@@ -9,7 +9,7 @@
 
 // Import the interfaces
 #import "IntroScene.h"
-#import "GameScene.h"
+#import "Level1Scene.h"
 
 // -----------------------------------------------------------------------
 #pragma mark - IntroScene
@@ -39,14 +39,14 @@
     [self addChild:background];
     
     // Hello world
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Hello World" fontName:@"Chalkduster" fontSize:36.0f];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Aftermath RPG" fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;
     label.color = [CCColor redColor];
     label.position = ccp(0.5f, 0.5f); // Middle of screen
     [self addChild:label];
     
     // Helloworld scene button
-    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Start ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+    CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Play ]" fontName:@"Verdana-Bold" fontSize:18.0f];
     helloWorldButton.positionType = CCPositionTypeNormalized;
     helloWorldButton.position = ccp(0.5f, 0.35f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
@@ -63,7 +63,7 @@
 - (void)onSpinningClicked:(id)sender
 {
     // start spinning scene with transition
-    [[CCDirector sharedDirector] replaceScene:[GameScene scene]
+    [[CCDirector sharedDirector] replaceScene:[Level1Scene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 }
 
