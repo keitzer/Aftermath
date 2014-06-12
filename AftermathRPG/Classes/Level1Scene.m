@@ -39,8 +39,9 @@
     self.levelOneMap = [CCTiledMap tiledMapWithFile:@"Level1.tmx"];
     self.metaTileLayer = [levelOneMap layerNamed:@"Meta"];
     metaTileLayer.visible = NO;
+    self.contentSize = levelOneMap.contentSize;
+    [self addChild:levelOneMap z:-1];
 
-    
     CCTiledMapObjectGroup *objects0  =    [levelOneMap objectGroupNamed:@"mainChar"];
     NSMutableDictionary *startPoint0 =    [objects0 objectNamed:@"startPosition"];
     int x0 = [[startPoint0 valueForKey:@"x"] intValue];
@@ -50,23 +51,22 @@
     mainChar.position = ccp(x0,y0);
     [self addChild:mainChar];
     
-    [self addChild:levelOneMap z:-1];
     
     CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
     NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
     int x1 = [[startPoint1 valueForKey:@"x"] intValue];
     int y1 = [[startPoint1 valueForKey:@"y"] intValue];
     
-    self.mainChar     = [CCSprite spriteWithImageNamed:@"zombiePirate.png"];
-    mainChar.position = ccp(x1,y1);
-    [self addChild:mainChar];
+    self.zombiePirate     = [CCSprite spriteWithImageNamed:@"zombiePirate.png"];
+    zombiePirate.position = ccp(x1,y1);
+    [self addChild:zombiePirate];
     
     CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
     NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
     int x2 = [[startPoint2 valueForKey:@"x"] intValue];
     int y2 = [[startPoint2 valueForKey:@"y"] intValue];
     
-    self.zombieHumanOne     = [CCSprite spriteWithImageNamed:@"zombieHuman.png"];
+    self.zombieHumanOne     = [CCSprite spriteWithImageNamed:@"zombieHumanTwo.png"];
     zombieHumanOne.position = ccp(x2,y2);
     [self addChild:zombieHumanOne];
 
@@ -75,7 +75,7 @@
     int x3 = [[startPoint3 valueForKey:@"x"] intValue];
     int y3 = [[startPoint3 valueForKey:@"y"] intValue];
     
-    self.zombieHumanTwo     = [CCSprite spriteWithImageNamed:@"zombieHumanTwo.png"];
+    self.zombieHumanTwo     = [CCSprite spriteWithImageNamed:@"zombieHuman.png"];
     zombieHumanTwo.position = ccp(x3,y3);
     [self addChild:zombieHumanTwo];
 
@@ -106,6 +106,109 @@
 
     // done
 	return self;
+}
+- (void)setCenterOfScreen:(CGPoint) position {
+    // Setting the user's screensize to a CGSize var to be used
+    CGSize screenSize = [[CCDirector sharedDirector] viewSize];
+    // Setting x and y integers to the max value of positions' x & y to the center of the screen
+    int x = MAX(position.x, screenSize.width / 2);
+    int y = MAX(position.y, screenSize.height / 2);
+    // Setting the minimum x / y center to the maps width & height times the  maps individual tileSize (total size), minus the users viewsize / 2
+    x = MIN(x, levelOneMap.mapSize.width * levelOneMap.tileSize.width - screenSize.width / 2);
+    y = MIN(y, levelOneMap.mapSize.height * levelOneMap.tileSize.height - screenSize.height / 2);
+    // Setting the
+    CGPoint goodPoint = ccp(x,y);
+    // Obtaining center of screen and storing it to centerOfScreen var
+    CGPoint centerOfScreen = ccp(screenSize.width / 2, screenSize.height / 2);
+    // Subtracting the difference between the center of the user's screen & goodPoint
+    CGPoint difference = ccpSub(centerOfScreen, goodPoint);
+    // Setting the position to the difference
+    self.position = difference;
+}
+-(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    // Storing touched location
+    CGPoint touchLoc = [touch locationInNode:self];
+    // Storing current players location, as well as the difference between the touched location and player position
+    CGPoint playerPos = mainChar.position;
+    CGPoint diff = ccpSub(touchLoc, playerPos);
+    
+    // If the abstract value of the difference in X is greater then Y's...
+    // Meaning, did the user tap further left or right then up or down based on their current position...
+    // If further left or right..
+    if (abs(diff.x) > abs(diff.y))
+    {
+       // If difference in x is greater than 0
+        if (diff.x > 0)
+        {
+            // Move player to the right a tile
+            playerPos.x += levelOneMap.tileSize.width;
+        }
+        else
+        {
+            // Move player to the left a tile
+
+            playerPos.x -= levelOneMap.tileSize.width;
+        }
+    }
+    // Further up or down..
+    else
+    {
+        if (diff.y > 0)
+        {
+            // Move player up a tile
+            playerPos.y += levelOneMap.tileSize.height;
+            
+        }
+        else
+        {
+            // Move player down a tiles
+            playerPos.y -= levelOneMap.tileSize.height;
+            
+        }
+    }
+    // If player's position is less then or equal to the level's map size, and it's greater than 0,0
+    // than...set the player's position
+    if (playerPos.x <= (levelOneMap.mapSize.width * levelOneMap.tileSize.width) &&
+        playerPos.y <= (levelOneMap.mapSize.height * levelOneMap.tileSize.height) &&
+        playerPos.y >= 0 &&
+        playerPos.x >= 0)
+    {
+        [self setPlayerPosition:playerPos];
+    }
+    // Setting the center of screen on the character
+    [self setCenterOfScreen:mainChar.position];
+}
+- (void) setPlayerPosition:(CGPoint)position
+{
+    NSLog(@"Setting Player Position!");
+    // Obtaining user's requested position and storing it into CGPoint
+    CGPoint mapTileCoords = [self returnCoordsFromPosition:position];
+    // Obtaining tileGID properties for requested tile position
+    int tileGidCheck = [metaTileLayer tileGIDAt:mapTileCoords];
+    // If indeed in the metaLayer, and contains collidable property set to true, then return out of method and prevent location from being set
+    if (tileGidCheck) {
+        NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck];
+        if (properties) {
+            // Setting properties Collidable to be checked, then performing the appropriate action after checking tile
+            NSString *checkCollision = properties[@"Collidable"];
+            if (checkCollision && [checkCollision isEqualToString:@"True"]) {
+                // Return out of method / ie. do not call the mainChar.position = position line beneath this conditional
+                return;
+                NSLog(@"Meta Tile (Wall Blocker) detected!");
+            }
+        }
+    }
+    // Setting characters position, granted no collison detected
+    mainChar.position = position;
+}
+// Add new method
+- (CGPoint)returnCoordsFromPosition:(CGPoint)position {
+    // Obtaining and returning coordinates from position
+    int x = position.x / levelOneMap.tileSize.width;
+    int y = ((levelOneMap.mapSize.height * levelOneMap.tileSize.height) - position.y) / levelOneMap.tileSize.height;
+    
+    return ccp(x, y);
 }
 
 // -----------------------------------------------------------------------
@@ -142,15 +245,7 @@
 #pragma mark - Touch Handler
 // -----------------------------------------------------------------------
 
--(void) touchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    CGPoint touchLoc = [touch locationInNode:self];
-     // Log touch location
-    CCLOG(@"Move sprite to @ %@",NSStringFromCGPoint(touchLoc));
-    
-//    // Move our sprite to touch location
-//    CCActionMoveTo *actionMove = [CCActionMoveTo actionWithDuration:1.0f position:touchLoc];
-//    [_sprite runAction:actionMove];
-}
+
 
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
