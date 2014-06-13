@@ -10,6 +10,8 @@
 // Importing cocos2d.h and cocos2d-ui.h, will import anything you need to start using Cocos2D v3
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import "Level1GameLayer.h"
+#import "HudLayer.h"
 
 // -----------------------------------------------------------------------
 
@@ -18,17 +20,7 @@
  */
 @interface Level1Scene : CCScene
 {
-    // Maps & Layers
-    CCTiledMap *levelOneMap;
-    CCTiledMapLayer *metaTileLayer;
-    
-    // Sprites
-    CCSprite *mainChar;
-    CCSprite *zombiePirate;
-    CCSprite *zombieHumanOne;
-    CCSprite *zombieHumanTwo;
-    CCSprite *zombieBoss;
-    CCSprite *dagger;
+
 
 }
 // -----------------------------------------------------------------------
@@ -37,14 +29,8 @@
 - (id)init;
 
 // Properties
-@property (nonatomic, retain) CCTiledMap *levelOneMap;
-@property (nonatomic, retain) CCTiledMapLayer *metaTileLayer;
-@property (nonatomic, retain) CCSprite *mainChar;
-@property (nonatomic, retain) CCSprite *zombiePirate;
-@property (nonatomic, retain) CCSprite *zombieHumanOne;
-@property (nonatomic, retain) CCSprite *zombieHumanTwo;
-@property (nonatomic, retain) CCSprite *zombieBoss;
-@property (nonatomic, retain) CCSprite *dagger;
+@property (nonatomic, retain) Level1GameLayer *gameLayer;
+@property (nonatomic ,retain) HudLayer *hudLayer;
 
 // -----------------------------------------------------------------------
 @end

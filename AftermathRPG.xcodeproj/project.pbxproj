@@ -1568,16 +1568,9 @@
 		9627A2D1194A4B8400D42DB1 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				9627A2D2194A4B8400D42DB1 /* AppDelegate.h */,
-				9627A2D3194A4B8400D42DB1 /* AppDelegate.m */,
-				9627A2D5194A4B8400D42DB1 /* Level1Scene.h */,
-				9627A2D6194A4B8400D42DB1 /* Level1Scene.m */,
-				9627A2F9194A636100D42DB1 /* Level1GameLayer.h */,
-				9627A2FA194A636100D42DB1 /* Level1GameLayer.m */,
-				9627A2FC194A636D00D42DB1 /* HudLayer.h */,
-				9627A2FD194A636D00D42DB1 /* HudLayer.m */,
-				9627A2D8194A4B8400D42DB1 /* IntroScene.h */,
-				9627A2D9194A4B8400D42DB1 /* IntroScene.m */,
+				9627A303194A647800D42DB1 /* App Delegate */,
+				9627A302194A645800D42DB1 /* Intro Scene */,
+				9627A2FF194A643800D42DB1 /* Level 1 Scene */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1606,6 +1599,53 @@
 			);
 			name = Maps;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		9627A2FF194A643800D42DB1 /* Level 1 Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9627A300194A643F00D42DB1 /* Scene */,
+				9627A301194A644E00D42DB1 /* Layers */,
+			);
+			name = "Level 1 Scene";
+			sourceTree = "<group>";
+		};
+		9627A300194A643F00D42DB1 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2D5194A4B8400D42DB1 /* Level1Scene.h */,
+				9627A2D6194A4B8400D42DB1 /* Level1Scene.m */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		9627A301194A644E00D42DB1 /* Layers */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2F9194A636100D42DB1 /* Level1GameLayer.h */,
+				9627A2FA194A636100D42DB1 /* Level1GameLayer.m */,
+				9627A2FC194A636D00D42DB1 /* HudLayer.h */,
+				9627A2FD194A636D00D42DB1 /* HudLayer.m */,
+			);
+			name = Layers;
+			sourceTree = "<group>";
+		};
+		9627A302194A645800D42DB1 /* Intro Scene */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2D8194A4B8400D42DB1 /* IntroScene.h */,
+				9627A2D9194A4B8400D42DB1 /* IntroScene.m */,
+			);
+			name = "Intro Scene";
+			sourceTree = "<group>";
+		};
+		9627A303194A647800D42DB1 /* App Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				9627A2D2194A4B8400D42DB1 /* AppDelegate.h */,
+				9627A2D3194A4B8400D42DB1 /* AppDelegate.m */,
+			);
+			name = "App Delegate";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

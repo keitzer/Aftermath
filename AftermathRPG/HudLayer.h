@@ -7,6 +7,8 @@
 //
 
 #import "CCNode.h"
+#import "cocos2d-ui.h"
+#import "cocos2d.h"
 
 @interface HudLayer : CCNode
 
