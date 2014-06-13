@@ -35,6 +35,7 @@
 -(void)updateZombiesKilled:(NSString*)value
 {
     zombiesKilled.string = value;
+    NSLog(@"Zombies should be updated...");
 }
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
@@ -48,4 +49,42 @@
 }
 
 // -----------------------------------------------------------------------
+- (void) onEnter
+{
+    [super onEnter];
+    NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
+    
+    [notiCenter addObserver:self
+                   selector:@selector(onUpdateZombieText:)
+                       name:@"HudLayerUpdateZombieNotification"
+                     object:nil];
+}
+- (void)onExit
+{
+    [super onExit];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)onUpdateZombieText:(NSNotification *)notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    
+    if (userInfo)
+    {
+        NSString* text = userInfo[@"zombiesKilled"];
+        
+        if (text)
+        {
+            [self updateZombiesKilled:text];
+        }
+        else
+        {
+            CCLOG(@"Text parameter invalid for zombies killed!.");
+        }
+    }
+    else
+    {
+        CCLOG(@"invalid user info for zombies killed!");
+    }
+}
 @end

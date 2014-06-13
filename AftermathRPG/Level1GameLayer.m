@@ -13,6 +13,7 @@
 @implementation Level1GameLayer
 {
     BOOL holdingDagger;
+    int zombiesDropped;
 }
 @synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode;
 
@@ -52,6 +53,8 @@
         
         
         holdingDagger = NO;
+        zombiesDropped = 0;
+        
         NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
 
     }
@@ -136,7 +139,7 @@
 {
     NSLog(@"Setting Player Position!");
 
-    [hud updateZombiesKilled:@"Zombies Killed: 1"];
+   
     // Obtaining user's requested position and storing it into CGPoint
     CGPoint mapTileCoords = [self returnCoordsFromPosition:position];
     // Obtaining tileGID properties for requested tile position
@@ -268,6 +271,14 @@
         CCActionRemove *removeElement = [CCActionRemove action];
         CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
         [monster runAction:monsterDeathSequence];
+        
+        zombiesDropped++;
+        NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
+        NSString* notiName = @"HudLayerUpdateZombieNotification";
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:notiName
+                                                            object:self userInfo:userInfo];
+
     }
     else
     {
