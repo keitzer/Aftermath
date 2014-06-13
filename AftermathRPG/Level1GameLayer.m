@@ -48,8 +48,11 @@
         
         // Spawning Sprites to Scene
         [self spawnLevelOneSprites];
+        [self schedule:@selector(animateMonsters) interval:12];
+        
         
         holdingDagger = NO;
+        NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
 
     }
     return self;
@@ -170,6 +173,7 @@
     // Setting characters position, granted no collison detected
     [mainChar runAction:[CCActionMoveTo actionWithDuration:0.1 position:position]];
 }
+
 // Add new method
 - (CGPoint)returnCoordsFromPosition:(CGPoint)position {
     // Obtaining and returning coordinates from position
@@ -278,5 +282,33 @@
     }
         return YES;
 }
+- (void)animateMonsters {
+  
+    int minimumTime = 3.0;
+    int maximumTime = 6.0;
+    int rangeDuration = maximumTime - minimumTime;
+    int randomDuration = (arc4random() % rangeDuration) + (minimumTime * 0.8);
+    
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(350, 220)];
+    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(368, 220)];
+    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(345, 220)];
+    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(360, 220)];
+    
+    CCAction *actionMove5 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(695, 331)];
+    CCAction *actionMove6 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(682, 331)];
+    CCAction *actionMove7 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(700, 331)];
+    CCAction *actionMove8 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(682, 331)];
+    
+    CCAction *actionMove9 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(834, 423)];
+    CCAction *actionMove10 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(849, 423)];
+    CCAction *actionMove11 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(829, 423)];
+    CCAction *actionMove12 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(848, 423)];
+    
+    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4]]];
+    [self.zombieHumanOne runAction:[CCActionSequence actionWithArray:@[actionMove5, actionMove6, actionMove7, actionMove8]]];
+    [self.zombieHumanTwo runAction:[CCActionSequence actionWithArray:@[actionMove9, actionMove10, actionMove11, actionMove12]]];
+
+}
+
 
 @end

@@ -42,7 +42,13 @@
 		// Make iPad's act like they run at a 2x content scale. (iPad retina 4x)
 //		CCSetupTabletScale2X: @(YES),
 	}];
-	
+    
+    // Preloading Audio
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"DeathByZombie.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"Zombie.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"Gunshot.mp3"];
+
+
 	return YES;
 }
 
