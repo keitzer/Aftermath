@@ -9,8 +9,9 @@
 #import "CCNode.h"
 #import "cocos2d.h"
 #import "cocos2d-ui.h"
+#import "HudLayer.h"
 
-@interface Level1GameLayer : CCNode
+@interface Level1GameLayer : CCNode <CCPhysicsCollisionDelegate>
 {
     // Maps & Layers
     CCTiledMap *levelOneMap;
@@ -23,6 +24,7 @@
     CCSprite *zombieHumanTwo;
     CCSprite *zombieBoss;
     CCSprite *dagger;
+    HudLayer *hud;
 }
 // Properties
 @property (nonatomic, retain) CCTiledMap *levelOneMap;
@@ -33,5 +35,5 @@
 @property (nonatomic, retain) CCSprite *zombieHumanTwo;
 @property (nonatomic, retain) CCSprite *zombieBoss;
 @property (nonatomic, retain) CCSprite *dagger;
-
+@property (nonatomic, assign) CCPhysicsNode *physicsWorldNode;
 @end

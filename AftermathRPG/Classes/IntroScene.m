@@ -51,7 +51,8 @@
     helloWorldButton.position = ccp(0.5f, 0.35f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
     [self addChild:helloWorldButton];
-
+    
+    [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" volume:0.3f pan:0.5f loop:YES];
     // done
 	return self;
 }

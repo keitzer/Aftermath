@@ -33,14 +33,13 @@
     self = [super init];
     if (!self) return(nil);
     
+    // Adding the game layer node to the scene
     self.gameLayer = [Level1GameLayer node];
     [self addChild:gameLayer z:-1];
     
-    hudLayer = [HudLayer node];
+    // Adding the hud layer node to the scene
+    self.hudLayer = [HudLayer node];
     [self addChild:hudLayer z:1];
-    
-
-     
    
 	return self;
 }
@@ -61,10 +60,8 @@
     // always call super onEnter first
     [super onEnter];
     
-    // In pre-v3, touch enable and scheduleUpdate was called here
-    // In v3, touch is enabled by setting userInterActionEnabled for the individual nodes
-    // Per frame update is automatically enabled, if update is overridden
-    
+    // Playing the Scene Track in the background on loop with a minimized volume from the original.
+    [[OALSimpleAudio sharedInstance] playBg:@"SceneTrack.mp3" volume:0.3f pan:0.5f loop:YES];
 }
 
 // -----------------------------------------------------------------------

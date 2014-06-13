@@ -24,13 +24,17 @@
         [backButton setTarget:self selector:@selector(onBackClicked:)];
         [self addChild:backButton];
         
-        CCLabelTTF *zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
+        zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
         zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.1 );
         [self addChild:zombiesKilled];
         
         
     }
     return self;
+}
+-(void)updateZombiesKilled:(NSString*)value
+{
+    zombiesKilled.string = value;
 }
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks

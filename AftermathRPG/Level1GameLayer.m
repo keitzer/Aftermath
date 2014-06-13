@@ -7,9 +7,15 @@
 //
 
 #import "Level1GameLayer.h"
+#import "GameOverScene.h"
+#import "HudLayer.h"
 
 @implementation Level1GameLayer
-@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger;
+{
+    BOOL holdingDagger;
+}
+@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode;
+
 - (id)init
 {
     self = [super init];
@@ -18,66 +24,32 @@
     {
         // Enable touch handling on scene node
         self.userInteractionEnabled = YES;
+        
+        // Setting the levelOneMap to the one created in Tiled
         self.levelOneMap = [CCTiledMap tiledMapWithFile:@"Level1.tmx"];
+        
+        // Setting the Meta Layer to the layer created to prevent players from colliding, and allow them to pick up items throughout the level
         self.metaTileLayer = [levelOneMap layerNamed:@"Meta"];
+        
+        // Making Meta Layer invisible, as they're acting rather then providing visual appearance
         metaTileLayer.visible = NO;
+        
+        // Setting content size of layer to the map size
         self.contentSize = levelOneMap.contentSize;
+        
+        // Adding Map to the Scene
         [self addChild:levelOneMap z:-1];
         
-        CCTiledMapObjectGroup *objects0  =    [levelOneMap objectGroupNamed:@"mainChar"];
-        NSMutableDictionary *startPoint0 =    [objects0 objectNamed:@"startPosition"];
-        int x0 = [[startPoint0 valueForKey:@"x"] intValue];
-        int y0 = [[startPoint0 valueForKey:@"y"] intValue];
+        self.physicsWorldNode = [CCPhysicsNode node];
+        self.physicsWorldNode.collisionDelegate = self;
+        self.physicsWorldNode.debugDraw = NO;
+        self.physicsWorldNode.gravity = ccp(0,0);
+        [self addChild:self.physicsWorldNode];
         
-        self.mainChar     = [CCSprite spriteWithImageNamed:@"mainChar.png"];
-        mainChar.position = ccp(x0,y0);
-        [self addChild:mainChar];
+        // Spawning Sprites to Scene
+        [self spawnLevelOneSprites];
         
-        
-        CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
-        NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
-        int x1 = [[startPoint1 valueForKey:@"x"] intValue];
-        int y1 = [[startPoint1 valueForKey:@"y"] intValue];
-        
-        self.zombiePirate     = [CCSprite spriteWithImageNamed:@"zombiePirate.png"];
-        zombiePirate.position = ccp(x1,y1);
-        [self addChild:zombiePirate];
-        
-        CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
-        NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
-        int x2 = [[startPoint2 valueForKey:@"x"] intValue];
-        int y2 = [[startPoint2 valueForKey:@"y"] intValue];
-        
-        self.zombieHumanOne     = [CCSprite spriteWithImageNamed:@"zombieHumanTwo.png"];
-        zombieHumanOne.position = ccp(x2,y2);
-        [self addChild:zombieHumanOne];
-        
-        CCTiledMapObjectGroup *objects3  =    [levelOneMap objectGroupNamed:@"zombieChar2"];
-        NSMutableDictionary *startPoint3 =    [objects3 objectNamed:@"startPoint"];
-        int x3 = [[startPoint3 valueForKey:@"x"] intValue];
-        int y3 = [[startPoint3 valueForKey:@"y"] intValue];
-        
-        self.zombieHumanTwo     = [CCSprite spriteWithImageNamed:@"zombieHuman.png"];
-        zombieHumanTwo.position = ccp(x3,y3);
-        [self addChild:zombieHumanTwo];
-        
-        CCTiledMapObjectGroup *objects4  =    [levelOneMap objectGroupNamed:@"zombieBoss"];
-        NSMutableDictionary *startPoint4 =    [objects4 objectNamed:@"startPoint"];
-        int x4 = [[startPoint4 valueForKey:@"x"] intValue];
-        int y4 = [[startPoint4 valueForKey:@"y"] intValue];
-        
-        self.zombieBoss     = [CCSprite spriteWithImageNamed:@"zombieBoss.png"];
-        zombieBoss.position = ccp(x4,y4);
-        [self addChild:zombieBoss];
-        
-        CCTiledMapObjectGroup *objects5  =    [levelOneMap objectGroupNamed:@"spawn"];
-        NSMutableDictionary *startPoint5 =    [objects5 objectNamed:@"daggerSpawn"];
-        int x5 = [[startPoint5 valueForKey:@"x"] intValue];
-        int y5 = [[startPoint5 valueForKey:@"y"] intValue];
-        
-        self.dagger     = [CCSprite spriteWithImageNamed:@"dagger.png"];
-        dagger.position = ccp(x5,y5);
-        [self addChild:dagger];
+        holdingDagger = NO;
 
     }
     return self;
@@ -160,6 +132,8 @@
 - (void) setPlayerPosition:(CGPoint)position
 {
     NSLog(@"Setting Player Position!");
+
+    [hud updateZombiesKilled:@"Zombies Killed: 1"];
     // Obtaining user's requested position and storing it into CGPoint
     CGPoint mapTileCoords = [self returnCoordsFromPosition:position];
     // Obtaining tileGID properties for requested tile position
@@ -170,10 +144,26 @@
         if (properties) {
             // Setting properties Collidable to be checked, then performing the appropriate action after checking tile
             NSString *checkCollision = properties[@"Collidable"];
+            NSString *checkCollectable = properties[@"Collectable"];
+
             if (checkCollision && [checkCollision isEqualToString:@"True"]) {
                 // Return out of method / ie. do not call the mainChar.position = position line beneath this conditional
                 return;
                 NSLog(@"Meta Tile (Wall Blocker) detected!");
+            }
+            else if (checkCollectable && [checkCollectable isEqualToString:@"True"])
+            {
+                NSLog(@"Meta Tile (Collectable) detected!");
+
+                CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
+                    [dagger removeFromParentAndCleanup:YES];
+                    holdingDagger = YES;
+                }];
+                [dagger runAction:blockAction];
+            }
+            else
+            {
+                
             }
         }
     }
@@ -187,6 +177,106 @@
     int y = ((levelOneMap.mapSize.height * levelOneMap.tileSize.height) - position.y) / levelOneMap.tileSize.height;
     
     return ccp(x, y);
+}
+- (void)spawnLevelOneSprites
+{
+    CCTiledMapObjectGroup *objects0  =    [levelOneMap objectGroupNamed:@"mainChar"];
+    NSMutableDictionary *startPoint0 =    [objects0 objectNamed:@"startPosition"];
+    int x0 = [[startPoint0 valueForKey:@"x"] intValue];
+    int y0 = [[startPoint0 valueForKey:@"y"] intValue];
+    self.mainChar     = [CCSprite spriteWithImageNamed:@"mainChar.png"];
+    mainChar.position = ccp(x0,y0);
+    mainChar.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, mainChar.contentSize} cornerRadius:0];
+    mainChar.physicsBody.collisionGroup = @"groupPlayer";
+    mainChar.physicsBody.collisionType = @"collisionPlayer";
+    [self.physicsWorldNode addChild: mainChar];
+    
+    
+    CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
+    NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
+    int x1 = [[startPoint1 valueForKey:@"x"] intValue];
+    int y1 = [[startPoint1 valueForKey:@"y"] intValue];
+    self.zombiePirate     = [CCSprite spriteWithImageNamed:@"zombiePirate.png"];
+    zombiePirate.position = ccp(x1,y1);
+    zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombiePirate.contentSize} cornerRadius:0];
+    zombiePirate.physicsBody.collisionGroup = @"groupMonster";
+    zombiePirate.physicsBody.collisionType = @"collisionMonster";
+    [self.physicsWorldNode addChild: zombiePirate];
+
+    CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
+    NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
+    int x2 = [[startPoint2 valueForKey:@"x"] intValue];
+    int y2 = [[startPoint2 valueForKey:@"y"] intValue];
+    self.zombieHumanOne     = [CCSprite spriteWithImageNamed:@"zombieHumanTwo.png"];
+    zombieHumanOne.position = ccp(x2,y2);
+    zombieHumanOne.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombieHumanOne.contentSize} cornerRadius:0];
+    zombieHumanOne.physicsBody.collisionGroup = @"groupMonster";
+    zombieHumanOne.physicsBody.collisionType = @"collisionMonster";
+    [self.physicsWorldNode addChild: zombieHumanOne];
+    
+    CCTiledMapObjectGroup *objects3  =    [levelOneMap objectGroupNamed:@"zombieChar2"];
+    NSMutableDictionary *startPoint3 =    [objects3 objectNamed:@"startPoint"];
+    int x3 = [[startPoint3 valueForKey:@"x"] intValue];
+    int y3 = [[startPoint3 valueForKey:@"y"] intValue];
+    self.zombieHumanTwo     = [CCSprite spriteWithImageNamed:@"zombieHuman.png"];
+    zombieHumanTwo.position = ccp(x3,y3);
+    zombieHumanTwo.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombieHumanTwo.contentSize} cornerRadius:0];
+    zombieHumanTwo.physicsBody.collisionGroup = @"groupMonster";
+    zombieHumanTwo.physicsBody.collisionType = @"collisionMonster";
+    [self.physicsWorldNode addChild: zombieHumanTwo];
+    
+    CCTiledMapObjectGroup *objects4  =    [levelOneMap objectGroupNamed:@"zombieBoss"];
+    NSMutableDictionary *startPoint4 =    [objects4 objectNamed:@"startPoint"];
+    int x4 = [[startPoint4 valueForKey:@"x"] intValue];
+    int y4 = [[startPoint4 valueForKey:@"y"] intValue];
+    self.zombieBoss     = [CCSprite spriteWithImageNamed:@"zombieBoss.png"];
+    zombieBoss.position = ccp(x4,y4);
+    zombieBoss.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombieBoss.contentSize} cornerRadius:0];
+    zombieBoss.physicsBody.collisionGroup = @"groupMonster";
+    zombieBoss.physicsBody.collisionType = @"collisionMonster";
+    [self.physicsWorldNode addChild: zombieBoss];
+
+    CCTiledMapObjectGroup *objects5  =    [levelOneMap objectGroupNamed:@"spawn"];
+    NSMutableDictionary *startPoint5 =    [objects5 objectNamed:@"daggerSpawn"];
+    int x5 = [[startPoint5 valueForKey:@"x"] intValue];
+    int y5 = [[startPoint5 valueForKey:@"y"] intValue];
+    self.dagger     = [CCSprite spriteWithImageNamed:@"dagger.png"];
+    dagger.position = ccp(x5,y5);
+    [self addChild:dagger];
+}
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionPlayer:(CCNode *)user collisionMonster:(CCNode *)monster
+{
+    if (holdingDagger)
+    {
+        [monster stopAllActions];
+        
+        
+        // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
+        
+        [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+        
+        CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
+        [monster runAction:actionSpin];
+        
+        CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
+        CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
+        
+        CCActionRemove *removeElement = [CCActionRemove action];
+        CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
+        [monster runAction:monsterDeathSequence];
+    }
+    else
+    {
+        [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
+        
+        CCActionRemove *removeElement = [CCActionRemove action];
+        [user runAction:removeElement];
+        
+        [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]
+                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+
+    }
+        return YES;
 }
 
 @end

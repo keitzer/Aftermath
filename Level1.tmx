@@ -65,7 +65,7 @@
  </objectgroup>
  <layer name="Meta" width="30" height="20">
   <data encoding="base64" compression="zlib">
-   eJxjYMAE7Iz4Ma0APrMJyRGDCZmNTQ2pZqLLkesnUsFQt5fSNEeJveTIEaufkvRIrr3kgqFiL7XKJ3LtxaaGVEyqvfQCg91eWoczvvglxS+kug0mxgHFtK5rCbl1FFAHAABUBwRz
+   eJxjYMAE7Iz4Ma0APrMJyRGDCZmNTQ2pZqLLkesnUgG17B0o/1Ka5iixlxw5YvVTkh7JtZdcMFTspVb5RK692NSQikm1l16AWHsHyr+0thebPnLSFalug4lxQDGpdpILKM1DowA/AABdvwUb
   </data>
  </layer>
  <layer name="overlay-2" width="30" height="20">

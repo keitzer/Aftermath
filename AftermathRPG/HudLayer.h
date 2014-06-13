@@ -11,5 +11,8 @@
 #import "cocos2d.h"
 
 @interface HudLayer : CCNode
-
+{
+    CCLabelTTF *zombiesKilled;
+}
+-(void)updateZombiesKilled:(NSString*)value;
 @end
