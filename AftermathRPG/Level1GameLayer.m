@@ -168,7 +168,7 @@
         }
     }
     // Setting characters position, granted no collison detected
-    mainChar.position = position;
+    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.1 position:position]];
 }
 // Add new method
 - (CGPoint)returnCoordsFromPosition:(CGPoint)position {
