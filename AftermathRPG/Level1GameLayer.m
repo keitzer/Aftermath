@@ -100,12 +100,18 @@
         {
             // Move player to the right a tile
             playerPos.x += levelOneMap.tileSize.width * 0.5;
+            self.mainChar.flipX = NO;
+            [mainChar runAnimation:@"AnimateChar"];
+
         }
         else
         {
             // Move player to the left a tile
             
             playerPos.x -= levelOneMap.tileSize.width * 0.5;
+            self.mainChar.flipX = YES;
+            [mainChar runAnimation:@"AnimateChar"];
+
         }
     }
     // Further up or down..
@@ -116,12 +122,17 @@
             // Move player up a tile
             playerPos.y += levelOneMap.tileSize.height;
             
+            [mainChar runAnimation:@"AnimateChar-N"];
+
         }
         else
         {
             // Move player down a tiles
             playerPos.y -= levelOneMap.tileSize.height;
             
+            [mainChar runAnimation:@"AnimateChar-S"];
+
+
         }
     }
     // If player's position is less then or equal to the level's map size, and it's greater than 0,0
@@ -132,7 +143,6 @@
         playerPos.x >= 0)
     {
         [self setPlayerPosition:playerPos];
-        [mainChar runAnimation:@"AnimateChar"];
     }
     // Setting the center of screen on the character
     [self setCenterOfScreen:mainChar.position];
@@ -198,11 +208,14 @@
     int y0 = [[startPoint0 valueForKey:@"y"] intValue];
     self.mainChar     = [CCAnimatedSprite animatedSpriteWithPlist:@"AnimateChar.plist"];
     mainChar.position = ccp(x0,y0);
-    [mainChar setFrame:@"AnimateChar-1.png"];
+    [mainChar setFrame:@"AnimateChar-S-1.png"];
     mainChar.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, mainChar.contentSize} cornerRadius:0];
     mainChar.physicsBody.collisionGroup = @"groupPlayer";
     mainChar.physicsBody.collisionType = @"collisionPlayer";
     [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar"];
+    [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar-N"];
+    [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar-S"];
+
     [self.physicsWorldNode addChild: mainChar];
     
         
@@ -272,8 +285,8 @@
         CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
         [monster runAction:actionSpin];
         
-        CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
-        CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
+        CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.6];
+        CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.3];
         
         CCActionRemove *removeElement = [CCActionRemove action];
         CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
@@ -298,7 +311,7 @@
                                    withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
 
     }
-        return YES;
+        return NO;
 }
 - (void)animateMonsters {
   

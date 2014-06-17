@@ -7,7 +7,7 @@
             <key>AnimateChar-1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{66,2},{30,35}}</string>
+                <string>{{2,76},{30,35}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -20,7 +20,7 @@
             <key>AnimateChar-2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{34,2},{30,35}}</string>
+                <string>{{2,39},{30,35}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -43,6 +43,84 @@
                 <key>sourceSize</key>
                 <string>{30,35}</string>
             </dict>
+            <key>AnimateChar-N-1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{33,186},{29,34}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,34}}</string>
+                <key>sourceSize</key>
+                <string>{29,34}</string>
+            </dict>
+            <key>AnimateChar-N-2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,187},{29,34}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,34}}</string>
+                <key>sourceSize</key>
+                <string>{29,34}</string>
+            </dict>
+            <key>AnimateChar-N-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{33,150},{29,34}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,34}}</string>
+                <key>sourceSize</key>
+                <string>{29,34}</string>
+            </dict>
+            <key>AnimateChar-S-1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,150},{29,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,35}}</string>
+                <key>sourceSize</key>
+                <string>{29,35}</string>
+            </dict>
+            <key>AnimateChar-S-2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{33,113},{29,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,35}}</string>
+                <key>sourceSize</key>
+                <string>{29,35}</string>
+            </dict>
+            <key>AnimateChar-S-3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,113},{29,35}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{29,35}}</string>
+                <key>sourceSize</key>
+                <string>{29,35}</string>
+            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -51,9 +129,9 @@
             <key>realTextureFileName</key>
             <string>AnimateChar.png</string>
             <key>size</key>
-            <string>{98,39}</string>
+            <string>{64,223}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b5e1f060dac9df4ef5be664aba8067ea:f9fa451b9a2ba34145810f3f7fe69ab4:8f8af59fd694c3352081b8ab3992d387$</string>
+            <string>$TexturePacker:SmartUpdate:19fe28ce8584f02325ad3d0b37c302e5:8e99d32be4c6b3299d75e18501107e65:8f8af59fd694c3352081b8ab3992d387$</string>
             <key>textureFileName</key>
             <string>AnimateChar.png</string>
         </dict>

@@ -231,8 +231,9 @@
 		9627A5BF194A80EB00D42DB1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5BE194A80EB00D42DB1 /* GameOverScene.m */; };
 		9627A5C2194A8E7100D42DB1 /* Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5C1194A8E7100D42DB1 /* Level1.tmx */; };
 		96D8A87D1950A161003626FE /* CCAnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8A87C1950A161003626FE /* CCAnimatedSprite.m */; };
-		96D8A87F1950A217003626FE /* AnimateChar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A87E1950A217003626FE /* AnimateChar.plist */; };
-		96D8A8811950AA57003626FE /* AnimateChar.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8801950AA57003626FE /* AnimateChar.png */; };
+		96D8A8841950CB59003626FE /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8A8831950CB59003626FE /* PauseScene.m */; };
+		96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8851950D7EA003626FE /* AnimateChar.plist */; };
+		96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8861950D7EA003626FE /* AnimateChar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -697,8 +698,10 @@
 		9627A5C1194A8E7100D42DB1 /* Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Level1.tmx; sourceTree = "<group>"; };
 		96D8A87B1950A161003626FE /* CCAnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCAnimatedSprite.h; sourceTree = "<group>"; };
 		96D8A87C1950A161003626FE /* CCAnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCAnimatedSprite.m; sourceTree = "<group>"; };
-		96D8A87E1950A217003626FE /* AnimateChar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnimateChar.plist; sourceTree = "<group>"; };
-		96D8A8801950AA57003626FE /* AnimateChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimateChar.png; sourceTree = "<group>"; };
+		96D8A8821950CB59003626FE /* PauseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseScene.h; sourceTree = "<group>"; };
+		96D8A8831950CB59003626FE /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
+		96D8A8851950D7EA003626FE /* AnimateChar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnimateChar.plist; sourceTree = "<group>"; };
+		96D8A8861950D7EA003626FE /* AnimateChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimateChar.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -725,8 +728,8 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
-				96D8A8801950AA57003626FE /* AnimateChar.png */,
-				96D8A87E1950A217003626FE /* AnimateChar.plist */,
+				96D8A8851950D7EA003626FE /* AnimateChar.plist */,
+				96D8A8861950D7EA003626FE /* AnimateChar.png */,
 				96D8A87B1950A161003626FE /* CCAnimatedSprite.h */,
 				96D8A87C1950A161003626FE /* CCAnimatedSprite.m */,
 				9627A5B3194A7DD800D42DB1 /* DeathByZombie.mp3 */,
@@ -1656,6 +1659,8 @@
 				9627A2FA194A636100D42DB1 /* Level1GameLayer.m */,
 				9627A2FC194A636D00D42DB1 /* HudLayer.h */,
 				9627A2FD194A636D00D42DB1 /* HudLayer.m */,
+				96D8A8821950CB59003626FE /* PauseScene.h */,
+				96D8A8831950CB59003626FE /* PauseScene.m */,
 			);
 			name = Layers;
 			sourceTree = "<group>";
@@ -1769,7 +1774,7 @@
 				9627A04E194A4B8200D42DB1 /* Icon.png in Resources */,
 				9627A5B8194A7DD800D42DB1 /* DeathByZombie.mp3 in Resources */,
 				9627A05C194A4B8200D42DB1 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
-				96D8A8811950AA57003626FE /* AnimateChar.png in Resources */,
+				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
 				9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */,
 				9627A04B194A4B8200D42DB1 /* Default-Landscape~ipad.png in Resources */,
 				9627A060194A4B8200D42DB1 /* Icon-Small.png in Resources */,
@@ -1788,7 +1793,7 @@
 				9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */,
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
 				9627A5B9194A7DD800D42DB1 /* Gunshot.mp3 in Resources */,
-				96D8A87F1950A217003626FE /* AnimateChar.plist in Resources */,
+				96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */,
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
@@ -1823,6 +1828,7 @@
 				9627A095194A4B8200D42DB1 /* CCClippingNode.m in Sources */,
 				9627A128194A4B8300D42DB1 /* CCSpriteBatchNode.m in Sources */,
 				9627A14C194A4B8300D42DB1 /* CCTransition.m in Sources */,
+				96D8A8841950CB59003626FE /* PauseScene.m in Sources */,
 				9627A12B194A4B8300D42DB1 /* CCSpriteFrame.m in Sources */,
 				9627A0BF194A4B8200D42DB1 /* CCNodeColor.m in Sources */,
 				9627A198194A4B8300D42DB1 /* TransformUtils.m in Sources */,

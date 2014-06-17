@@ -8,6 +8,7 @@
 
 #import "HudLayer.h"
 #import "IntroScene.h"
+#import "PauseScene.h"
 
 @implementation HudLayer
 -(id)init
@@ -20,9 +21,14 @@
         
         
         CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-        backButton.position = ccp(0.85f * viewSize.width, 0.95f * viewSize.height);
+        backButton.position = ccp(0.90f * viewSize.width, 0.95f * viewSize.height);
         [backButton setTarget:self selector:@selector(onBackClicked:)];
         [self addChild:backButton];
+        
+        CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"Verdana-Bold" fontSize:18.0f];
+        pauseButton.position = ccp(0.75f * viewSize.width, 0.95f * viewSize.height);
+        [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
+        [self addChild:pauseButton];
         
         zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
         zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.1 );
@@ -46,6 +52,14 @@
     // back to intro scene with transition
     [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+}
+- (void)onPauseClicked:(id)sender
+{
+    CCScene *pauseScene = [PauseScene node];
+    // back to intro scene with transition
+    [[CCDirector sharedDirector] pushScene:pauseScene];
+    [[OALSimpleAudio sharedInstance] stopEverything];
+
 }
 
 // -----------------------------------------------------------------------
