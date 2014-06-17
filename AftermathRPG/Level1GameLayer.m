@@ -9,6 +9,7 @@
 #import "Level1GameLayer.h"
 #import "GameOverScene.h"
 #import "HudLayer.h"
+#import "CCAnimatedSprite.h"
 
 @implementation Level1GameLayer
 {
@@ -98,13 +99,13 @@
         if (diff.x > 0)
         {
             // Move player to the right a tile
-            playerPos.x += levelOneMap.tileSize.width;
+            playerPos.x += levelOneMap.tileSize.width * 0.5;
         }
         else
         {
             // Move player to the left a tile
             
-            playerPos.x -= levelOneMap.tileSize.width;
+            playerPos.x -= levelOneMap.tileSize.width * 0.5;
         }
     }
     // Further up or down..
@@ -131,6 +132,7 @@
         playerPos.x >= 0)
     {
         [self setPlayerPosition:playerPos];
+        [mainChar runAnimation:@"AnimateChar"];
     }
     // Setting the center of screen on the character
     [self setCenterOfScreen:mainChar.position];
@@ -176,7 +178,10 @@
     // Setting characters position, granted no collison detected
     [mainChar runAction:[CCActionMoveTo actionWithDuration:0.1 position:position]];
 }
-
+- (void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    [mainChar stopAnimation];
+}
 // Add new method
 - (CGPoint)returnCoordsFromPosition:(CGPoint)position {
     // Obtaining and returning coordinates from position
@@ -191,14 +196,16 @@
     NSMutableDictionary *startPoint0 =    [objects0 objectNamed:@"startPosition"];
     int x0 = [[startPoint0 valueForKey:@"x"] intValue];
     int y0 = [[startPoint0 valueForKey:@"y"] intValue];
-    self.mainChar     = [CCSprite spriteWithImageNamed:@"mainChar.png"];
+    self.mainChar     = [CCAnimatedSprite animatedSpriteWithPlist:@"AnimateChar.plist"];
     mainChar.position = ccp(x0,y0);
+    [mainChar setFrame:@"AnimateChar-1.png"];
     mainChar.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, mainChar.contentSize} cornerRadius:0];
     mainChar.physicsBody.collisionGroup = @"groupPlayer";
     mainChar.physicsBody.collisionType = @"collisionPlayer";
+    [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar"];
     [self.physicsWorldNode addChild: mainChar];
     
-    
+        
     CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
     NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
     int x1 = [[startPoint1 valueForKey:@"x"] intValue];
