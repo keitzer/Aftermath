@@ -11,6 +11,7 @@
 #import "PauseScene.h"
 
 @implementation HudLayer
+@synthesize healthBar;
 -(id)init
 {
     self = [super init];
@@ -34,7 +35,11 @@
         zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.1 );
         [self addChild:zombiesKilled];
         
-        
+        self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
+        healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
+        [healthBar setFrame:@"Health-4.png"];
+        [self addChild:healthBar];
+
     }
     return self;
 }
@@ -43,6 +48,34 @@
     zombiesKilled.string = value;
     NSLog(@"Zombies should be updated...");
 }
+-(void)updateHealth:(NSNotification *)notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    
+    if (userInfo)
+        
+    {
+        NSString *text = userInfo[@"livesLeft"];
+        NSInteger livesLeft = [text integerValue];
+        switch (livesLeft)
+        {
+            case 0:
+                [healthBar setFrame:@"Health-1.png"];
+                break;
+            case 1:
+                [healthBar setFrame:@"Health-2.png"];
+                break;
+            case 2:
+                [healthBar setFrame:@"Health-3.png"];
+                break;
+            case 3:
+                [healthBar setFrame:@"Health-4.png"];
+                break;
+        }
+    }
+    NSLog(@"Health should be updated...");
+}
+
 // -----------------------------------------------------------------------
 #pragma mark - Button Callbacks
 // -----------------------------------------------------------------------
@@ -72,6 +105,11 @@
                    selector:@selector(onUpdateZombieText:)
                        name:@"HudLayerUpdateZombieNotification"
                      object:nil];
+    [notiCenter addObserver:self
+                   selector:@selector(updateHealth:)
+                       name:@"HudLayerUpdateHealthNotification"
+                     object:nil];
+
 }
 - (void)onExit
 {

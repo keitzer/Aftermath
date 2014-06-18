@@ -15,6 +15,7 @@
 {
     BOOL holdingDagger;
     int zombiesDropped;
+    int livesLeft;
 }
 @synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode;
 
@@ -55,6 +56,7 @@
         
         holdingDagger = NO;
         zombiesDropped = 0;
+        livesLeft = 3;
         
         NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
 
@@ -302,13 +304,26 @@
     }
     else
     {
-        [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
-        
-        CCActionRemove *removeElement = [CCActionRemove action];
-        [user runAction:removeElement];
-        
-        [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]
-                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+        if (livesLeft >= 2)
+        {
+            livesLeft--;
+            
+            NSDictionary* userInfo = @{@"livesLeft" : [NSString stringWithFormat:@"%d", livesLeft]};
+            NSString* notiName = @"HudLayerUpdateHealthNotification";
+            [[NSNotificationCenter defaultCenter] postNotificationName:notiName
+                                                                object:self userInfo:userInfo];
+
+        }
+        else
+        {
+            [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
+            
+            CCActionRemove *removeElement = [CCActionRemove action];
+            [user runAction:removeElement];
+            
+            [[CCDirector sharedDirector] replaceScene:[GameOverScene scene]
+                                       withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+        }
 
     }
         return NO;

@@ -234,6 +234,8 @@
 		96D8A8841950CB59003626FE /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8A8831950CB59003626FE /* PauseScene.m */; };
 		96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8851950D7EA003626FE /* AnimateChar.plist */; };
 		96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8861950D7EA003626FE /* AnimateChar.png */; };
+		96D8A88A1951036C003626FE /* Health.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8891951036C003626FE /* Health.png */; };
+		96D8A88C19510371003626FE /* Health.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A88B19510371003626FE /* Health.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -702,6 +704,8 @@
 		96D8A8831950CB59003626FE /* PauseScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseScene.m; sourceTree = "<group>"; };
 		96D8A8851950D7EA003626FE /* AnimateChar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AnimateChar.plist; sourceTree = "<group>"; };
 		96D8A8861950D7EA003626FE /* AnimateChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AnimateChar.png; sourceTree = "<group>"; };
+		96D8A8891951036C003626FE /* Health.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Health.png; sourceTree = "<group>"; };
+		96D8A88B19510371003626FE /* Health.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Health.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -728,6 +732,8 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
+				96D8A88B19510371003626FE /* Health.plist */,
+				96D8A8891951036C003626FE /* Health.png */,
 				96D8A8851950D7EA003626FE /* AnimateChar.plist */,
 				96D8A8861950D7EA003626FE /* AnimateChar.png */,
 				96D8A87B1950A161003626FE /* CCAnimatedSprite.h */,
@@ -1767,6 +1773,7 @@
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
+				96D8A88A1951036C003626FE /* Health.png in Resources */,
 				9627A050194A4B8200D42DB1 /* Icon@2x.png in Resources */,
 				9627A062194A4B8200D42DB1 /* Icon-Small@2x.png in Resources */,
 				9627A054194A4B8200D42DB1 /* Icon-72@2x.png in Resources */,
@@ -1794,6 +1801,7 @@
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
 				9627A5B9194A7DD800D42DB1 /* Gunshot.mp3 in Resources */,
 				96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */,
+				96D8A88C19510371003626FE /* Health.plist in Resources */,
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
