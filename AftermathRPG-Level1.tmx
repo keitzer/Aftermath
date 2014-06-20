@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="64" height="48" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="water" tilewidth="32" tileheight="32">
+  <image source="water.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="2" name="sand_5" tilewidth="32" tileheight="32">
+  <image source="sand_5.png" width="288" height="384"/>
+ </tileset>
+ <tileset firstgid="110" name="bridges" tilewidth="32" tileheight="32">
+  <image source="bridges.png" width="192" height="224"/>
+ </tileset>
+ <tileset firstgid="152" name="grassalt" tilewidth="32" tileheight="32">
+  <image source="grassalt.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="170" name="CastleExample_4" tilewidth="32" tileheight="32">
+  <image source="CastleExample_4.png" width="2239" height="2235"/>
+ </tileset>
+ <tileset firstgid="4931" name="house" tilewidth="32" tileheight="32">
+  <image source="house.png" width="288" height="224"/>
+ </tileset>
+ <tileset firstgid="4994" name="plant repack_2" tilewidth="32" tileheight="32">
+  <image source="plant repack_2.png" width="416" height="416"/>
+ </tileset>
+ <tileset firstgid="5163" name="lpc_misc_0" tilewidth="32" tileheight="32">
+  <image source="lpc_misc_0.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="5172" name="PathAndObjects_0" tilewidth="32" tileheight="32">
+  <image source="PathAndObjects_0.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="5428" name="meta_tiles" tilewidth="32" tileheight="32">
+  <image source="meta_tiles.png" width="67" height="34"/>
+  <tile id="0">
+   <properties>
+    <property name="Collidable" value="True"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="Collectable" value="True"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="water" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Grf9OzsQckrJqqqqqqqqqqqqqqqvr6AVjgDAE=
+  </data>
+ </layer>
+ <layer name="sand_5" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztz7ENgEAMBEF3AWQPGdB/f7gEpLccwIx0+W0EAAAAAAAAAABfsuTWwm2996eN3F64o/X9vBH69evXr1////rP3FW4u/c+wGsP1TwbEw==
+  </data>
+ </layer>
+ <layer name="grass" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2bENACAMA0HvvwUI9qRigzSJztIPcLV3ki1JkiRJkqSx3QatQm/H8fPz8/Pz8/Pz8/Pz8/Pz8/Pz8/Pz8/PP85/UfSlmZn8P8vosZQ==
+  </data>
+ </layer>
+ <layer name="pub" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1EVOA2EAhuFZ4NrSPe6wxZ2r4E63UNxu0EPgDjvcT0CCcwHcIbwLErohLQ2hpXxv8mRmMZn83+a3mwzD7oZ9F787wCGOcIwTnOIM5+iP+po75/ot0WbDiHEiFnGIRwISkYRkpCAVaUhHBjLNn/93fPdGFZyv0okqVKMGtahDPRrQiCY0owWtsDpstnr5flcMs2EEoxjDOCYwiSlMYwazmMM8FrD48e7p8/+EC3Zc4grXuMEt7nCPBzziCc94wSvefGR/FvdYNnKQizzkowCFKEIxSlCKMpR7+d33HW1saYcNHehEF7rRg170Odz3gzyHfGj/EluWsYJVrGEdG9jEFraxg13sYcCH9vtZDMMfAQhEEIIRglCEIRwRiITJ4vkz/ydKKaWUUkoppZRSSimllFJKKaWUUkoppf5m77TlkB8=
+  </data>
+ </layer>
+ <layer name="gravel" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmb0OwjAMBv1aMMIGbJQNeP/HwAyRIlRUh8alte+kb2t+ronqqBGZ5qoZNAfNUXMztIlE8S/BPxf4i+w0e8nrX759Wf2z73/8Y/qfDRlGYmm3hYy5taauDb3j3XeP8eva0DvefU/5eYzvuaat43m+33+saet4jwCZ4xSBuj5Hqs1W8Mc/u3+pcVn9s/6bfMP+xx9//PHHH/98cP7j/Jd9/+OPP/74R/U/if0O79tzl8Vn3Y/PO+hfsuW9cZf59yTPxWcNAAAAa+QF7Gi4Ig==
+  </data>
+ </layer>
+ <layer name="bridges" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztzzEOQEAQhtG9MgoUuAANFzYJlWhkdyvvJV83xT8pAQAAAAAAAAAA8KaJ2sy6QlvWaHtUWx8NmY2FtuzRka6/j7vapmj+cD+/tFTYBQD81wkS0Rn9
+  </data>
+ </layer>
+ <layer name="home" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztz7kNgDAQRUH34JI4Iq4E6L8TnCKBAwsJYWakH22yL4RvaGIIbcG6+PbnzxhSx1iwSX8V9OvXr/9q/Q/619Sx3WzO3PZK+nOWHzQCAAAAAAAAAABwdgDHFzL2
+  </data>
+ </layer>
+ <layer name="home2" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0rEJACAMRUF3yFAWtu4/i9gHUhvvqge/CmSMt6zIu9q62JF3tdGD/8+72ujB/+ddbZ3Nj24FAAAAAAAAAACA6wC3vAmX
+  </data>
+ </layer>
+ <layer name="trees" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJztmstP1UAUxrvwgQgL7AWEhYAC/rEga8A/QNaoO15bEBJwwcMEWICQAAsUEx+A8N2YE740p+1pmeu908wv+ZJpM23PNz3z6J0bRXccxVF0DK1DG9DnODJzgbo/lPpp59OQGLpqUfQMiqFazX69Bb43e5VYd6E9aL9A3K6QGF4gtgFoEBq6p/+fuN8v6Df0J3Fv9sptcQqdNcF/I3gAnw+hR9DjRFuekFdui3fQTIb/ZJvWybumDC7uqfUliZ/htvgAfcx4rtamyWt2UP5yz9jz4rDA+S7tKfFrcVrGP8v4JGNZGbT8coG0p8SvxWkZ/7Q2raONp2XI6rNl4dgk/jrJOLkfWOAcdTV3uJz/5P0UGd/KUrTt0nA5/8n7KTK+BQKBQKDavMEcMAGNQeNx6xxzmZWslwbXy3rWNPQWmoSmWuiYy6xkvTS4XtazfES+V2ah94qH5Pm/KN/Ujx3/jtIs5HvF6v8pfHdAnR77v4SfK+g6vvteyfMva/zn8N0H9Xvsvw2xP4HayUOef1njj+CaUei1x/67EXsP1FvAf5V4Cd+voOEC/rnPNOp793/B8Us5zz/3Gd+/dzl+Kef51/qMr2hzeJ5/6TNzKM9DCx6/f57DrfkvLKO8An3y2D/P4db8l3bahLagbY/9a3O4df4/gA6hrx77F3hOs+b/OcrfoO8V8M9zmjX/uc18h+c0a/5ra2ffkHfJ60Br/ldhHaCt36z+tbWzr/AeXp7/Mv9jaXV4D28RWlK8yflm/o+lUfAe3iq0pniT8672IquYR0WoYh4VwZJHIUcamyNl91Os+yVW0n5HcjXWpFF2P8W6X2LF99+RAoFAIPCPW6JogUE=
+  </data>
+ </layer>
+ <layer name="misc" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt2LEJwDAMRUEPoTUCgey/W3Cnwoh0Aemu0l/gFVoLADi5ot7d3VHv7p6oN/Cf3ONpbd5yj6e1ecs91mYAAAAAoBP/7/M9hf83AABfvfCBBMk=
+  </data>
+ </layer>
+ <layer name="boat" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt0LkRwjAYBWEVwBXY3FfATXnUB1QAObQAHUDApjDG49TSfjMv0p+sQpAkSZIkSZIkSZIkKX5ZHkLOuqyX/7/r8zZgQzYquaubBS1LtmLrkq4Nb1u2Y/uI+hu0NFmLtVmnoK3KTV2NaZmwKZuxeUFblZuYnLPvxehI1ynStioutF8T7n/Q/ky4/0X7O+H+G+33hPt/HfwLSVJEPq46E9c=
+  </data>
+ </layer>
+ <layer name="meta" width="64" height="48">
+  <data encoding="base64" compression="zlib">
+   eJzt1WEKwyAMhuFeojfp7n+1sX9DEk1so0v2fvDBBq3zicKu8ziuTrX03qlU/Pgr+0emf/C31ll/xrnM+iVrVX87B+m75J+dx8o5WjLya3dCc4x8Xv+deT3tJ4QQsi7tf7f33eytaMKPHz9+/Pgt/u857N4P548fP378+PHn9lvX/uR1xuxh9/lb/bvuH/76/t7aFr9nb6N4ns/qt87CO6uMfs/diPZrvyF9nt3Lk/5fSqRfe2bF+Uf7vWtH+FdW8/XmUt3feqzZbaGUUir3DfF/jyE=
+  </data>
+ </layer>
+ <objectgroup name="mainChar" width="64" height="48">
+  <object name="startPosition" x="640" y="1184"/>
+ </objectgroup>
+ <objectgroup name="zombiePirate" width="64" height="48">
+  <object name="startPoint" x="1056" y="1216"/>
+ </objectgroup>
+ <objectgroup name="zombieChar1" width="64" height="48">
+  <object name="startPoint" x="1760" y="1184"/>
+ </objectgroup>
+ <objectgroup name="zombieChar2" width="64" height="48">
+  <object name="startPoint" x="1632" y="448"/>
+ </objectgroup>
+ <objectgroup name="zombieBoss" width="64" height="48">
+  <object name="startPoint" x="416" y="64"/>
+ </objectgroup>
+ <objectgroup name="spawn" width="64" height="48">
+  <object name="daggerSpawn" x="640" y="1024"/>
+ </objectgroup>
+</map>

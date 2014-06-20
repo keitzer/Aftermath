@@ -29,10 +29,10 @@
         self.userInteractionEnabled = YES;
         
         // Setting the levelOneMap to the one created in Tiled
-        self.levelOneMap = [CCTiledMap tiledMapWithFile:@"Level1.tmx"];
+        self.levelOneMap = [CCTiledMap tiledMapWithFile:@"AftermathRPG-Level1.tmx"];
         
         // Setting the Meta Layer to the layer created to prevent players from colliding, and allow them to pick up items throughout the level
-        self.metaTileLayer = [levelOneMap layerNamed:@"Meta"];
+        self.metaTileLayer = [levelOneMap layerNamed:@"meta"];
         
         // Making Meta Layer invisible, as they're acting rather then providing visual appearance
         metaTileLayer.visible = NO;
