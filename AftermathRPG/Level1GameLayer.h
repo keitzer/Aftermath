@@ -21,9 +21,9 @@
 
     // Sprites
     CCAnimatedSprite *mainChar;
-    CCSprite *zombiePirate;
-    CCSprite *zombieHumanOne;
-    CCSprite *zombieHumanTwo;
+    CCAnimatedSprite *zombiePirate;
+    CCAnimatedSprite *zombieHumanOne;
+    CCAnimatedSprite *zombieHumanTwo;
     CCSprite *zombieBoss;
     CCSprite *dagger;
     HudLayer *hud;
@@ -33,9 +33,9 @@
 @property (nonatomic, retain) CCTiledMapLayer *metaTileLayer;
 @property (nonatomic, retain) CCTiledMapLayer *metaTileTwoLayer;
 @property (nonatomic, retain) CCAnimatedSprite *mainChar;
-@property (nonatomic, retain) CCSprite *zombiePirate;
-@property (nonatomic, retain) CCSprite *zombieHumanOne;
-@property (nonatomic, retain) CCSprite *zombieHumanTwo;
+@property (nonatomic, retain) CCAnimatedSprite *zombiePirate;
+@property (nonatomic, retain) CCAnimatedSprite *zombieHumanOne;
+@property (nonatomic, retain) CCAnimatedSprite *zombieHumanTwo;
 @property (nonatomic, retain) CCSprite *zombieBoss;
 @property (nonatomic, retain) CCSprite *dagger;
 @property (nonatomic, assign) CCPhysicsNode *physicsWorldNode;

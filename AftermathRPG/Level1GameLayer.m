@@ -15,6 +15,7 @@
 @implementation Level1GameLayer
 {
     BOOL holdingDagger;
+    BOOL daggerPickedUp;
     int zombiesDropped;
     int livesLeft;
 }
@@ -60,7 +61,7 @@
         [self spawnLevelOneSprites];
         [self schedule:@selector(animateMonsters) interval:12];
         
-        
+        daggerPickedUp = NO;
         holdingDagger = NO;
         zombiesDropped = 0;
         livesLeft = 3;
@@ -110,7 +111,7 @@
         if (diff.x > 0)
         {
             // Move player to the right a tile
-            playerPos.x += levelOneMap.tileSize.width * 0.5;
+            playerPos.x += levelOneMap.tileSize.width;
             self.mainChar.flipX = NO;
             [mainChar runAnimation:@"AnimateChar"];
 
@@ -119,7 +120,7 @@
         {
             // Move player to the left a tile
             
-            playerPos.x -= levelOneMap.tileSize.width * 0.5;
+            playerPos.x -= levelOneMap.tileSize.width;
             self.mainChar.flipX = YES;
             [mainChar runAnimation:@"AnimateChar"];
 
@@ -183,19 +184,22 @@
             }
             else if (checkCollectable && [checkCollectable isEqualToString:@"True"])
             {
-                NSLog(@"Meta Tile (Collectable) detected!");
-                [[OALSimpleAudio sharedInstance] playEffect:@"itemPickup.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
+                if (daggerPickedUp == NO)
+                {
+                    NSLog(@"Meta Tile (Collectable) detected!");
+                    [[OALSimpleAudio sharedInstance] playEffect:@"itemPickup.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
                 
-                NSDictionary* userInfo2 = @{@"textInfo" : @"You have found a dagger!"};
-                NSString* notiName2 = @"HudLayerUpdateTextNotification";
-                [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                    NSDictionary* userInfo2 = @{@"textInfo" : @"You have found a dagger!"};
+                    NSString* notiName2 = @"HudLayerUpdateTextNotification";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
                                                                     object:self userInfo:userInfo2];
-                
-                CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
-                    [dagger removeFromParentAndCleanup:YES];
-                    holdingDagger = YES;
-                }];
-                [dagger runAction:blockAction];
+                    daggerPickedUp = YES;
+                    CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
+                        [dagger removeFromParentAndCleanup:YES];
+                        holdingDagger = YES;
+                    }];
+                    [dagger runAction:blockAction];
+                }
             }
             else
             {
@@ -236,7 +240,7 @@
         }
     }
     // Setting characters position, granted no collison detected
-    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.1 position:position]];
+    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.3 position:position]];
 }
 - (void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -271,33 +275,42 @@
     NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
     int x1 = [[startPoint1 valueForKey:@"x"] intValue];
     int y1 = [[startPoint1 valueForKey:@"y"] intValue];
-    self.zombiePirate     = [CCSprite spriteWithImageNamed:@"zombiePirate.png"];
+    self.zombiePirate     = [CCAnimatedSprite animatedSpriteWithPlist:@"zombiePirate.plist"];
+    [zombiePirate setFrame:@"zombiePirate-1.png"];
+
     zombiePirate.position = ccp(x1,y1);
     zombiePirate.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombiePirate.contentSize} cornerRadius:0];
     zombiePirate.physicsBody.collisionGroup = @"groupMonster";
     zombiePirate.physicsBody.collisionType = @"collisionMonster";
+    [zombiePirate addAnimationwithDelayBetweenFrames:0.1f name:@"zombiePirate"];
+
     [self.physicsWorldNode addChild: zombiePirate];
 
     CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
     NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
     int x2 = [[startPoint2 valueForKey:@"x"] intValue];
     int y2 = [[startPoint2 valueForKey:@"y"] intValue];
-    self.zombieHumanOne     = [CCSprite spriteWithImageNamed:@"zombieHumanTwo.png"];
+    self.zombieHumanOne     = [CCAnimatedSprite animatedSpriteWithPlist:@"zombieHuman.plist"];
+    [zombieHumanOne setFrame:@"zombieHuman-1.png"];
     zombieHumanOne.position = ccp(x2,y2);
     zombieHumanOne.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombieHumanOne.contentSize} cornerRadius:0];
     zombieHumanOne.physicsBody.collisionGroup = @"groupMonster";
     zombieHumanOne.physicsBody.collisionType = @"collisionMonster";
+    [zombieHumanOne addAnimationwithDelayBetweenFrames:0.1f name:@"zombieHuman"];
     [self.physicsWorldNode addChild: zombieHumanOne];
     
     CCTiledMapObjectGroup *objects3  =    [levelOneMap objectGroupNamed:@"zombieChar2"];
     NSMutableDictionary *startPoint3 =    [objects3 objectNamed:@"startPoint"];
     int x3 = [[startPoint3 valueForKey:@"x"] intValue];
     int y3 = [[startPoint3 valueForKey:@"y"] intValue];
-    self.zombieHumanTwo     = [CCSprite spriteWithImageNamed:@"zombieHuman.png"];
+    self.zombieHumanTwo     = [CCAnimatedSprite animatedSpriteWithPlist:@"zombieHuman2.plist"];
+    [zombieHumanTwo setFrame:@"zombieHuman2-1.png"];
     zombieHumanTwo.position = ccp(x3,y3);
     zombieHumanTwo.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, zombieHumanTwo.contentSize} cornerRadius:0];
     zombieHumanTwo.physicsBody.collisionGroup = @"groupMonster";
     zombieHumanTwo.physicsBody.collisionType = @"collisionMonster";
+    [zombieHumanTwo addAnimationwithDelayBetweenFrames:0.1f name:@"zombieHuman2"];
+    [zombieHumanTwo addAnimationwithDelayBetweenFrames:0.1f name:@"zombieHuman2-N"];
     [self.physicsWorldNode addChild: zombieHumanTwo];
     
     CCTiledMapObjectGroup *objects4  =    [levelOneMap objectGroupNamed:@"zombieBoss"];
@@ -377,6 +390,10 @@
             NSString* notiName = @"HudLayerUpdateHealthNotification";
             [[NSNotificationCenter defaultCenter] postNotificationName:notiName
                                                                 object:self userInfo:userInfo];
+            NSDictionary* userInfo2 = @{@"textInfo" : @"-1 life"};
+            NSString* notiName2 = @"HudLayerUpdateTextNotification";
+            [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                object:self userInfo:userInfo2];
 
         }
         else
@@ -404,37 +421,98 @@
     CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x +100, zombiePirate.position.y)];
     CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x -50, zombiePirate.position.y)];
     CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x +50, zombiePirate.position.y)];
+    
+    
     CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
     NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
     int x1 = [[startPoint1 valueForKey:@"x"] intValue];
     int y1 = [[startPoint1 valueForKey:@"y"] intValue];
-    CCAction *resetMoves = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x1,y1)];
+    CCAction *resetMoves = [CCActionMoveTo actionWithDuration:2 position:ccp(x1,y1)];
     
     CCAction *actionMove5 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x +50, zombieHumanOne.position.y)];
     CCAction *actionMove6 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x -50, zombieHumanOne.position.y)];
     CCAction *actionMove7 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x +50, zombieHumanOne.position.y)];
     CCAction *actionMove8 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x -50, zombieHumanOne.position.y)];
+  
+    
     CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
     NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
     int x2 = [[startPoint2 valueForKey:@"x"] intValue];
     int y2 = [[startPoint2 valueForKey:@"y"] intValue];
-    CCAction *resetMoves2 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x2,y2)];
+    CCAction *resetMoves2 = [CCActionMoveTo actionWithDuration:2 position:ccp(x2,y2)];
 
     CCAction *actionMove9 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y + 50)];
     CCAction *actionMove10 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y - 30)];
     CCAction *actionMove11 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y + 50)];
     CCAction *actionMove12 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y - 70)];
+    
+    
     CCTiledMapObjectGroup *objects3  =    [levelOneMap objectGroupNamed:@"zombieChar2"];
     NSMutableDictionary *startPoint3 =    [objects3 objectNamed:@"startPoint"];
     int x3 = [[startPoint3 valueForKey:@"x"] intValue];
     int y3 = [[startPoint3 valueForKey:@"y"] intValue];
     CCAction *resetMoves3 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x3,y3)];
-
-    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4, resetMoves]]];
-    [self.zombieHumanOne runAction:[CCActionSequence actionWithArray:@[actionMove5, actionMove6, actionMove7, actionMove8, resetMoves2]]];
-    [self.zombieHumanTwo runAction:[CCActionSequence actionWithArray:@[actionMove9, actionMove10, actionMove11, actionMove12, resetMoves3]]];
+    
+    CCActionCallFunc *actionAnimateSouth = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateSouth)];
+    CCActionCallFunc *actionAnimateNorth = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateNorth)];
+    CCActionCallFunc *actionAnimateStop = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateStopZ1)];
+    CCActionCallFunc *actionAnimateEast = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateEast)];
+    CCActionCallFunc *actionAnimateWest = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateWest)];
+    CCActionCallFunc *actionAnimateStop2 = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateStopZ2)];
+    CCActionCallFunc *actionAnimateStop3 = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateStopZ3)];
+    CCActionCallFunc *actionAnimateEast2 = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateEast2)];
+    CCActionCallFunc *actionAnimateWest2 = [CCActionCallFunc actionWithTarget:self selector:@selector(actionAnimateWest2)];
+    
+    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionAnimateWest2, actionMove, actionAnimateStop3, actionAnimateEast2, actionMove2, actionAnimateStop3,actionAnimateWest2, actionMove3, actionAnimateStop3, actionAnimateEast2, actionMove4, actionAnimateStop3, actionAnimateWest2, resetMoves]]];
+    [self.zombieHumanOne runAction:[CCActionSequence actionWithArray:@[actionAnimateWest, actionMove5, actionAnimateStop, actionAnimateEast, actionMove6, actionAnimateStop, actionAnimateWest,  actionMove7, actionAnimateStop, actionAnimateEast, actionMove8,actionAnimateStop, actionAnimateWest,  resetMoves2]]];
+    [self.zombieHumanTwo runAction:[CCActionSequence actionWithArray:@[actionAnimateNorth, actionMove9, actionAnimateStop2, actionAnimateSouth, actionMove10, actionAnimateStop2, actionAnimateNorth, actionMove11, actionAnimateStop, actionAnimateSouth, actionMove12, actionAnimateStop2, actionAnimateNorth, resetMoves3]]];
 
 }
 
+-(void)actionAnimateEast
+{
+    self.zombieHumanOne.flipX = YES;
+    [zombieHumanOne runAnimation:@"zombieHuman"];
+}
+-(void)actionAnimateWest
+{
+    self.zombieHumanOne.flipX = NO;
+    [zombieHumanOne runAnimation:@"zombieHuman"];
+}
+-(void)actionAnimateSouth
+{
+    [zombieHumanTwo runAnimation:@"zombieHuman2"];
+
+}
+-(void)actionAnimateNorth
+{
+    [zombieHumanTwo runAnimation:@"zombieHuman2-N"];
+
+}
+-(void)actionAnimateStopZ1
+{
+    [zombieHumanOne stopAnimation];
+    
+}
+-(void)actionAnimateStopZ2
+{
+    [zombieHumanTwo stopAnimation];
+    
+}
+-(void)actionAnimateStopZ3
+{
+    [zombiePirate stopAnimation];
+    
+}
+-(void)actionAnimateEast2
+{
+    self.zombiePirate.flipX = YES;
+    [zombiePirate runAnimation:@"zombiePirate"];
+}
+-(void)actionAnimateWest2
+{
+    self.zombiePirate.flipX = NO;
+    [zombiePirate runAnimation:@"zombiePirate"];
+}
 
 @end

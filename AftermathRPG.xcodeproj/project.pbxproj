@@ -225,9 +225,7 @@
 		9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E6194A4CF100D42DB1 /* mainChar.png */; };
 		9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E7194A4CF100D42DB1 /* meta_tiles.png */; };
 		9627A2F2194A4CF100D42DB1 /* PathAndObjects_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E8194A4CF100D42DB1 /* PathAndObjects_0.png */; };
-		9627A2F3194A4CF100D42DB1 /* zombiePirate.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2E9194A4CF100D42DB1 /* zombiePirate.png */; };
 		9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EA194A4CF100D42DB1 /* zombieBoss.png */; };
-		9627A2F5194A4CF100D42DB1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EB194A4CF100D42DB1 /* zombieHuman.png */; };
 		9627A2F6194A4CF100D42DB1 /* zombieHumanTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */; };
 		9627A2FB194A636100D42DB1 /* Level1GameLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2FA194A636100D42DB1 /* Level1GameLayer.m */; };
 		9627A2FE194A636D00D42DB1 /* HudLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A2FD194A636D00D42DB1 /* HudLayer.m */; };
@@ -237,6 +235,12 @@
 		9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B6194A7DD800D42DB1 /* SceneTrack.mp3 */; };
 		9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */; };
 		9627A5BF194A80EB00D42DB1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5BE194A80EB00D42DB1 /* GameOverScene.m */; };
+		96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B541956327F00894AE1 /* zombieHuman.plist */; };
+		96A94B591956327F00894AE1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B551956327F00894AE1 /* zombieHuman.png */; };
+		96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5C1956334300894AE1 /* zombieHuman2.plist */; };
+		96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5D1956334300894AE1 /* zombieHuman2.png */; };
+		96A94B661956463300894AE1 /* zombiePirate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B641956463300894AE1 /* zombiePirate.plist */; };
+		96A94B671956463300894AE1 /* zombiePirate.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B651956463300894AE1 /* zombiePirate.png */; };
 		96BFDCEB1954EBD00097178C /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCE91954EBD00097178C /* gameOver.mp3 */; };
 		96BFDCEC1954EBD00097178C /* itemPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCEA1954EBD00097178C /* itemPickup.mp3 */; };
 		96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */; };
@@ -702,9 +706,7 @@
 		9627A2E6194A4CF100D42DB1 /* mainChar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainChar.png; sourceTree = "<group>"; };
 		9627A2E7194A4CF100D42DB1 /* meta_tiles.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meta_tiles.png; sourceTree = "<group>"; };
 		9627A2E8194A4CF100D42DB1 /* PathAndObjects_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PathAndObjects_0.png; sourceTree = "<group>"; };
-		9627A2E9194A4CF100D42DB1 /* zombiePirate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombiePirate.png; sourceTree = "<group>"; };
 		9627A2EA194A4CF100D42DB1 /* zombieBoss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieBoss.png; sourceTree = "<group>"; };
-		9627A2EB194A4CF100D42DB1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
 		9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHumanTwo.png; sourceTree = "<group>"; };
 		9627A2F9194A636100D42DB1 /* Level1GameLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level1GameLayer.h; sourceTree = "<group>"; };
 		9627A2FA194A636100D42DB1 /* Level1GameLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level1GameLayer.m; sourceTree = "<group>"; };
@@ -717,6 +719,12 @@
 		9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Zombie.mp3; path = ../Zombie.mp3; sourceTree = "<group>"; };
 		9627A5BD194A80EB00D42DB1 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		9627A5BE194A80EB00D42DB1 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		96A94B541956327F00894AE1 /* zombieHuman.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman.plist; sourceTree = "<group>"; };
+		96A94B551956327F00894AE1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
+		96A94B5C1956334300894AE1 /* zombieHuman2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman2.plist; sourceTree = "<group>"; };
+		96A94B5D1956334300894AE1 /* zombieHuman2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman2.png; sourceTree = "<group>"; };
+		96A94B641956463300894AE1 /* zombiePirate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombiePirate.plist; sourceTree = "<group>"; };
+		96A94B651956463300894AE1 /* zombiePirate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombiePirate.png; sourceTree = "<group>"; };
 		96BFDCE91954EBD00097178C /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
 		96BFDCEA1954EBD00097178C /* itemPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = itemPickup.mp3; sourceTree = "<group>"; };
 		96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "AftermathRPG-Level1.tmx"; sourceTree = "<group>"; };
@@ -1658,6 +1666,12 @@
 		9627A2F7194A4F9C00D42DB1 /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				96A94B641956463300894AE1 /* zombiePirate.plist */,
+				96A94B651956463300894AE1 /* zombiePirate.png */,
+				96A94B5C1956334300894AE1 /* zombieHuman2.plist */,
+				96A94B5D1956334300894AE1 /* zombieHuman2.png */,
+				96A94B541956327F00894AE1 /* zombieHuman.plist */,
+				96A94B551956327F00894AE1 /* zombieHuman.png */,
 				96129C531953760500CB03F8 /* grassalt.png */,
 				96D8A88B19510371003626FE /* Health.plist */,
 				96129C6119537C7D00CB03F8 /* sand_5.png */,
@@ -1673,10 +1687,8 @@
 				9627A2E4194A4CF100D42DB1 /* dagger.png */,
 				9627A2E6194A4CF100D42DB1 /* mainChar.png */,
 				9627A2E8194A4CF100D42DB1 /* PathAndObjects_0.png */,
-				9627A2E9194A4CF100D42DB1 /* zombiePirate.png */,
 				9627A2EA194A4CF100D42DB1 /* zombieBoss.png */,
 				9627A2E5194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png */,
-				9627A2EB194A4CF100D42DB1 /* zombieHuman.png */,
 				9627A2EC194A4CF100D42DB1 /* zombieHumanTwo.png */,
 			);
 			name = "Image Assets";
@@ -1830,6 +1842,7 @@
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
+				96A94B671956463300894AE1 /* zombiePirate.png in Resources */,
 				96D8A88A1951036C003626FE /* Health.png in Resources */,
 				9627A050194A4B8200D42DB1 /* Icon@2x.png in Resources */,
 				9627A062194A4B8200D42DB1 /* Icon-Small@2x.png in Resources */,
@@ -1841,6 +1854,7 @@
 				9627A5B8194A7DD800D42DB1 /* DeathByZombie.mp3 in Resources */,
 				9627A05C194A4B8200D42DB1 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				96129C5019536D8D00CB03F8 /* CastleExample_4.png in Resources */,
+				96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */,
 				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
 				96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */,
 				9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */,
@@ -1848,7 +1862,6 @@
 				9627A060194A4B8200D42DB1 /* Icon-Small.png in Resources */,
 				96129C581953767600CB03F8 /* house.png in Resources */,
 				9627A05E194A4B8200D42DB1 /* Icon-Small-50.png in Resources */,
-				9627A2F5194A4CF100D42DB1 /* zombieHuman.png in Resources */,
 				9627A5BA194A7DD800D42DB1 /* MenuTrack.mp3 in Resources */,
 				9627A247194A4B8300D42DB1 /* LICENSE_Kazmath.txt in Resources */,
 				9627A052194A4B8200D42DB1 /* Icon-72.png in Resources */,
@@ -1871,9 +1884,12 @@
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
-				9627A2F3194A4CF100D42DB1 /* zombiePirate.png in Resources */,
 				96129C4C19536D3800CB03F8 /* plant repack_2.png in Resources */,
+				96A94B591956327F00894AE1 /* zombieHuman.png in Resources */,
+				96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */,
 				9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */,
+				96A94B661956463300894AE1 /* zombiePirate.plist in Resources */,
+				96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */,
 				9627A06B194A4B8200D42DB1 /* iTunesArtwork@2x in Resources */,
 				96BFDCF019550D9B0097178C /* metaTwo.png in Resources */,
 			);
