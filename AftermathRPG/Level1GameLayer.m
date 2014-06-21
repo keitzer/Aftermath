@@ -342,7 +342,7 @@
         [monster runAction:monsterDeathSequence];
         
         zombiesDropped++;
-        if (zombiesDropped >=4)
+        if (zombiesDropped >= 4)
         {
             NSDictionary* userInfo2 = @{@"textInfo" : @"Zombies cleared, head north of town!"};
             NSString* notiName2 = @"HudLayerUpdateTextNotification";
@@ -350,17 +350,20 @@
                                                                 object:self userInfo:userInfo2];
             
         }
+        else
+        {
+            NSDictionary* userInfo2 = @{@"textInfo" : @"+50 xp"};
+            NSString* notiName2 = @"HudLayerUpdateTextNotification";
+            [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                object:self userInfo:userInfo2];
+
+        }
         NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
         NSString* notiName = @"HudLayerUpdateZombieNotification";
         
         [[NSNotificationCenter defaultCenter] postNotificationName:notiName
                                                             object:self userInfo:userInfo];
         
-        NSDictionary* userInfo2 = @{@"textInfo" : @"+50 xp"};
-        NSString* notiName2 = @"HudLayerUpdateTextNotification";
-        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
-                                                            object:self userInfo:userInfo2];
-
 
     }
     else

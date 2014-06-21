@@ -32,8 +32,8 @@
             [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
             [self addChild:pauseButton];
             
-            userInfoTxt = [CCLabelTTF labelWithString:@"Rah" fontName:@"Arial" fontSize:16.0f];
-            userInfoTxt.position = ccp(0.75f * viewSize.width, 0.85f * viewSize.height);
+            userInfoTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12.0f];
+            userInfoTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
             [self addChild:userInfoTxt];
             
             zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:19.0f];
@@ -58,7 +58,10 @@
             [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
             [self addChild:pauseButton];
             
-            
+            userInfoTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12.0f];
+            userInfoTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
+            [self addChild:userInfoTxt];
+
             zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
             zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
             [self addChild:zombiesKilled];
@@ -81,13 +84,12 @@
         
     {
         NSString *text = userInfo[@"textInfo"];
-    //    CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:2.0f];
-     //   CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:2.0f];
-     //   [userInfoTxt runAction:fadeIn];
+        CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:2.0f];
+        CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:2.0f];
+        [userInfoTxt runAction:fadeIn];
         userInfoTxt.string = text;
-    //    [userInfoTxt runAction:fadeOut];
+        [userInfoTxt runAction:fadeOut];
         
-        //userInfoTxt.string = @"";
 
     }
 }
