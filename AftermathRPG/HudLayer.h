@@ -14,10 +14,11 @@
 @interface HudLayer : CCNode
 {
     CCLabelTTF *zombiesKilled;
+    CCLabelTTF *userInfoTxt;
     CCAnimatedSprite *healthBar;
 
 }
--(void)updateZombiesKilled:(NSString*)value;
+
 @property (nonatomic, retain) CCAnimatedSprite *healthBar;
 
 @end

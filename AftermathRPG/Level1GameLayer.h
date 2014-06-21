@@ -17,7 +17,8 @@
     // Maps & Layers
     CCTiledMap *levelOneMap;
     CCTiledMapLayer *metaTileLayer;
-    
+    CCTiledMapLayer *metaTileTwoLayer;
+
     // Sprites
     CCAnimatedSprite *mainChar;
     CCSprite *zombiePirate;
@@ -30,6 +31,7 @@
 // Properties
 @property (nonatomic, retain) CCTiledMap *levelOneMap;
 @property (nonatomic, retain) CCTiledMapLayer *metaTileLayer;
+@property (nonatomic, retain) CCTiledMapLayer *metaTileTwoLayer;
 @property (nonatomic, retain) CCAnimatedSprite *mainChar;
 @property (nonatomic, retain) CCSprite *zombiePirate;
 @property (nonatomic, retain) CCSprite *zombieHumanOne;

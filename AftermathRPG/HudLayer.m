@@ -11,6 +11,7 @@
 #import "PauseScene.h"
 
 @implementation HudLayer
+
 @synthesize healthBar;
 -(id)init
 {
@@ -20,33 +21,75 @@
     {
         CGSize viewSize = [[CCDirector sharedDirector] viewSize];
         
-        
-        CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
-        backButton.position = ccp(0.90f * viewSize.width, 0.95f * viewSize.height);
-        [backButton setTarget:self selector:@selector(onBackClicked:)];
-        [self addChild:backButton];
-        
-        CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"Verdana-Bold" fontSize:18.0f];
-        pauseButton.position = ccp(0.75f * viewSize.width, 0.95f * viewSize.height);
-        [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
-        [self addChild:pauseButton];
-        
-        zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
-        zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.1 );
-        [self addChild:zombiesKilled];
-        
-        self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
-        healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
-        [healthBar setFrame:@"Health-4.png"];
-        [self addChild:healthBar];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:22.0f];
+            backButton.position = ccp(0.90f * viewSize.width, 0.95f * viewSize.height);
+            [backButton setTarget:self selector:@selector(onBackClicked:)];
+            [self addChild:backButton];
+            
+            CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"Verdana-Bold" fontSize:22.0f];
+            pauseButton.position = ccp(0.75f * viewSize.width, 0.95f * viewSize.height);
+            [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
+            [self addChild:pauseButton];
+            
+            userInfoTxt = [CCLabelTTF labelWithString:@"Rah" fontName:@"Arial" fontSize:16.0f];
+            userInfoTxt.position = ccp(0.75f * viewSize.width, 0.85f * viewSize.height);
+            [self addChild:userInfoTxt];
+            
+            zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:19.0f];
+            zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
+            [self addChild:zombiesKilled];
+            
+            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
+            healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
+            [healthBar setFrame:@"Health-4.png"];
+            [self addChild:healthBar];
 
+        }
+        else
+        {
+            CCButton *backButton = [CCButton buttonWithTitle:@"[ Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+            backButton.position = ccp(0.90f * viewSize.width, 0.95f * viewSize.height);
+            [backButton setTarget:self selector:@selector(onBackClicked:)];
+            [self addChild:backButton];
+            
+            CCButton *pauseButton = [CCButton buttonWithTitle:@"Pause" fontName:@"Verdana-Bold" fontSize:18.0f];
+            pauseButton.position = ccp(0.75f * viewSize.width, 0.95f * viewSize.height);
+            [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
+            [self addChild:pauseButton];
+            
+            
+            zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
+            zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
+            [self addChild:zombiesKilled];
+            
+            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
+            healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
+            [healthBar setFrame:@"Health-4.png"];
+            [self addChild:healthBar];
+
+
+        }
     }
     return self;
 }
--(void)updateZombiesKilled:(NSString*)value
+-(void)provideUserInfo:(NSNotification *)notification
 {
-    zombiesKilled.string = value;
-    NSLog(@"Zombies should be updated...");
+    NSDictionary* userInfo = notification.userInfo;
+    
+    if (userInfo)
+        
+    {
+        NSString *text = userInfo[@"textInfo"];
+    //    CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:2.0f];
+     //   CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:2.0f];
+     //   [userInfoTxt runAction:fadeIn];
+        userInfoTxt.string = text;
+    //    [userInfoTxt runAction:fadeOut];
+        
+        //userInfoTxt.string = @"";
+
+    }
 }
 -(void)updateHealth:(NSNotification *)notification
 {
@@ -109,6 +152,11 @@
                    selector:@selector(updateHealth:)
                        name:@"HudLayerUpdateHealthNotification"
                      object:nil];
+    [notiCenter addObserver:self
+                   selector:@selector(provideUserInfo:)
+                       name:@"HudLayerUpdateTextNotification"
+                     object:nil];
+
 
 }
 - (void)onExit
@@ -127,7 +175,7 @@
         
         if (text)
         {
-            [self updateZombiesKilled:text];
+            zombiesKilled.string = text;
         }
         else
         {

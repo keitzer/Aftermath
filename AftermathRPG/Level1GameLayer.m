@@ -10,6 +10,7 @@
 #import "GameOverScene.h"
 #import "HudLayer.h"
 #import "CCAnimatedSprite.h"
+#import "LevelUpScene.h"
 
 @implementation Level1GameLayer
 {
@@ -17,7 +18,7 @@
     int zombiesDropped;
     int livesLeft;
 }
-@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode;
+@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode, metaTileTwoLayer;
 
 - (id)init
 {
@@ -36,6 +37,12 @@
         
         // Making Meta Layer invisible, as they're acting rather then providing visual appearance
         metaTileLayer.visible = NO;
+        
+        // Setting the Meta Layer to the layer created to prevent players from colliding, and allow them to pick up items throughout the level
+        self.metaTileTwoLayer = [levelOneMap layerNamed:@"meta2"];
+        
+        // Making Meta Layer invisible, as they're acting rather then providing visual appearance
+        metaTileTwoLayer.visible = NO;
         
         // Setting content size of layer to the map size
         self.contentSize = levelOneMap.contentSize;
@@ -58,6 +65,8 @@
         zombiesDropped = 0;
         livesLeft = 3;
         
+        [self setCenterOfScreen:mainChar.position];
+
         NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
 
     }
@@ -158,6 +167,8 @@
     CGPoint mapTileCoords = [self returnCoordsFromPosition:position];
     // Obtaining tileGID properties for requested tile position
     int tileGidCheck = [metaTileLayer tileGIDAt:mapTileCoords];
+    int tileGidCheck2 = [metaTileTwoLayer tileGIDAt:mapTileCoords];
+
     // If indeed in the metaLayer, and contains collidable property set to true, then return out of method and prevent location from being set
     if (tileGidCheck) {
         NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck];
@@ -165,7 +176,6 @@
             // Setting properties Collidable to be checked, then performing the appropriate action after checking tile
             NSString *checkCollision = properties[@"Collidable"];
             NSString *checkCollectable = properties[@"Collectable"];
-
             if (checkCollision && [checkCollision isEqualToString:@"True"]) {
                 // Return out of method / ie. do not call the mainChar.position = position line beneath this conditional
                 return;
@@ -174,12 +184,50 @@
             else if (checkCollectable && [checkCollectable isEqualToString:@"True"])
             {
                 NSLog(@"Meta Tile (Collectable) detected!");
-
+                [[OALSimpleAudio sharedInstance] playEffect:@"itemPickup.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
+                
+                NSDictionary* userInfo2 = @{@"textInfo" : @"You have found a dagger!"};
+                NSString* notiName2 = @"HudLayerUpdateTextNotification";
+                [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                    object:self userInfo:userInfo2];
+                
                 CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
                     [dagger removeFromParentAndCleanup:YES];
                     holdingDagger = YES;
                 }];
                 [dagger runAction:blockAction];
+            }
+            else
+            {
+                
+            }
+        }
+    }
+    else if (tileGidCheck2)
+    {
+        NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck2];
+        if (properties) {
+            NSString *checkDeadEnd = properties[@"DeadEnd"];
+            NSString *checkLevelUp = properties[@"LevelUp"];
+            if (checkDeadEnd && [checkDeadEnd isEqualToString:@"True"])
+            {
+                // Alert user dead end
+                
+            }
+            else if (checkLevelUp && [checkLevelUp isEqualToString:@"True"])
+            {
+                if (zombiesDropped >=4)
+                {
+                    // Go to level up scene
+                    NSLog(@"CheckLevelUpHit");
+                    [[CCDirector sharedDirector] replaceScene:[LevelUpScene scene]
+                                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                    
+                }
+                else
+                {
+                    // Alert user to check map for remaining zombies
+                }
             }
             else
             {
@@ -217,10 +265,8 @@
     [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar"];
     [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar-N"];
     [mainChar addAnimationwithDelayBetweenFrames:0.1f name:@"AnimateChar-S"];
-
     [self.physicsWorldNode addChild: mainChar];
     
-        
     CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
     NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
     int x1 = [[startPoint1 valueForKey:@"x"] intValue];
@@ -275,6 +321,7 @@
 }
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionPlayer:(CCNode *)user collisionMonster:(CCNode *)monster
 {
+
     if (holdingDagger)
     {
         [monster stopAllActions];
@@ -295,17 +342,32 @@
         [monster runAction:monsterDeathSequence];
         
         zombiesDropped++;
+        if (zombiesDropped >=4)
+        {
+            NSDictionary* userInfo2 = @{@"textInfo" : @"Zombies cleared, head north of town!"};
+            NSString* notiName2 = @"HudLayerUpdateTextNotification";
+            [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                object:self userInfo:userInfo2];
+            
+        }
         NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
         NSString* notiName = @"HudLayerUpdateZombieNotification";
         
         [[NSNotificationCenter defaultCenter] postNotificationName:notiName
                                                             object:self userInfo:userInfo];
+        
+        NSDictionary* userInfo2 = @{@"textInfo" : @"+50 xp"};
+        NSString* notiName2 = @"HudLayerUpdateTextNotification";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                            object:self userInfo:userInfo2];
+
 
     }
     else
     {
         if (livesLeft >= 2)
         {
+            [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
             livesLeft--;
             
             NSDictionary* userInfo = @{@"livesLeft" : [NSString stringWithFormat:@"%d", livesLeft]};
@@ -316,7 +378,7 @@
         }
         else
         {
-            [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
+            [[OALSimpleAudio sharedInstance] playEffect:@"gameOver.mp3" volume:0.7f pitch:1.0f pan:10.0f loop:0];
             
             CCActionRemove *removeElement = [CCActionRemove action];
             [user runAction:removeElement];
@@ -335,24 +397,39 @@
     int rangeDuration = maximumTime - minimumTime;
     int randomDuration = (arc4random() % rangeDuration) + (minimumTime * 0.8);
     
-    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(350, 220)];
-    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(368, 220)];
-    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(345, 220)];
-    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(360, 220)];
+    CCAction *actionMove = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x -100, zombiePirate.position.y)];
+    CCAction *actionMove2 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x +100, zombiePirate.position.y)];
+    CCAction *actionMove3 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x -50, zombiePirate.position.y)];
+    CCAction *actionMove4 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombiePirate.position.x +50, zombiePirate.position.y)];
+    CCTiledMapObjectGroup *objects1  =    [levelOneMap objectGroupNamed:@"zombiePirate"];
+    NSMutableDictionary *startPoint1 =    [objects1 objectNamed:@"startPoint"];
+    int x1 = [[startPoint1 valueForKey:@"x"] intValue];
+    int y1 = [[startPoint1 valueForKey:@"y"] intValue];
+    CCAction *resetMoves = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x1,y1)];
     
-    CCAction *actionMove5 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(695, 331)];
-    CCAction *actionMove6 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(682, 331)];
-    CCAction *actionMove7 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(700, 331)];
-    CCAction *actionMove8 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(682, 331)];
-    
-    CCAction *actionMove9 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(834, 423)];
-    CCAction *actionMove10 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(849, 423)];
-    CCAction *actionMove11 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(829, 423)];
-    CCAction *actionMove12 = [CCActionMoveTo actionWithDuration:randomDuration position:CGPointMake(848, 423)];
-    
-    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4]]];
-    [self.zombieHumanOne runAction:[CCActionSequence actionWithArray:@[actionMove5, actionMove6, actionMove7, actionMove8]]];
-    [self.zombieHumanTwo runAction:[CCActionSequence actionWithArray:@[actionMove9, actionMove10, actionMove11, actionMove12]]];
+    CCAction *actionMove5 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x +50, zombieHumanOne.position.y)];
+    CCAction *actionMove6 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x -50, zombieHumanOne.position.y)];
+    CCAction *actionMove7 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x +50, zombieHumanOne.position.y)];
+    CCAction *actionMove8 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanOne.position.x -50, zombieHumanOne.position.y)];
+    CCTiledMapObjectGroup *objects2  =    [levelOneMap objectGroupNamed:@"zombieChar1"];
+    NSMutableDictionary *startPoint2 =    [objects2 objectNamed:@"startPoint"];
+    int x2 = [[startPoint2 valueForKey:@"x"] intValue];
+    int y2 = [[startPoint2 valueForKey:@"y"] intValue];
+    CCAction *resetMoves2 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x2,y2)];
+
+    CCAction *actionMove9 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y + 50)];
+    CCAction *actionMove10 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y - 30)];
+    CCAction *actionMove11 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y + 50)];
+    CCAction *actionMove12 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(zombieHumanTwo.position.x, zombieHumanTwo.position.y - 70)];
+    CCTiledMapObjectGroup *objects3  =    [levelOneMap objectGroupNamed:@"zombieChar2"];
+    NSMutableDictionary *startPoint3 =    [objects3 objectNamed:@"startPoint"];
+    int x3 = [[startPoint3 valueForKey:@"x"] intValue];
+    int y3 = [[startPoint3 valueForKey:@"y"] intValue];
+    CCAction *resetMoves3 = [CCActionMoveTo actionWithDuration:randomDuration position:ccp(x3,y3)];
+
+    [self.zombiePirate runAction:[CCActionSequence actionWithArray:@[actionMove,actionMove2,actionMove3,actionMove4, resetMoves]]];
+    [self.zombieHumanOne runAction:[CCActionSequence actionWithArray:@[actionMove5, actionMove6, actionMove7, actionMove8, resetMoves2]]];
+    [self.zombieHumanTwo runAction:[CCActionSequence actionWithArray:@[actionMove9, actionMove10, actionMove11, actionMove12, resetMoves3]]];
 
 }
 

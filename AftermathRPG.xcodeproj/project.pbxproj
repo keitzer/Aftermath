@@ -15,7 +15,6 @@
 		96129C581953767600CB03F8 /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = 96129C571953767600CB03F8 /* house.png */; };
 		96129C5A1953768600CB03F8 /* bridges.png in Resources */ = {isa = PBXBuildFile; fileRef = 96129C591953768600CB03F8 /* bridges.png */; };
 		96129C6219537C7D00CB03F8 /* sand_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 96129C6119537C7D00CB03F8 /* sand_5.png */; };
-		96129C6A1953DD4000CB03F8 /* AftermathRPG-Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 96129C691953DD4000CB03F8 /* AftermathRPG-Level1.tmx */; };
 		9627A02B194A4B8200D42DB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9627A02A194A4B8200D42DB1 /* QuartzCore.framework */; };
 		9627A02D194A4B8200D42DB1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9627A02C194A4B8200D42DB1 /* OpenGLES.framework */; };
 		9627A02F194A4B8200D42DB1 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9627A02E194A4B8200D42DB1 /* OpenAL.framework */; };
@@ -238,6 +237,11 @@
 		9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B6194A7DD800D42DB1 /* SceneTrack.mp3 */; };
 		9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */; };
 		9627A5BF194A80EB00D42DB1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5BE194A80EB00D42DB1 /* GameOverScene.m */; };
+		96BFDCEB1954EBD00097178C /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCE91954EBD00097178C /* gameOver.mp3 */; };
+		96BFDCEC1954EBD00097178C /* itemPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCEA1954EBD00097178C /* itemPickup.mp3 */; };
+		96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */; };
+		96BFDCF019550D9B0097178C /* metaTwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCEE19550D9B0097178C /* metaTwo.png */; };
+		96BFDCF319550E2B0097178C /* LevelUpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BFDCF219550E2B0097178C /* LevelUpScene.m */; };
 		96D8A87D1950A161003626FE /* CCAnimatedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8A87C1950A161003626FE /* CCAnimatedSprite.m */; };
 		96D8A8841950CB59003626FE /* PauseScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D8A8831950CB59003626FE /* PauseScene.m */; };
 		96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96D8A8851950D7EA003626FE /* AnimateChar.plist */; };
@@ -265,7 +269,6 @@
 		96129C571953767600CB03F8 /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = house.png; sourceTree = "<group>"; };
 		96129C591953768600CB03F8 /* bridges.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bridges.png; sourceTree = "<group>"; };
 		96129C6119537C7D00CB03F8 /* sand_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sand_5.png; sourceTree = "<group>"; };
-		96129C691953DD4000CB03F8 /* AftermathRPG-Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "AftermathRPG-Level1.tmx"; sourceTree = "<group>"; };
 		9627A027194A4B8200D42DB1 /* AftermathRPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AftermathRPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9627A02A194A4B8200D42DB1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9627A02C194A4B8200D42DB1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -714,6 +717,12 @@
 		9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Zombie.mp3; path = ../Zombie.mp3; sourceTree = "<group>"; };
 		9627A5BD194A80EB00D42DB1 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		9627A5BE194A80EB00D42DB1 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		96BFDCE91954EBD00097178C /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
+		96BFDCEA1954EBD00097178C /* itemPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = itemPickup.mp3; sourceTree = "<group>"; };
+		96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "AftermathRPG-Level1.tmx"; sourceTree = "<group>"; };
+		96BFDCEE19550D9B0097178C /* metaTwo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = metaTwo.png; sourceTree = "<group>"; };
+		96BFDCF119550E2B0097178C /* LevelUpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelUpScene.h; sourceTree = "<group>"; };
+		96BFDCF219550E2B0097178C /* LevelUpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelUpScene.m; sourceTree = "<group>"; };
 		96D8A87B1950A161003626FE /* CCAnimatedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAnimatedSprite.h; path = ../CCAnimatedSprite.h; sourceTree = "<group>"; };
 		96D8A87C1950A161003626FE /* CCAnimatedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCAnimatedSprite.m; path = ../CCAnimatedSprite.m; sourceTree = "<group>"; };
 		96D8A8821950CB59003626FE /* PauseScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseScene.h; sourceTree = "<group>"; };
@@ -748,6 +757,8 @@
 		96129C6B1953DF3E00CB03F8 /* Audio Assets */ = {
 			isa = PBXGroup;
 			children = (
+				96BFDCE91954EBD00097178C /* gameOver.mp3 */,
+				96BFDCEA1954EBD00097178C /* itemPickup.mp3 */,
 				9627A5B3194A7DD800D42DB1 /* DeathByZombie.mp3 */,
 				9627A5B4194A7DD800D42DB1 /* Gunshot.mp3 */,
 				9627A5B6194A7DD800D42DB1 /* SceneTrack.mp3 */,
@@ -1675,8 +1686,9 @@
 		9627A2F8194A4FA400D42DB1 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */,
+				96BFDCEE19550D9B0097178C /* metaTwo.png */,
 				9627A2E7194A4CF100D42DB1 /* meta_tiles.png */,
-				96129C691953DD4000CB03F8 /* AftermathRPG-Level1.tmx */,
 			);
 			name = Maps;
 			path = ..;
@@ -1705,6 +1717,8 @@
 			children = (
 				9627A2F9194A636100D42DB1 /* Level1GameLayer.h */,
 				9627A2FA194A636100D42DB1 /* Level1GameLayer.m */,
+				96BFDCF119550E2B0097178C /* LevelUpScene.h */,
+				96BFDCF219550E2B0097178C /* LevelUpScene.m */,
 				9627A2FC194A636D00D42DB1 /* HudLayer.h */,
 				9627A2FD194A636D00D42DB1 /* HudLayer.m */,
 				96D8A8821950CB59003626FE /* PauseScene.h */,
@@ -1812,6 +1826,7 @@
 				9627A047194A4B8200D42DB1 /* Default@2x.png in Resources */,
 				9627A2F6194A4CF100D42DB1 /* zombieHumanTwo.png in Resources */,
 				9627A2EE194A4CF100D42DB1 /* dagger.png in Resources */,
+				96BFDCEC1954EBD00097178C /* itemPickup.mp3 in Resources */,
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
@@ -1827,6 +1842,7 @@
 				9627A05C194A4B8200D42DB1 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				96129C5019536D8D00CB03F8 /* CastleExample_4.png in Resources */,
 				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
+				96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */,
 				9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */,
 				9627A04B194A4B8200D42DB1 /* Default-Landscape~ipad.png in Resources */,
 				9627A060194A4B8200D42DB1 /* Icon-Small.png in Resources */,
@@ -1841,13 +1857,13 @@
 				9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */,
 				9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */,
 				96129C4A19536D2800CB03F8 /* water.png in Resources */,
-				96129C6A1953DD4000CB03F8 /* AftermathRPG-Level1.tmx in Resources */,
 				9627A069194A4B8200D42DB1 /* iTunesArtwork in Resources */,
 				9627A064194A4B8200D42DB1 /* Icon-Spotlight-iOS7.png in Resources */,
 				9627A058194A4B8200D42DB1 /* Icon-76@2x.png in Resources */,
 				9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */,
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
 				96129C6219537C7D00CB03F8 /* sand_5.png in Resources */,
+				96BFDCEB1954EBD00097178C /* gameOver.mp3 in Resources */,
 				9627A5B9194A7DD800D42DB1 /* Gunshot.mp3 in Resources */,
 				96129C541953760500CB03F8 /* grassalt.png in Resources */,
 				96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */,
@@ -1859,6 +1875,7 @@
 				96129C4C19536D3800CB03F8 /* plant repack_2.png in Resources */,
 				9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */,
 				9627A06B194A4B8200D42DB1 /* iTunesArtwork@2x in Resources */,
+				96BFDCF019550D9B0097178C /* metaTwo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1905,6 +1922,7 @@
 				9627A20E194A4B8300D42DB1 /* CCSlider.m in Sources */,
 				9627A149194A4B8300D42DB1 /* CCTMXXMLParser.m in Sources */,
 				9627A189194A4B8300D42DB1 /* CGPointExtension.m in Sources */,
+				96BFDCF319550E2B0097178C /* LevelUpScene.m in Sources */,
 				9627A214194A4B8300D42DB1 /* CCTextField.m in Sources */,
 				9627A17F194A4B8300D42DB1 /* CCProfiling.m in Sources */,
 				9627A1A6194A4B8300D42DB1 /* OALAction.m in Sources */,

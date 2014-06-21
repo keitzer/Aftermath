@@ -47,7 +47,8 @@
     [[OALSimpleAudio sharedInstance] preloadEffect:@"DeathByZombie.mp3"];
     [[OALSimpleAudio sharedInstance] preloadEffect:@"Zombie.mp3"];
     [[OALSimpleAudio sharedInstance] preloadEffect:@"Gunshot.mp3"];
-
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"gameOver.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"itemPickup.mp3"];
 
 	return YES;
 }
