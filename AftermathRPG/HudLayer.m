@@ -36,7 +36,7 @@
             userInfoTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
             [self addChild:userInfoTxt];
             
-            zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:19.0f];
+            zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:21.0f];
             zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
             [self addChild:zombiesKilled];
             

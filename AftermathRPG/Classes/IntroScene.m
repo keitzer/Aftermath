@@ -38,6 +38,25 @@
     CCNodeColor *background = [CCNodeColor nodeWithColor:[CCColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0f]];
     [self addChild:background];
     
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        // Hello world
+        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Aftermath RPG" fontName:@"Chalkduster" fontSize:48.0f];
+        label.positionType = CCPositionTypeNormalized;
+        label.color = [CCColor redColor];
+        label.position = ccp(0.5f, 0.5f); // Middle of screen
+        [self addChild:label];
+        
+        // Helloworld scene button
+        CCButton *helloWorldButton = [CCButton buttonWithTitle:@"[ Play ]" fontName:@"Verdana-Bold" fontSize:30.0f];
+        helloWorldButton.positionType = CCPositionTypeNormalized;
+        helloWorldButton.position = ccp(0.5f, 0.35f);
+        [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
+        [self addChild:helloWorldButton];
+
+            
+        }
+    else
+    {
     // Hello world
     CCLabelTTF *label = [CCLabelTTF labelWithString:@"Aftermath RPG" fontName:@"Chalkduster" fontSize:36.0f];
     label.positionType = CCPositionTypeNormalized;
@@ -51,6 +70,7 @@
     helloWorldButton.position = ccp(0.5f, 0.35f);
     [helloWorldButton setTarget:self selector:@selector(onSpinningClicked:)];
     [self addChild:helloWorldButton];
+    }
     
     [[OALSimpleAudio sharedInstance] playBg:@"MenuTrack.mp3" volume:0.3f pan:0.5f loop:YES];
     // done
