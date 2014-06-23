@@ -37,7 +37,7 @@
             [self addChild:userInfoTxt];
             
             zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:21.0f];
-            zombiesKilled.position = ccp(viewSize.width * 0.10, viewSize.height * 0.90);
+            zombiesKilled.position = ccp(viewSize.width * 0.10, viewSize.height * 0.80);
             [self addChild:zombiesKilled];
             
             CCSprite *skillSlot = [CCSprite spriteWithImageNamed:@"skillSlot2.png"];
@@ -50,9 +50,9 @@
             button.position = ccp(skillSlot.position.x - 88, skillSlot.position.y - 1);
             [self addChild:button];
 
-            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
-            healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
-            [healthBar setFrame:@"Health-4.png"];
+            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"healthBar.plist"];
+            healthBar.position = ccp(0.15f * viewSize.width, 0.91f * viewSize.height);
+            [healthBar setFrame:@"healthBar-iPad-4.png"];
             [self addChild:healthBar];
 
         }
@@ -86,9 +86,9 @@
             button.position = ccp(skillSlot2.position.x - 44, skillSlot2.position.y);
             [self addChild:button];
 
-            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
-            healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
-            [healthBar setFrame:@"Health-4.png"];
+            self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"healthBar.plist"];
+            healthBar.position = ccp(0.13f * viewSize.width, 0.90f * viewSize.height);
+            [healthBar setFrame:@"healthBar-4.png"];
             [self addChild:healthBar];
 
 
@@ -122,20 +122,41 @@
     {
         NSString *text = userInfo[@"livesLeft"];
         NSInteger livesLeft = [text integerValue];
-        switch (livesLeft)
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
-            case 0:
-                [healthBar setFrame:@"Health-1.png"];
-                break;
-            case 1:
-                [healthBar setFrame:@"Health-2.png"];
-                break;
-            case 2:
-                [healthBar setFrame:@"Health-3.png"];
-                break;
-            case 3:
-                [healthBar setFrame:@"Health-4.png"];
-                break;
+            switch (livesLeft)
+            {
+                case 0:
+                    [healthBar setFrame:@"healthBar-iPad-1.png"];
+                    break;
+                case 1:
+                    [healthBar setFrame:@"healthBar-iPad-2.png"];
+                    break;
+                case 2:
+                    [healthBar setFrame:@"healthBar-iPad-3.png"];
+                    break;
+                case 3:
+                    [healthBar setFrame:@"healthBar-iPad-4.png"];
+                    break;
+            }
+        }
+        else
+        {
+            switch (livesLeft)
+            {
+                case 0:
+                    [healthBar setFrame:@"healthBar-1.png"];
+                    break;
+                case 1:
+                    [healthBar setFrame:@"healthBar-2.png"];
+                    break;
+                case 2:
+                    [healthBar setFrame:@"healthBar-3.png"];
+                    break;
+                case 3:
+                    [healthBar setFrame:@"healthBar-4.png"];
+                    break;
+            }
         }
     }
     NSLog(@"Health should be updated...");

@@ -42,6 +42,7 @@
         // Enable touch handling on scene node
         self.userInteractionEnabled = YES;
         
+
         // Setting the levelOneMap to the one created in Tiled
         self.levelOneMap = [CCTiledMap tiledMapWithFile:@"AftermathRPG-Level1.tmx"];
         
@@ -97,19 +98,87 @@
         self.bullet.physicsBody.collisionType = @"collisionAmmo";
         // Adding Bullet to the Physics World
         [self.physicsWorldNode addChild: self.bullet];
+        
+        NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
+        
+        [notiCenter addObserver:self
+                       selector:@selector(shootBulletsFromGun)
+                           name:@"Level1GameLayerShootGun"
+                         object:nil];
     }
     return self;
 }
+- (void) shootBulletsFromGun
+{
+    // Checking to see if the bullet current has no actions running, if so then run this sequence of events on the bullet projectile
+    if (!self.bullet.numberOfRunningActions)
+    {
+        // Playing GunShot sound when bullet is fired
+        [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+        // Moving bullet projectile to the target's tapped position
+        repositionBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
+        showBullet = [CCActionShow action];
+        hideBullet = [CCActionHide action];
+        // Moving the bullet projectile back to the main character, to be shot again (reusing the same sprite rather then creating a new one each time)
+        returnBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
+        // Action to simply delay the spam of bullets
+        bulletDelay = [CCActionDelay actionWithDuration:0.6];
+        
+        
+        
+        if (charDirection == 0)
+        {
+            
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y + 350)];
+            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:270];
+            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:90];
+            bullet.flipX = NO;
+            
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+        }
+        else if (charDirection == 1)
+        {
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y - 350)];
+            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:90];
+            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:270];
+            bullet.flipX = NO;
+            
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+        }
+        else if (charDirection == 2)
+        {
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x + 350, mainChar.position.y)];
+            bullet.flipX = NO;
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+            
+            
+        }
+        else if (charDirection == 3)
+        {
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x - 350, mainChar.position.y)];
+            bullet.flipX = YES;
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+            
+            
+        }
+        else
+        {
+        }
+    }
+}
+
 -(void) onEnter
 {
     [super onEnter];
-    NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
-    
-    [notiCenter addObserver:self
-                   selector:@selector(shootBulletsFromGun)
-                       name:@"Level1GameLayerShootGun"
-                     object:nil];
-
+   
 }
 - (void)setCenterOfScreen:(CGPoint) position {
     // Setting the user's screensize to a CGSize var to be used
@@ -449,7 +518,7 @@
     }
     else
     {
-        if (livesLeft >= 2)
+        if (livesLeft >= 1)
         {
             [[OALSimpleAudio sharedInstance] playEffect:@"DeathByZombie.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
             livesLeft--;
@@ -477,72 +546,6 @@
 
     }
         return NO;
-}
-- (void) shootBulletsFromGun
-{
-    // Checking to see if the bullet current has no actions running, if so then run this sequence of events on the bullet projectile
-    if (!self.bullet.numberOfRunningActions)
-    {
-        // Playing GunShot sound when bullet is fired
-        [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
-        // Moving bullet projectile to the target's tapped position
-        repositionBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
-        showBullet = [CCActionShow action];
-        hideBullet = [CCActionHide action];
-        // Moving the bullet projectile back to the main character, to be shot again (reusing the same sprite rather then creating a new one each time)
-        returnBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
-        // Action to simply delay the spam of bullets
-        bulletDelay = [CCActionDelay actionWithDuration:0.6];
-
-
-        
-        if (charDirection == 0)
-        {
-            
-            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y + 350)];
-            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:270];
-            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:90];
-            bullet.flipX = NO;
-            
-            // Running actions in sequence, as opposed to all at the same time
-            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
-            [self.bullet runAction: bulletSequence];
-        }
-        else if (charDirection == 1)
-        {
-            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y - 350)];
-            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:90];
-            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:270];
-            bullet.flipX = NO;
-
-            // Running actions in sequence, as opposed to all at the same time
-            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
-            [self.bullet runAction: bulletSequence];
-        }
-        else if (charDirection == 2)
-        {
-            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x + 350, mainChar.position.y)];
-            bullet.flipX = NO;
-            // Running actions in sequence, as opposed to all at the same time
-            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
-            [self.bullet runAction: bulletSequence];
-
-
-        }
-        else if (charDirection == 3)
-        {
-           moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x - 350, mainChar.position.y)];
-           bullet.flipX = YES;
-            // Running actions in sequence, as opposed to all at the same time
-            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
-            [self.bullet runAction: bulletSequence];
-
-
-        }
-        else
-        {
-        }
-    }
 }
 - (void)animateMonsters {
   

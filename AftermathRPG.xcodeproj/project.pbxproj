@@ -235,6 +235,8 @@
 		9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B6194A7DD800D42DB1 /* SceneTrack.mp3 */; };
 		9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */; };
 		9627A5BF194A80EB00D42DB1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5BE194A80EB00D42DB1 /* GameOverScene.m */; };
+		964528BB195887C1008D795F /* healthBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 964528B9195887C1008D795F /* healthBar.plist */; };
+		964528BC195887C1008D795F /* healthBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528BA195887C1008D795F /* healthBar.png */; };
 		96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B541956327F00894AE1 /* zombieHuman.plist */; };
 		96A94B591956327F00894AE1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B551956327F00894AE1 /* zombieHuman.png */; };
 		96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5C1956334300894AE1 /* zombieHuman2.plist */; };
@@ -724,6 +726,8 @@
 		9627A5B7194A7DD800D42DB1 /* Zombie.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Zombie.mp3; path = ../Zombie.mp3; sourceTree = "<group>"; };
 		9627A5BD194A80EB00D42DB1 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		9627A5BE194A80EB00D42DB1 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		964528B9195887C1008D795F /* healthBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = healthBar.plist; sourceTree = "<group>"; };
+		964528BA195887C1008D795F /* healthBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthBar.png; sourceTree = "<group>"; };
 		96A94B541956327F00894AE1 /* zombieHuman.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman.plist; sourceTree = "<group>"; };
 		96A94B551956327F00894AE1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
 		96A94B5C1956334300894AE1 /* zombieHuman2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman2.plist; sourceTree = "<group>"; };
@@ -798,6 +802,8 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
+				964528B9195887C1008D795F /* healthBar.plist */,
+				964528BA195887C1008D795F /* healthBar.png */,
 				9627A2D1194A4B8400D42DB1 /* Classes */,
 				9627A043194A4B8200D42DB1 /* Resources */,
 				9627A042194A4B8200D42DB1 /* AftermathRPG */,
@@ -1885,6 +1891,7 @@
 				9627A052194A4B8200D42DB1 /* Icon-72.png in Resources */,
 				9627A1A0194A4B8300D42DB1 /* LICENSE_cocos2d.txt in Resources */,
 				9627A049194A4B8200D42DB1 /* Default-568h@2x.png in Resources */,
+				964528BC195887C1008D795F /* healthBar.png in Resources */,
 				9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */,
 				9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */,
 				96129C4A19536D2800CB03F8 /* water.png in Resources */,
@@ -1901,6 +1908,7 @@
 				96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */,
 				96D8A88C19510371003626FE /* Health.plist in Resources */,
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
+				964528BB195887C1008D795F /* healthBar.plist in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
 				96A94B6B1956AF3D00894AE1 /* skillSlot2.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
