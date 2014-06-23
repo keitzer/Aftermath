@@ -37,9 +37,19 @@
             [self addChild:userInfoTxt];
             
             zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:21.0f];
-            zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
+            zombiesKilled.position = ccp(viewSize.width * 0.10, viewSize.height * 0.90);
             [self addChild:zombiesKilled];
             
+            CCSprite *skillSlot = [CCSprite spriteWithImageNamed:@"skillSlot2.png"];
+            skillSlot.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05);
+            [self addChild:skillSlot];
+            
+            
+            CCButton *button = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"shoot-iPad.png"]];
+            [button setTarget:self selector:@selector(shootButtonClicked)];
+            button.position = ccp(skillSlot.position.x - 88, skillSlot.position.y - 1);
+            [self addChild:button];
+
             self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
             healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
             [healthBar setFrame:@"Health-4.png"];
@@ -63,9 +73,19 @@
             [self addChild:userInfoTxt];
 
             zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
-            zombiesKilled.position = ccp(viewSize.width * 0.85, viewSize.height * 0.05 );
+            zombiesKilled.position = ccp(viewSize.width * 0.11, viewSize.height * 0.90 );
             [self addChild:zombiesKilled];
             
+            
+            CCSprite *skillSlot2 = [CCSprite spriteWithImageNamed:@"skillSlot_iPhone.png"];
+            skillSlot2.position = ccp(viewSize.width * 0.86, viewSize.height * .06);
+            [self addChild:skillSlot2];
+            
+            CCButton *button = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"shoot-iPhone.png"]];
+            [button setTarget:self selector:@selector(shootButtonClicked)];
+            button.position = ccp(skillSlot2.position.x - 44, skillSlot2.position.y);
+            [self addChild:button];
+
             self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"Health.plist"];
             healthBar.position = ccp(0.05f * viewSize.width, 0.95f * viewSize.height);
             [healthBar setFrame:@"Health-4.png"];
@@ -139,7 +159,12 @@
     [[OALSimpleAudio sharedInstance] stopEverything];
 
 }
-
+-(void)shootButtonClicked
+{
+    NSString* notiName2 = @"Level1GameLayerShootGun";
+    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                        object:self userInfo:nil];
+}
 // -----------------------------------------------------------------------
 - (void) onEnter
 {

@@ -10,12 +10,15 @@
 #import "cocos2d-ui.h"
 #import "cocos2d.h"
 #import "CCAnimatedSprite.h"
-
+@class SneakyJoystick;
+@class SneakyButton;
 @interface HudLayer : CCNode
 {
     CCLabelTTF *zombiesKilled;
     CCLabelTTF *userInfoTxt;
     CCAnimatedSprite *healthBar;
+    SneakyJoystick *leftJoystick;
+	SneakyButton *rightButton;
 
 }
 

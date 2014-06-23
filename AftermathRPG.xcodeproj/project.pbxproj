@@ -241,6 +241,11 @@
 		96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5D1956334300894AE1 /* zombieHuman2.png */; };
 		96A94B661956463300894AE1 /* zombiePirate.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B641956463300894AE1 /* zombiePirate.plist */; };
 		96A94B671956463300894AE1 /* zombiePirate.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B651956463300894AE1 /* zombiePirate.png */; };
+		96A94B6B1956AF3D00894AE1 /* skillSlot2.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B691956AF3D00894AE1 /* skillSlot2.png */; };
+		96A94B731956B4E200894AE1 /* skillSlot_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B721956B4E200894AE1 /* skillSlot_iPhone.png */; };
+		96B8E84719577528007005C9 /* shoot-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B8E84519577528007005C9 /* shoot-iPad.png */; };
+		96B8E84819577528007005C9 /* shoot-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B8E84619577528007005C9 /* shoot-iPhone.png */; };
+		96B8E84A19577B96007005C9 /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B8E84919577B96007005C9 /* bullet.png */; };
 		96BFDCEB1954EBD00097178C /* gameOver.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCE91954EBD00097178C /* gameOver.mp3 */; };
 		96BFDCEC1954EBD00097178C /* itemPickup.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCEA1954EBD00097178C /* itemPickup.mp3 */; };
 		96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */; };
@@ -725,6 +730,11 @@
 		96A94B5D1956334300894AE1 /* zombieHuman2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman2.png; sourceTree = "<group>"; };
 		96A94B641956463300894AE1 /* zombiePirate.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombiePirate.plist; sourceTree = "<group>"; };
 		96A94B651956463300894AE1 /* zombiePirate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombiePirate.png; sourceTree = "<group>"; };
+		96A94B691956AF3D00894AE1 /* skillSlot2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skillSlot2.png; sourceTree = "<group>"; };
+		96A94B721956B4E200894AE1 /* skillSlot_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skillSlot_iPhone.png; sourceTree = "<group>"; };
+		96B8E84519577528007005C9 /* shoot-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoot-iPad.png"; sourceTree = "<group>"; };
+		96B8E84619577528007005C9 /* shoot-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shoot-iPhone.png"; sourceTree = "<group>"; };
+		96B8E84919577B96007005C9 /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		96BFDCE91954EBD00097178C /* gameOver.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = gameOver.mp3; sourceTree = "<group>"; };
 		96BFDCEA1954EBD00097178C /* itemPickup.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = itemPickup.mp3; sourceTree = "<group>"; };
 		96BFDCED19550D9B0097178C /* AftermathRPG-Level1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "AftermathRPG-Level1.tmx"; sourceTree = "<group>"; };
@@ -1666,6 +1676,11 @@
 		9627A2F7194A4F9C00D42DB1 /* Image Assets */ = {
 			isa = PBXGroup;
 			children = (
+				96B8E84919577B96007005C9 /* bullet.png */,
+				96B8E84519577528007005C9 /* shoot-iPad.png */,
+				96B8E84619577528007005C9 /* shoot-iPhone.png */,
+				96A94B721956B4E200894AE1 /* skillSlot_iPhone.png */,
+				96A94B691956AF3D00894AE1 /* skillSlot2.png */,
 				96A94B641956463300894AE1 /* zombiePirate.plist */,
 				96A94B651956463300894AE1 /* zombiePirate.png */,
 				96A94B5C1956334300894AE1 /* zombieHuman2.plist */,
@@ -1835,6 +1850,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9627A2F2194A4CF100D42DB1 /* PathAndObjects_0.png in Resources */,
+				96B8E84A19577B96007005C9 /* bullet.png in Resources */,
 				9627A047194A4B8200D42DB1 /* Default@2x.png in Resources */,
 				9627A2F6194A4CF100D42DB1 /* zombieHumanTwo.png in Resources */,
 				9627A2EE194A4CF100D42DB1 /* dagger.png in Resources */,
@@ -1843,6 +1859,7 @@
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
 				96A94B671956463300894AE1 /* zombiePirate.png in Resources */,
+				96B8E84719577528007005C9 /* shoot-iPad.png in Resources */,
 				96D8A88A1951036C003626FE /* Health.png in Resources */,
 				9627A050194A4B8200D42DB1 /* Icon@2x.png in Resources */,
 				9627A062194A4B8200D42DB1 /* Icon-Small@2x.png in Resources */,
@@ -1856,6 +1873,7 @@
 				96129C5019536D8D00CB03F8 /* CastleExample_4.png in Resources */,
 				96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */,
 				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
+				96A94B731956B4E200894AE1 /* skillSlot_iPhone.png in Resources */,
 				96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */,
 				9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */,
 				9627A04B194A4B8200D42DB1 /* Default-Landscape~ipad.png in Resources */,
@@ -1872,6 +1890,7 @@
 				96129C4A19536D2800CB03F8 /* water.png in Resources */,
 				9627A069194A4B8200D42DB1 /* iTunesArtwork in Resources */,
 				9627A064194A4B8200D42DB1 /* Icon-Spotlight-iOS7.png in Resources */,
+				96B8E84819577528007005C9 /* shoot-iPhone.png in Resources */,
 				9627A058194A4B8200D42DB1 /* Icon-76@2x.png in Resources */,
 				9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */,
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
@@ -1883,6 +1902,7 @@
 				96D8A88C19510371003626FE /* Health.plist in Resources */,
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
+				96A94B6B1956AF3D00894AE1 /* skillSlot2.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
 				96129C4C19536D3800CB03F8 /* plant repack_2.png in Resources */,
 				96A94B591956327F00894AE1 /* zombieHuman.png in Resources */,
@@ -2191,7 +2211,7 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = AftermathRPG/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",
@@ -2217,7 +2237,7 @@
 					"\"$(SRCROOT)/$(PROJECT_NAME)/Libraries/Chipmunk/objectivec/include\"",
 				);
 				INFOPLIST_FILE = AftermathRPG/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-lsqlite3",

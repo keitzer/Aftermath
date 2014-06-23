@@ -26,6 +26,7 @@
     CCAnimatedSprite *zombieHumanTwo;
     CCSprite *zombieBoss;
     CCSprite *dagger;
+    CCSprite *bullet;
     HudLayer *hud;
 }
 // Properties
@@ -38,6 +39,7 @@
 @property (nonatomic, retain) CCAnimatedSprite *zombieHumanTwo;
 @property (nonatomic, retain) CCSprite *zombieBoss;
 @property (nonatomic, retain) CCSprite *dagger;
+@property (nonatomic, retain) CCSprite *bullet;
 @property (nonatomic, assign) CCPhysicsNode *physicsWorldNode;
 
 @property (nonatomic, strong) CCAction *moveAction;

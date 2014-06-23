@@ -18,8 +18,20 @@
     BOOL daggerPickedUp;
     int zombiesDropped;
     int livesLeft;
+    /* 0 = North
+       1 =  South
+       2 =  East
+       3 = West */
+    int charDirection;
+    CCActionMoveTo *moveBullet;
+    CCActionMoveTo *repositionBullet;
+    CCActionShow *showBullet;
+    CCActionRemove *hideBullet;
+    CCActionDelay *returnBullet;
+    CCActionDelay *bulletDelay;
+    
 }
-@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode, metaTileTwoLayer;
+@synthesize levelOneMap, metaTileLayer, mainChar, zombiePirate, zombieBoss, zombieHumanTwo, zombieHumanOne, dagger,physicsWorldNode, metaTileTwoLayer, bullet;
 
 - (id)init
 {
@@ -66,12 +78,38 @@
         zombiesDropped = 0;
         livesLeft = 3;
         
+        // Setting character direction to facing east by default
+        charDirection = 1;
+        
         [self setCenterOfScreen:mainChar.position];
 
-        NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
+      //  NSLog(@"%@, %@, %@",NSStringFromCGPoint(self.zombiePirate.position) , NSStringFromCGPoint(self.zombieHumanOne.position), NSStringFromCGPoint(self.zombieHumanTwo.position));
 
+        // Adding the bullet projectile
+        self.bullet = [CCSprite spriteWithImageNamed:@"bullet.png"];
+        // Positioning the bullet
+        self.bullet.position = ccp(0,0);
+        // Setting it visible to false, until fired (screen tapped)
+        self.bullet.visible = FALSE;
+        self.bullet.physicsBody = [CCPhysicsBody bodyWithRect:(CGRect){CGPointZero, self.bullet.contentSize} cornerRadius:0];
+        // Setting the Collison Group & Type for further comparison later on...
+        self.bullet.physicsBody.collisionGroup = @"groupPlayer";
+        self.bullet.physicsBody.collisionType = @"collisionAmmo";
+        // Adding Bullet to the Physics World
+        [self.physicsWorldNode addChild: self.bullet];
     }
     return self;
+}
+-(void) onEnter
+{
+    [super onEnter];
+    NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
+    
+    [notiCenter addObserver:self
+                   selector:@selector(shootBulletsFromGun)
+                       name:@"Level1GameLayerShootGun"
+                     object:nil];
+
 }
 - (void)setCenterOfScreen:(CGPoint) position {
     // Setting the user's screensize to a CGSize var to be used
@@ -113,6 +151,7 @@
             // Move player to the right a tile
             playerPos.x += levelOneMap.tileSize.width;
             self.mainChar.flipX = NO;
+            charDirection = 2;
             [mainChar runAnimation:@"AnimateChar"];
 
         }
@@ -122,6 +161,7 @@
             
             playerPos.x -= levelOneMap.tileSize.width;
             self.mainChar.flipX = YES;
+            charDirection = 3;
             [mainChar runAnimation:@"AnimateChar"];
 
         }
@@ -133,7 +173,7 @@
         {
             // Move player up a tile
             playerPos.y += levelOneMap.tileSize.height;
-            
+            charDirection = 0;
             [mainChar runAnimation:@"AnimateChar-N"];
 
         }
@@ -141,10 +181,8 @@
         {
             // Move player down a tiles
             playerPos.y -= levelOneMap.tileSize.height;
-            
+            charDirection = 1;
             [mainChar runAnimation:@"AnimateChar-S"];
-
-
         }
     }
     // If player's position is less then or equal to the level's map size, and it's greater than 0,0
@@ -240,11 +278,12 @@
         }
     }
     // Setting characters position, granted no collison detected
-    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.3 position:position]];
+    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.5 position:position]];
 }
 - (void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
     [mainChar stopAnimation];
+   // [mainChar stopAllActions];
 }
 // Add new method
 - (CGPoint)returnCoordsFromPosition:(CGPoint)position {
@@ -332,6 +371,56 @@
     dagger.position = ccp(x5,y5);
     [self addChild:dagger];
 }
+// Method to call when there is a collision between ammo & a monster npc!
+- (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionMonster:(CCNode *)monster collisionAmmo:(CCNode *)ammo
+{
+    [monster stopAllActions];
+    
+    
+    // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
+    
+    [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+    
+    CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
+    [monster runAction:actionSpin];
+    
+    CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
+    CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
+    
+    CCActionRemove *removeElement = [CCActionRemove action];
+    CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
+    [monster runAction:monsterDeathSequence];
+    
+    [self zombieKilledUpdateHud];
+
+    return YES;
+}
+- (void)zombieKilledUpdateHud
+{
+    zombiesDropped++;
+    if (zombiesDropped >= 4)
+    {
+        NSDictionary* userInfo2 = @{@"textInfo" : @"Zombies cleared, head north of town!"};
+        NSString* notiName2 = @"HudLayerUpdateTextNotification";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                            object:self userInfo:userInfo2];
+        
+    }
+    else
+    {
+        NSDictionary* userInfo2 = @{@"textInfo" : @"+50 xp"};
+        NSString* notiName2 = @"HudLayerUpdateTextNotification";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                            object:self userInfo:userInfo2];
+        
+    }
+    NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
+    NSString* notiName = @"HudLayerUpdateZombieNotification";
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:notiName
+                                                        object:self userInfo:userInfo];
+}
+
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionPlayer:(CCNode *)user collisionMonster:(CCNode *)monster
 {
 
@@ -354,28 +443,7 @@
         CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
         [monster runAction:monsterDeathSequence];
         
-        zombiesDropped++;
-        if (zombiesDropped >= 4)
-        {
-            NSDictionary* userInfo2 = @{@"textInfo" : @"Zombies cleared, head north of town!"};
-            NSString* notiName2 = @"HudLayerUpdateTextNotification";
-            [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
-                                                                object:self userInfo:userInfo2];
-            
-        }
-        else
-        {
-            NSDictionary* userInfo2 = @{@"textInfo" : @"+50 xp"};
-            NSString* notiName2 = @"HudLayerUpdateTextNotification";
-            [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
-                                                                object:self userInfo:userInfo2];
-
-        }
-        NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
-        NSString* notiName = @"HudLayerUpdateZombieNotification";
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:notiName
-                                                            object:self userInfo:userInfo];
+        [self zombieKilledUpdateHud];
         
 
     }
@@ -409,6 +477,72 @@
 
     }
         return NO;
+}
+- (void) shootBulletsFromGun
+{
+    // Checking to see if the bullet current has no actions running, if so then run this sequence of events on the bullet projectile
+    if (!self.bullet.numberOfRunningActions)
+    {
+        // Playing GunShot sound when bullet is fired
+        [[OALSimpleAudio sharedInstance] playEffect:@"Gunshot.mp3" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+        // Moving bullet projectile to the target's tapped position
+        repositionBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
+        showBullet = [CCActionShow action];
+        hideBullet = [CCActionHide action];
+        // Moving the bullet projectile back to the main character, to be shot again (reusing the same sprite rather then creating a new one each time)
+        returnBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
+        // Action to simply delay the spam of bullets
+        bulletDelay = [CCActionDelay actionWithDuration:0.6];
+
+
+        
+        if (charDirection == 0)
+        {
+            
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y + 350)];
+            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:270];
+            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:90];
+            bullet.flipX = NO;
+            
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+        }
+        else if (charDirection == 1)
+        {
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x, mainChar.position.y - 350)];
+            CCActionRotateBy *rotateBullet = [CCActionRotateBy actionWithDuration:0 angle:90];
+            CCActionRotateBy *rotateBulletBack = [CCActionRotateBy actionWithDuration:0 angle:270];
+            bullet.flipX = NO;
+
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet, rotateBullet,showBullet, moveBullet, hideBullet, rotateBulletBack, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+        }
+        else if (charDirection == 2)
+        {
+            moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x + 350, mainChar.position.y)];
+            bullet.flipX = NO;
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+
+
+        }
+        else if (charDirection == 3)
+        {
+           moveBullet = [CCActionMoveTo actionWithDuration:0.6f position:ccp(mainChar.position.x - 350, mainChar.position.y)];
+           bullet.flipX = YES;
+            // Running actions in sequence, as opposed to all at the same time
+            CCActionSequence* bulletSequence = [CCActionSequence actions: repositionBullet,showBullet, moveBullet, hideBullet, returnBullet, bulletDelay, nil];
+            [self.bullet runAction: bulletSequence];
+
+
+        }
+        else
+        {
+        }
+    }
 }
 - (void)animateMonsters {
   
