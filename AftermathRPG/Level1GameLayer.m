@@ -74,6 +74,10 @@
         [self spawnLevelOneSprites];
         [self schedule:@selector(animateMonsters) interval:12];
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:@"NO" forKey:@"daggerPickedUp"];
+        [defaults synchronize];
+        
         daggerPickedUp = NO;
         holdingDagger = NO;
         zombiesDropped = 0;
@@ -300,6 +304,11 @@
                     NSString* notiName2 = @"HudLayerUpdateTextNotification";
                     [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
                                                                     object:self userInfo:userInfo2];
+                    
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:@"YES" forKey:@"daggerPickedUp"];
+                    [defaults synchronize];
+
                     daggerPickedUp = YES;
                     CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
                         [dagger removeFromParentAndCleanup:YES];

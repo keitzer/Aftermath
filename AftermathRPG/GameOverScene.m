@@ -36,6 +36,13 @@
         playAgainButton.position = ccp(0.5f, 0.35f);
         [playAgainButton setTarget:self selector:@selector(onPlayRestart:)];
         [self addChild:playAgainButton];
+        
+        CCButton *mainMenuButton = [CCButton buttonWithTitle:@"[ Main Menu ]" fontName:@"Verdana-Bold" fontSize:30.0f];
+        mainMenuButton.positionType = CCPositionTypeNormalized;
+        mainMenuButton.position = ccp(0.5f, 0.20f);
+        [mainMenuButton setTarget:self selector:@selector(onMainMenu:)];
+        [self addChild:mainMenuButton];
+
 
     }
     else
@@ -51,6 +58,13 @@
         playAgainButton.position = ccp(0.5f, 0.35f);
         [playAgainButton setTarget:self selector:@selector(onPlayRestart:)];
         [self addChild:playAgainButton];
+        
+        CCButton *mainMenuButton = [CCButton buttonWithTitle:@"[ Main Menu ]" fontName:@"Verdana-Bold" fontSize:18.0f];
+        mainMenuButton.positionType = CCPositionTypeNormalized;
+        mainMenuButton.position = ccp(0.5f, 0.20f);
+        [mainMenuButton setTarget:self selector:@selector(onMainMenu:)];
+        [self addChild:mainMenuButton];
+
 
     }
     
@@ -63,5 +77,10 @@
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[Level1Scene scene]
                                withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:0.5f]];
+}
+- (void)onMainMenu:(id)sender
+{
+    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
 }
 @end

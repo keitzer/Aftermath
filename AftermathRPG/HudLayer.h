@@ -17,11 +17,12 @@
     CCLabelTTF *zombiesKilled;
     CCLabelTTF *userInfoTxt;
     CCAnimatedSprite *healthBar;
-    SneakyJoystick *leftJoystick;
-	SneakyButton *rightButton;
-
+    CCAnimatedSprite *sideBar;
+    CCAnimatedSprite *objectiveGump;
 }
 
 @property (nonatomic, retain) CCAnimatedSprite *healthBar;
+@property (nonatomic, retain) CCAnimatedSprite *sideBar;
+@property (nonatomic, retain) CCAnimatedSprite *objectiveGump;
 
 @end

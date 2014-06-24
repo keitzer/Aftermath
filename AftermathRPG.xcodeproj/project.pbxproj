@@ -237,6 +237,24 @@
 		9627A5BF194A80EB00D42DB1 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 9627A5BE194A80EB00D42DB1 /* GameOverScene.m */; };
 		964528BB195887C1008D795F /* healthBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 964528B9195887C1008D795F /* healthBar.plist */; };
 		964528BC195887C1008D795F /* healthBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528BA195887C1008D795F /* healthBar.png */; };
+		964528CF1958BF35008D795F /* sideBar.plist in Resources */ = {isa = PBXBuildFile; fileRef = 964528CD1958BF35008D795F /* sideBar.plist */; };
+		964528D01958BF35008D795F /* sideBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528CE1958BF35008D795F /* sideBar.png */; };
+		964528D31958C08D008D795F /* pauseButton-iPad-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528D11958C08D008D795F /* pauseButton-iPad-1.png */; };
+		964528D41958C08D008D795F /* pauseButton-iPhone-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528D21958C08D008D795F /* pauseButton-iPhone-1.png */; };
+		964528D71958C09A008D795F /* inventoryButton-iPad-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528D51958C09A008D795F /* inventoryButton-iPad-1.png */; };
+		964528D81958C09A008D795F /* inventoryButton-iPhone-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528D61958C09A008D795F /* inventoryButton-iPhone-1.png */; };
+		964528DB1958C0AA008D795F /* objectiveButton-iPad-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528D91958C0AA008D795F /* objectiveButton-iPad-1.png */; };
+		964528DC1958C0AA008D795F /* objectiveButton-iPhone-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 964528DA1958C0AA008D795F /* objectiveButton-iPhone-1.png */; };
+		966FC6F11959D8E200FFF5E6 /* objectiveGumpLeft-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6ED1959D8E200FFF5E6 /* objectiveGumpLeft-iPad.png */; };
+		966FC6F21959D8E200FFF5E6 /* objectiveGumpLeft-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6EE1959D8E200FFF5E6 /* objectiveGumpLeft-iPhone.png */; };
+		966FC6F31959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6EF1959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png */; };
+		966FC6F41959D8E200FFF5E6 /* objectiveGumpRight-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F01959D8E200FFF5E6 /* objectiveGumpRight-iPad.png */; };
+		966FC6F91959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F51959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png */; };
+		966FC6FA1959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F61959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png */; };
+		966FC6FB1959FF2200FFF5E6 /* inventoryGump-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F71959FF2200FFF5E6 /* inventoryGump-iPad.png */; };
+		966FC6FC1959FF2200FFF5E6 /* inventoryGump-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F81959FF2200FFF5E6 /* inventoryGump-iPhone.png */; };
+		966FC6FF195A07EC00FFF5E6 /* inventory-dagger-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */; };
+		966FC700195A07EC00FFF5E6 /* inventory-dagger-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */; };
 		96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B541956327F00894AE1 /* zombieHuman.plist */; };
 		96A94B591956327F00894AE1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B551956327F00894AE1 /* zombieHuman.png */; };
 		96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5C1956334300894AE1 /* zombieHuman2.plist */; };
@@ -728,6 +746,24 @@
 		9627A5BE194A80EB00D42DB1 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		964528B9195887C1008D795F /* healthBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = healthBar.plist; sourceTree = "<group>"; };
 		964528BA195887C1008D795F /* healthBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = healthBar.png; sourceTree = "<group>"; };
+		964528CD1958BF35008D795F /* sideBar.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sideBar.plist; sourceTree = "<group>"; };
+		964528CE1958BF35008D795F /* sideBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sideBar.png; sourceTree = "<group>"; };
+		964528D11958C08D008D795F /* pauseButton-iPad-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseButton-iPad-1.png"; sourceTree = "<group>"; };
+		964528D21958C08D008D795F /* pauseButton-iPhone-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pauseButton-iPhone-1.png"; sourceTree = "<group>"; };
+		964528D51958C09A008D795F /* inventoryButton-iPad-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryButton-iPad-1.png"; sourceTree = "<group>"; };
+		964528D61958C09A008D795F /* inventoryButton-iPhone-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryButton-iPhone-1.png"; sourceTree = "<group>"; };
+		964528D91958C0AA008D795F /* objectiveButton-iPad-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveButton-iPad-1.png"; sourceTree = "<group>"; };
+		964528DA1958C0AA008D795F /* objectiveButton-iPhone-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveButton-iPhone-1.png"; sourceTree = "<group>"; };
+		966FC6ED1959D8E200FFF5E6 /* objectiveGumpLeft-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveGumpLeft-iPad.png"; sourceTree = "<group>"; };
+		966FC6EE1959D8E200FFF5E6 /* objectiveGumpLeft-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveGumpLeft-iPhone.png"; sourceTree = "<group>"; };
+		966FC6EF1959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveGumpRight-iPhone.png"; sourceTree = "<group>"; };
+		966FC6F01959D8E200FFF5E6 /* objectiveGumpRight-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "objectiveGumpRight-iPad.png"; sourceTree = "<group>"; };
+		966FC6F51959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryCloseBtn-iPad.png"; sourceTree = "<group>"; };
+		966FC6F61959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryCloseBtn-iPhone.png"; sourceTree = "<group>"; };
+		966FC6F71959FF2200FFF5E6 /* inventoryGump-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryGump-iPad.png"; sourceTree = "<group>"; };
+		966FC6F81959FF2200FFF5E6 /* inventoryGump-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryGump-iPhone.png"; sourceTree = "<group>"; };
+		966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventory-dagger-iPad.png"; sourceTree = "<group>"; };
+		966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventory-dagger-iPhone.png"; sourceTree = "<group>"; };
 		96A94B541956327F00894AE1 /* zombieHuman.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman.plist; sourceTree = "<group>"; };
 		96A94B551956327F00894AE1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
 		96A94B5C1956334300894AE1 /* zombieHuman2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman2.plist; sourceTree = "<group>"; };
@@ -802,6 +838,24 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
+				966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */,
+				966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */,
+				966FC6F51959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png */,
+				966FC6F61959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png */,
+				966FC6F71959FF2200FFF5E6 /* inventoryGump-iPad.png */,
+				966FC6F81959FF2200FFF5E6 /* inventoryGump-iPhone.png */,
+				966FC6ED1959D8E200FFF5E6 /* objectiveGumpLeft-iPad.png */,
+				966FC6EE1959D8E200FFF5E6 /* objectiveGumpLeft-iPhone.png */,
+				966FC6EF1959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png */,
+				966FC6F01959D8E200FFF5E6 /* objectiveGumpRight-iPad.png */,
+				964528D91958C0AA008D795F /* objectiveButton-iPad-1.png */,
+				964528DA1958C0AA008D795F /* objectiveButton-iPhone-1.png */,
+				964528D51958C09A008D795F /* inventoryButton-iPad-1.png */,
+				964528D61958C09A008D795F /* inventoryButton-iPhone-1.png */,
+				964528D11958C08D008D795F /* pauseButton-iPad-1.png */,
+				964528D21958C08D008D795F /* pauseButton-iPhone-1.png */,
+				964528CD1958BF35008D795F /* sideBar.plist */,
+				964528CE1958BF35008D795F /* sideBar.png */,
 				964528B9195887C1008D795F /* healthBar.plist */,
 				964528BA195887C1008D795F /* healthBar.png */,
 				9627A2D1194A4B8400D42DB1 /* Classes */,
@@ -1855,21 +1909,31 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				966FC700195A07EC00FFF5E6 /* inventory-dagger-iPhone.png in Resources */,
 				9627A2F2194A4CF100D42DB1 /* PathAndObjects_0.png in Resources */,
 				96B8E84A19577B96007005C9 /* bullet.png in Resources */,
 				9627A047194A4B8200D42DB1 /* Default@2x.png in Resources */,
 				9627A2F6194A4CF100D42DB1 /* zombieHumanTwo.png in Resources */,
 				9627A2EE194A4CF100D42DB1 /* dagger.png in Resources */,
 				96BFDCEC1954EBD00097178C /* itemPickup.mp3 in Resources */,
+				966FC6F11959D8E200FFF5E6 /* objectiveGumpLeft-iPad.png in Resources */,
+				966FC6F21959D8E200FFF5E6 /* objectiveGumpLeft-iPhone.png in Resources */,
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
+				966FC6FB1959FF2200FFF5E6 /* inventoryGump-iPad.png in Resources */,
+				966FC6FF195A07EC00FFF5E6 /* inventory-dagger-iPad.png in Resources */,
+				964528D01958BF35008D795F /* sideBar.png in Resources */,
 				96A94B671956463300894AE1 /* zombiePirate.png in Resources */,
+				966FC6FC1959FF2200FFF5E6 /* inventoryGump-iPhone.png in Resources */,
 				96B8E84719577528007005C9 /* shoot-iPad.png in Resources */,
+				964528DC1958C0AA008D795F /* objectiveButton-iPhone-1.png in Resources */,
 				96D8A88A1951036C003626FE /* Health.png in Resources */,
 				9627A050194A4B8200D42DB1 /* Icon@2x.png in Resources */,
+				964528D71958C09A008D795F /* inventoryButton-iPad-1.png in Resources */,
 				9627A062194A4B8200D42DB1 /* Icon-Small@2x.png in Resources */,
 				9627A054194A4B8200D42DB1 /* Icon-72@2x.png in Resources */,
+				964528D41958C08D008D795F /* pauseButton-iPhone-1.png in Resources */,
 				96129C561953765E00CB03F8 /* lpc_misc_0.png in Resources */,
 				9627A045194A4B8200D42DB1 /* Default.png in Resources */,
 				96129C5A1953768600CB03F8 /* bridges.png in Resources */,
@@ -1877,6 +1941,7 @@
 				9627A5B8194A7DD800D42DB1 /* DeathByZombie.mp3 in Resources */,
 				9627A05C194A4B8200D42DB1 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
 				96129C5019536D8D00CB03F8 /* CastleExample_4.png in Resources */,
+				966FC6F41959D8E200FFF5E6 /* objectiveGumpRight-iPad.png in Resources */,
 				96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */,
 				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
 				96A94B731956B4E200894AE1 /* skillSlot_iPhone.png in Resources */,
@@ -1886,10 +1951,12 @@
 				9627A060194A4B8200D42DB1 /* Icon-Small.png in Resources */,
 				96129C581953767600CB03F8 /* house.png in Resources */,
 				9627A05E194A4B8200D42DB1 /* Icon-Small-50.png in Resources */,
+				964528D81958C09A008D795F /* inventoryButton-iPhone-1.png in Resources */,
 				9627A5BA194A7DD800D42DB1 /* MenuTrack.mp3 in Resources */,
 				9627A247194A4B8300D42DB1 /* LICENSE_Kazmath.txt in Resources */,
 				9627A052194A4B8200D42DB1 /* Icon-72.png in Resources */,
 				9627A1A0194A4B8300D42DB1 /* LICENSE_cocos2d.txt in Resources */,
+				966FC6FA1959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png in Resources */,
 				9627A049194A4B8200D42DB1 /* Default-568h@2x.png in Resources */,
 				964528BC195887C1008D795F /* healthBar.png in Resources */,
 				9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */,
@@ -1899,6 +1966,7 @@
 				9627A064194A4B8200D42DB1 /* Icon-Spotlight-iOS7.png in Resources */,
 				96B8E84819577528007005C9 /* shoot-iPhone.png in Resources */,
 				9627A058194A4B8200D42DB1 /* Icon-76@2x.png in Resources */,
+				966FC6F31959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png in Resources */,
 				9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */,
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
 				96129C6219537C7D00CB03F8 /* sand_5.png in Resources */,
@@ -1908,7 +1976,9 @@
 				96D8A8871950D7EA003626FE /* AnimateChar.plist in Resources */,
 				96D8A88C19510371003626FE /* Health.plist in Resources */,
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
+				964528CF1958BF35008D795F /* sideBar.plist in Resources */,
 				964528BB195887C1008D795F /* healthBar.plist in Resources */,
+				966FC6F91959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
 				96A94B6B1956AF3D00894AE1 /* skillSlot2.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
@@ -1918,7 +1988,9 @@
 				9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */,
 				96A94B661956463300894AE1 /* zombiePirate.plist in Resources */,
 				96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */,
+				964528D31958C08D008D795F /* pauseButton-iPad-1.png in Resources */,
 				9627A06B194A4B8200D42DB1 /* iTunesArtwork@2x in Resources */,
+				964528DB1958C0AA008D795F /* objectiveButton-iPad-1.png in Resources */,
 				96BFDCF019550D9B0097178C /* metaTwo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
