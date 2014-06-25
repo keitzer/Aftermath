@@ -73,6 +73,7 @@
             
             CCButton *inventoryButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryButton-iPad-1.png"]];
             inventoryButton.position = ccp(0.95f * viewSize.width, 0.3470f * viewSize.height);
+            [inventoryButton setTarget:self selector:@selector(onShowInventoryGumpClicked:)];
             [self addChild:inventoryButton];
 
 
@@ -301,7 +302,7 @@
         
         inventoryCloseGump = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryCloseBtn-iPad.png"]];
         [inventoryCloseGump setTarget:self selector:@selector(hideInventoryGumpClicked:)];
-        inventoryCloseGump.position = ccp(viewSize.width * 0.945, viewSize.height * 0.09);
+        inventoryCloseGump.position = ccp(viewSize.width * 0.634, viewSize.height * 0.605);
         [self addChild:inventoryCloseGump];
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -309,7 +310,7 @@
         if ([value isEqualToString:@"YES"])
         {
             daggerIcon = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventory-dagger-iPad.png"]];
-            daggerIcon.position = ccp(inventoryGump.position.x,inventoryGump.position.y);
+            daggerIcon.position = ccp(inventoryGump.position.x -97,inventoryGump.position.y + 8);
             [self addChild:daggerIcon];
         }
         else
