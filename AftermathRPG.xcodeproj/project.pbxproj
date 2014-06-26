@@ -255,6 +255,17 @@
 		966FC6FC1959FF2200FFF5E6 /* inventoryGump-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6F81959FF2200FFF5E6 /* inventoryGump-iPhone.png */; };
 		966FC6FF195A07EC00FFF5E6 /* inventory-dagger-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */; };
 		966FC700195A07EC00FFF5E6 /* inventory-dagger-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */; };
+		966FC702195A897E00FFF5E6 /* leather_inventory.wav in Resources */ = {isa = PBXBuildFile; fileRef = 966FC701195A897E00FFF5E6 /* leather_inventory.wav */; };
+		966FC705195A8D7A00FFF5E6 /* collectedBg-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC703195A8D7A00FFF5E6 /* collectedBg-iPad.png */; };
+		966FC706195A8D7A00FFF5E6 /* collectedBg-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 966FC704195A8D7A00FFF5E6 /* collectedBg-iPhone.png */; };
+		96A548AF195C9F210011E3D8 /* aftermathLogo-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548AD195C9F210011E3D8 /* aftermathLogo-iPad.png */; };
+		96A548B0195C9F210011E3D8 /* aftermathLogo-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548AE195C9F210011E3D8 /* aftermathLogo-iPhone.png */; };
+		96A548B3195CA13E0011E3D8 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A548B2195CA13E0011E3D8 /* CreditsScene.m */; };
+		96A548B8195CA36E0011E3D8 /* creditsBtn-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548B4195CA36E0011E3D8 /* creditsBtn-iPad.png */; };
+		96A548B9195CA36E0011E3D8 /* creditsBtn-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548B5195CA36E0011E3D8 /* creditsBtn-iPhone.png */; };
+		96A548BA195CA36E0011E3D8 /* playNowBtn-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548B6195CA36E0011E3D8 /* playNowBtn-iPad.png */; };
+		96A548BB195CA36E0011E3D8 /* playNowBtn-iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548B7195CA36E0011E3D8 /* playNowBtn-iPhone.png */; };
+		96A548BF195CA8200011E3D8 /* aftermathBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A548BE195CA8200011E3D8 /* aftermathBG.png */; };
 		96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B541956327F00894AE1 /* zombieHuman.plist */; };
 		96A94B591956327F00894AE1 /* zombieHuman.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B551956327F00894AE1 /* zombieHuman.png */; };
 		96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96A94B5C1956334300894AE1 /* zombieHuman2.plist */; };
@@ -764,6 +775,18 @@
 		966FC6F81959FF2200FFF5E6 /* inventoryGump-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventoryGump-iPhone.png"; sourceTree = "<group>"; };
 		966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventory-dagger-iPad.png"; sourceTree = "<group>"; };
 		966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "inventory-dagger-iPhone.png"; sourceTree = "<group>"; };
+		966FC701195A897E00FFF5E6 /* leather_inventory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = leather_inventory.wav; sourceTree = "<group>"; };
+		966FC703195A8D7A00FFF5E6 /* collectedBg-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collectedBg-iPad.png"; sourceTree = "<group>"; };
+		966FC704195A8D7A00FFF5E6 /* collectedBg-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collectedBg-iPhone.png"; sourceTree = "<group>"; };
+		96A548AD195C9F210011E3D8 /* aftermathLogo-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aftermathLogo-iPad.png"; sourceTree = "<group>"; };
+		96A548AE195C9F210011E3D8 /* aftermathLogo-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aftermathLogo-iPhone.png"; sourceTree = "<group>"; };
+		96A548B1195CA13E0011E3D8 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
+		96A548B2195CA13E0011E3D8 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
+		96A548B4195CA36E0011E3D8 /* creditsBtn-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBtn-iPad.png"; sourceTree = "<group>"; };
+		96A548B5195CA36E0011E3D8 /* creditsBtn-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "creditsBtn-iPhone.png"; sourceTree = "<group>"; };
+		96A548B6195CA36E0011E3D8 /* playNowBtn-iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playNowBtn-iPad.png"; sourceTree = "<group>"; };
+		96A548B7195CA36E0011E3D8 /* playNowBtn-iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "playNowBtn-iPhone.png"; sourceTree = "<group>"; };
+		96A548BE195CA8200011E3D8 /* aftermathBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aftermathBG.png; sourceTree = "<group>"; };
 		96A94B541956327F00894AE1 /* zombieHuman.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman.plist; sourceTree = "<group>"; };
 		96A94B551956327F00894AE1 /* zombieHuman.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zombieHuman.png; sourceTree = "<group>"; };
 		96A94B5C1956334300894AE1 /* zombieHuman2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = zombieHuman2.plist; sourceTree = "<group>"; };
@@ -838,6 +861,16 @@
 		9627A01E194A4B8200D42DB1 = {
 			isa = PBXGroup;
 			children = (
+				96A548BE195CA8200011E3D8 /* aftermathBG.png */,
+				96A548B4195CA36E0011E3D8 /* creditsBtn-iPad.png */,
+				96A548B5195CA36E0011E3D8 /* creditsBtn-iPhone.png */,
+				96A548B6195CA36E0011E3D8 /* playNowBtn-iPad.png */,
+				96A548B7195CA36E0011E3D8 /* playNowBtn-iPhone.png */,
+				96A548AD195C9F210011E3D8 /* aftermathLogo-iPad.png */,
+				96A548AE195C9F210011E3D8 /* aftermathLogo-iPhone.png */,
+				966FC703195A8D7A00FFF5E6 /* collectedBg-iPad.png */,
+				966FC704195A8D7A00FFF5E6 /* collectedBg-iPhone.png */,
+				966FC701195A897E00FFF5E6 /* leather_inventory.wav */,
 				966FC6FD195A07EC00FFF5E6 /* inventory-dagger-iPad.png */,
 				966FC6FE195A07EC00FFF5E6 /* inventory-dagger-iPhone.png */,
 				966FC6F51959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png */,
@@ -1819,6 +1852,8 @@
 			children = (
 				9627A2D8194A4B8400D42DB1 /* IntroScene.h */,
 				9627A2D9194A4B8400D42DB1 /* IntroScene.m */,
+				96A548B1195CA13E0011E3D8 /* CreditsScene.h */,
+				96A548B2195CA13E0011E3D8 /* CreditsScene.m */,
 			);
 			name = "Intro Scene";
 			sourceTree = "<group>";
@@ -1921,6 +1956,7 @@
 				9627A05A194A4B8200D42DB1 /* Icon-120.png in Resources */,
 				9627A25E194A4B8300D42DB1 /* LICENSE_CCBReader.txt in Resources */,
 				9627A2F1194A4CF100D42DB1 /* meta_tiles.png in Resources */,
+				96A548B9195CA36E0011E3D8 /* creditsBtn-iPhone.png in Resources */,
 				966FC6FB1959FF2200FFF5E6 /* inventoryGump-iPad.png in Resources */,
 				966FC6FF195A07EC00FFF5E6 /* inventory-dagger-iPad.png in Resources */,
 				964528D01958BF35008D795F /* sideBar.png in Resources */,
@@ -1937,13 +1973,16 @@
 				96129C561953765E00CB03F8 /* lpc_misc_0.png in Resources */,
 				9627A045194A4B8200D42DB1 /* Default.png in Resources */,
 				96129C5A1953768600CB03F8 /* bridges.png in Resources */,
+				966FC705195A8D7A00FFF5E6 /* collectedBg-iPad.png in Resources */,
 				9627A04E194A4B8200D42DB1 /* Icon.png in Resources */,
 				9627A5B8194A7DD800D42DB1 /* DeathByZombie.mp3 in Resources */,
 				9627A05C194A4B8200D42DB1 /* Icon-iPad-Spotlight-iOS7@2x.png in Resources */,
+				966FC702195A897E00FFF5E6 /* leather_inventory.wav in Resources */,
 				96129C5019536D8D00CB03F8 /* CastleExample_4.png in Resources */,
 				966FC6F41959D8E200FFF5E6 /* objectiveGumpRight-iPad.png in Resources */,
 				96A94B5F1956334300894AE1 /* zombieHuman2.png in Resources */,
 				96D8A8881950D7EA003626FE /* AnimateChar.png in Resources */,
+				96A548BB195CA36E0011E3D8 /* playNowBtn-iPhone.png in Resources */,
 				96A94B731956B4E200894AE1 /* skillSlot_iPhone.png in Resources */,
 				96BFDCEF19550D9B0097178C /* AftermathRPG-Level1.tmx in Resources */,
 				9627A2F0194A4CF100D42DB1 /* mainChar.png in Resources */,
@@ -1958,6 +1997,7 @@
 				9627A1A0194A4B8300D42DB1 /* LICENSE_cocos2d.txt in Resources */,
 				966FC6FA1959FF2200FFF5E6 /* inventoryCloseBtn-iPhone.png in Resources */,
 				9627A049194A4B8200D42DB1 /* Default-568h@2x.png in Resources */,
+				96A548AF195C9F210011E3D8 /* aftermathLogo-iPad.png in Resources */,
 				964528BC195887C1008D795F /* healthBar.png in Resources */,
 				9627A5BC194A7DD800D42DB1 /* Zombie.mp3 in Resources */,
 				9627A5BB194A7DD800D42DB1 /* SceneTrack.mp3 in Resources */,
@@ -1969,6 +2009,7 @@
 				966FC6F31959D8E200FFF5E6 /* objectiveGumpRight-iPhone.png in Resources */,
 				9627A2CC194A4B8400D42DB1 /* LICENSE_Chipmunk.txt in Resources */,
 				9627A2EF194A4CF100D42DB1 /* DungeonCrawl_ProjectUtumnoTileset.png in Resources */,
+				96A548BA195CA36E0011E3D8 /* playNowBtn-iPad.png in Resources */,
 				96129C6219537C7D00CB03F8 /* sand_5.png in Resources */,
 				96BFDCEB1954EBD00097178C /* gameOver.mp3 in Resources */,
 				9627A5B9194A7DD800D42DB1 /* Gunshot.mp3 in Resources */,
@@ -1978,8 +2019,10 @@
 				9627A066194A4B8200D42DB1 /* Icon-Spotlight-iOS7@2x.png in Resources */,
 				964528CF1958BF35008D795F /* sideBar.plist in Resources */,
 				964528BB195887C1008D795F /* healthBar.plist in Resources */,
+				96A548B0195C9F210011E3D8 /* aftermathLogo-iPhone.png in Resources */,
 				966FC6F91959FF2200FFF5E6 /* inventoryCloseBtn-iPad.png in Resources */,
 				9627A056194A4B8200D42DB1 /* Icon-76.png in Resources */,
+				966FC706195A8D7A00FFF5E6 /* collectedBg-iPhone.png in Resources */,
 				96A94B6B1956AF3D00894AE1 /* skillSlot2.png in Resources */,
 				9627A22C194A4B8300D42DB1 /* ChangeLog in Resources */,
 				96129C4C19536D3800CB03F8 /* plant repack_2.png in Resources */,
@@ -1987,11 +2030,13 @@
 				96A94B581956327F00894AE1 /* zombieHuman.plist in Resources */,
 				9627A2F4194A4CF100D42DB1 /* zombieBoss.png in Resources */,
 				96A94B661956463300894AE1 /* zombiePirate.plist in Resources */,
+				96A548B8195CA36E0011E3D8 /* creditsBtn-iPad.png in Resources */,
 				96A94B5E1956334300894AE1 /* zombieHuman2.plist in Resources */,
 				964528D31958C08D008D795F /* pauseButton-iPad-1.png in Resources */,
 				9627A06B194A4B8200D42DB1 /* iTunesArtwork@2x in Resources */,
 				964528DB1958C0AA008D795F /* objectiveButton-iPad-1.png in Resources */,
 				96BFDCF019550D9B0097178C /* metaTwo.png in Resources */,
+				96A548BF195CA8200011E3D8 /* aftermathBG.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2119,6 +2164,7 @@
 				9627A1D5194A4B8300D42DB1 /* ALSoundSourcePool.m in Sources */,
 				9627A0E4194A4B8200D42DB1 /* CCParticleSystemBase.m in Sources */,
 				9627A17B194A4B8300D42DB1 /* CCColor.m in Sources */,
+				96A548B3195CA13E0011E3D8 /* CreditsScene.m in Sources */,
 				9627A1C8194A4B8300D42DB1 /* ALChannelSource.m in Sources */,
 				9627A074194A4B8200D42DB1 /* CCActionCatmullRom.m in Sources */,
 				9627A18C194A4B8300D42DB1 /* NSAttributedString+CCAdditions.m in Sources */,

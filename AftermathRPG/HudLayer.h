@@ -10,12 +10,11 @@
 #import "cocos2d-ui.h"
 #import "cocos2d.h"
 #import "CCAnimatedSprite.h"
-@class SneakyJoystick;
-@class SneakyButton;
+
 @interface HudLayer : CCNode
 {
     CCLabelTTF *zombiesKilled;
-    CCLabelTTF *userInfoTxt;
+    CCLabelTTF *userPickupTxt;
     CCAnimatedSprite *healthBar;
     CCAnimatedSprite *sideBar;
     CCAnimatedSprite *objectiveGump;
@@ -24,5 +23,6 @@
 @property (nonatomic, retain) CCAnimatedSprite *healthBar;
 @property (nonatomic, retain) CCAnimatedSprite *sideBar;
 @property (nonatomic, retain) CCAnimatedSprite *objectiveGump;
+-(void)shootButtonClicked:(id)sender;
 
 @end

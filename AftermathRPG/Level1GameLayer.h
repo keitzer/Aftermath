@@ -44,5 +44,6 @@
 
 @property (nonatomic, strong) CCAction *moveAction;
 @property (nonatomic, strong) CCAction *walkAction;
+- (void) shootBulletsFromGun:(id)sender;
 
 @end

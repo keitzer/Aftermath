@@ -49,6 +49,7 @@
     [[OALSimpleAudio sharedInstance] preloadEffect:@"Gunshot.mp3"];
     [[OALSimpleAudio sharedInstance] preloadEffect:@"gameOver.mp3"];
     [[OALSimpleAudio sharedInstance] preloadEffect:@"itemPickup.mp3"];
+    [[OALSimpleAudio sharedInstance] preloadEffect:@"leather_inventory.wav"];
 
 	return YES;
 }

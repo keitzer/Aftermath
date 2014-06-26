@@ -20,6 +20,11 @@
     CCSprite *inventoryGump;
     CCButton *inventoryCloseGump;
     CCButton *daggerIcon;
+    CCLabelTTF *alert;
+    CCSprite *collectedBase;
+    NSString *pickupText;
+    NSString *healthText;
+    CCLabelTTF *userHealthTxt;
 }
 @synthesize healthBar, objectiveGump, sideBar;
 
@@ -30,76 +35,97 @@
     
     if (self)
     {
+        // Setting viewSize constant to size of device window
         viewSize = [[CCDirector sharedDirector] viewSize];
         
+        // Checking if user is on iPad or iPhone, then resizing all assets accordingly.
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             
-            userInfoTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12.0f];
-            userInfoTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
-            [self addChild:userInfoTxt];
+            // User's pick up text (dagger for now)
+            userPickupTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:14.0f];
+            userPickupTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
+            [self addChild:userPickupTxt z:6];
             
-       
+            // User's health text
+            userHealthTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial-Bold" fontSize:16.0f];
+            userHealthTxt.color = [CCColor colorWithRed:1.0f green:0.0f blue:0.0f];
+            userHealthTxt.position = ccp(viewSize.width * 0.325, viewSize.height * 0.965 );
+            [self addChild:userHealthTxt];
+            
+            // Skill Slot (max skills 3 at the moment)
             CCSprite *skillSlot = [CCSprite spriteWithImageNamed:@"skillSlot2.png"];
             skillSlot.position = ccp(viewSize.width * 0.16, viewSize.height * 0.06);
             [self addChild:skillSlot];
             
+            // Displaying user objective gump - TODO: Make this it's own object eventually when I go to reuse it for other levels.
             [self displayObjectiveGump:viewSize];
             
+            // Shoot button to allow user's to shoot bullet projectiles across the map
             CCButton *shootButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"shoot-iPad.png"]];
-            [shootButton setTarget:self selector:@selector(shootButtonClicked)];
+            [shootButton setTarget:self selector:@selector(shootButtonClicked:)];
             shootButton.position = ccp(skillSlot.position.x - 87, skillSlot.position.y);
             [self addChild:shootButton];
-
+            
+            // User's health bar
             self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"healthBar.plist"];
             healthBar.position = ccp(0.15f * viewSize.width, 0.91f * viewSize.height);
             [healthBar setFrame:@"healthBar-iPad-4.png"];
             [self addChild:healthBar];
             
+            // User's side bar with button's overlayed
             self.sideBar = [CCAnimatedSprite animatedSpriteWithPlist:@"sideBar.plist"];
             sideBar.position = ccp(0.87f * viewSize.width, 0.64f * viewSize.height);
             [sideBar setFrame:@"sideBar-iPad-1.png"];
             [self addChild:sideBar];
             
+            // Overlay button 1 - Objective Gump Button
             CCButton *objectiveButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"objectiveButton-iPad-1.png"]];
              objectiveButton.position = ccp(0.95f * viewSize.width, 0.596f * viewSize.height);
             [objectiveButton setTarget:self selector:@selector(onShowObjectiveGumpClicked:)];
             [self addChild:objectiveButton];
             
+            // Overlay button 2 - Pause Scene Button
             CCButton *pauseButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"pauseButton-iPad-1.png"]];
             pauseButton.position = ccp(0.95f * viewSize.width, 0.47f * viewSize.height);
             [pauseButton setTarget:self selector:@selector(onPauseClicked:)];
-
             [self addChild:pauseButton];
             
+            // Overlay button 3 - Inventory Gump Button
             CCButton *inventoryButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryButton-iPad-1.png"]];
             inventoryButton.position = ccp(0.95f * viewSize.width, 0.3470f * viewSize.height);
             [inventoryButton setTarget:self selector:@selector(onShowInventoryGumpClicked:)];
             [self addChild:inventoryButton];
-
-
+        
+            // Base background for collected items
+            collectedBase = [CCSprite spriteWithImageNamed:@"collectedBg-iPad.png"];
+            collectedBase.visible = FALSE;
+            collectedBase.position = ccp(viewSize.width *0.5,viewSize.height*0.65);
+            [self addChild:collectedBase z:5];
+        
+            
         }
         else
         {
             
-            
-            userInfoTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:12.0f];
-            userInfoTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
-            [self addChild:userInfoTxt];
+            userPickupTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial" fontSize:8.0f];
+            userPickupTxt.position = ccp(viewSize.width * 0.50, viewSize.height * 0.65 );
+            [self addChild:userPickupTxt z:6];
 
-            zombiesKilled = [CCLabelTTF labelWithString:@"Zombies Killed: 0" fontName:@"Arial" fontSize:15];
-            zombiesKilled.position = ccp(viewSize.width * 0.11, viewSize.height * 0.90 );
-            [self addChild:zombiesKilled];
+            // User's health text
+            userHealthTxt = [CCLabelTTF labelWithString:@"" fontName:@"Arial-Bold" fontSize:14.0f];
+            userHealthTxt.color = [CCColor colorWithRed:1.0f green:0.0f blue:0.0f];
+            userHealthTxt.position = ccp(viewSize.width * 0.325, viewSize.height * 0.965 );
+            [self addChild:userHealthTxt];
             
-            
-            CCSprite *skillSlot2 = [CCSprite spriteWithImageNamed:@"skillSlot_iPhone.png"];
-            skillSlot2.position = ccp(viewSize.width * 0.14, viewSize.height * 0.07);
-            [self addChild:skillSlot2];
+            CCSprite *skillSlot = [CCSprite spriteWithImageNamed:@"skillSlot_iPhone.png"];
+            skillSlot.position = ccp(viewSize.width * 0.14, viewSize.height * 0.07);
+            [self addChild:skillSlot];
             
             [self displayObjectiveGump:viewSize];
 
             CCButton *shootButton = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"shoot-iPhone.png"]];
-            [shootButton setTarget:self selector:@selector(shootButtonClicked)];
-            shootButton.position = ccp(skillSlot2.position.x - 44, skillSlot2.position.y);
+            [shootButton setTarget:self selector:@selector(shootButtonClicked:)];
+            shootButton.position = ccp(skillSlot.position.x - 44, skillSlot.position.y);
             [self addChild:shootButton];
 
             self.healthBar = [CCAnimatedSprite animatedSpriteWithPlist:@"healthBar.plist"];
@@ -128,6 +154,11 @@
             [inventoryButton setTarget:self selector:@selector(onShowInventoryGumpClicked:)];
             [self addChild:inventoryButton];
 
+            // Base background for collected items
+            collectedBase = [CCSprite spriteWithImageNamed:@"collectedBg-iPhone.png"];
+            collectedBase.visible = FALSE;
+            collectedBase.position = ccp(viewSize.width *0.5,viewSize.height*0.65);
+            [self addChild:collectedBase z:5];
 
         }
     }
@@ -176,22 +207,235 @@
     }
     
 }
--(void)provideUserInfo:(NSNotification *)notification
+// -----------------------------------------------------------------------
+#pragma mark - Button Callbacks
+// -----------------------------------------------------------------------
+
+- (void)onBackClicked:(id)sender
+{
+    // back to intro scene with transition
+    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
+}
+- (void)onPauseClicked:(id)sender
+{
+    CCScene *pauseScene = [PauseScene node];
+    // back to intro scene with transition
+    [[CCDirector sharedDirector] pushScene:pauseScene];
+    [[OALSimpleAudio sharedInstance] stopEverything];
+
+}
+-(void)onShowObjectiveGumpClicked:(id)sender
+{
+    [objectiveRight removeFromParent];
+    [objectiveLeft removeFromParent];
+    [level1Header removeFromParent];
+    [level1Objectives removeFromParent];
+    [self displayObjectiveGump:viewSize];
+}
+-(void)shootButtonClicked:(id)sender
+{
+    NSString* notiName2 = @"Level1GameLayerShootGun";
+    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                        object:self userInfo:nil];
+}
+- (void)hideObjectiveGumpClicked:(id)sender
+{
+    [objectiveRight removeFromParent];
+    [objectiveLeft removeFromParent];
+    [level1Header removeFromParent];
+    [level1Objectives removeFromParent];
+}
+- (void)hideInventoryGumpClicked:(id)sender
+{
+    [daggerIcon removeFromParent];
+    [inventoryCloseGump removeFromParent];
+    [inventoryGump removeFromParent];
+    [[OALSimpleAudio sharedInstance] playEffect:@"leather_inventory.wav" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+
+    
+}
+- (void) onShowInventoryGumpClicked:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        [inventoryCloseGump removeFromParent];
+        [inventoryGump removeFromParent];
+        [daggerIcon removeFromParent];
+        
+        [[OALSimpleAudio sharedInstance] playEffect:@"leather_inventory.wav" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+
+        inventoryGump = [CCSprite spriteWithImageNamed:@"inventoryGump-iPad.png"];
+        inventoryGump.position = ccp(viewSize.width * 0.50, viewSize.height * 0.50);
+        [self addChild:inventoryGump];
+        
+        inventoryCloseGump = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryCloseBtn-iPad.png"]];
+        [inventoryCloseGump setTarget:self selector:@selector(hideInventoryGumpClicked:)];
+        inventoryCloseGump.position = ccp(viewSize.width * 0.634, viewSize.height * 0.605);
+        [self addChild:inventoryCloseGump];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *value = [defaults stringForKey:@"daggerPickedUp"];
+        if ([value isEqualToString:@"YES"])
+        {
+            daggerIcon = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventory-dagger-iPad.png"]];
+            daggerIcon.position = ccp(inventoryGump.position.x -97,inventoryGump.position.y + 8);
+            [self addChild:daggerIcon];
+        }
+        else
+        {
+            
+        }
+    }
+    else
+    {
+        [inventoryCloseGump removeFromParent];
+        [inventoryGump removeFromParent];
+        [daggerIcon removeFromParent];
+        
+        [[OALSimpleAudio sharedInstance] playEffect:@"leather_inventory.wav" volume:0.3f pitch:1.0f pan:10.0f loop:0];
+
+        inventoryGump = [CCSprite spriteWithImageNamed:@"inventoryGump-iPhone.png"];
+        inventoryGump.position = ccp(viewSize.width * 0.50, viewSize.height * 0.50);
+        [self addChild:inventoryGump];
+        
+        inventoryCloseGump = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryCloseBtn-iPhone.png"]];
+        [inventoryCloseGump setTarget:self selector:@selector(hideInventoryGumpClicked:)];
+        inventoryCloseGump.position = ccp(viewSize.width * 0.621, viewSize.height * 0.625);
+        [self addChild:inventoryCloseGump];
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *value = [defaults stringForKey:@"daggerPickedUp"];
+        NSLog(@"%@", value);
+        if ([value isEqualToString:@"YES"])
+        {
+            daggerIcon = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventory-dagger-iPhone.png"]];
+            daggerIcon.position = ccp(inventoryGump.position.x - 48,inventoryGump.position.y + 4);
+            [self addChild:daggerIcon];
+        }
+        else
+        {
+            
+        }
+
+        
+    }
+}
+// -----------------------------------------------------------------------
+#pragma mark - onEnter / onExit
+// -----------------------------------------------------------------------
+
+- (void) onEnter
+{
+    [super onEnter];
+    NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
+    
+    [notiCenter addObserver:self
+                   selector:@selector(onUpdateZombieText:)
+                       name:@"HudLayerUpdateZombieNotification"
+                     object:nil];
+    [notiCenter addObserver:self
+                   selector:@selector(updateHealth:)
+                       name:@"HudLayerUpdateHealthNotification"
+                     object:nil];
+    [notiCenter addObserver:self
+                   selector:@selector(showCollectionGump:)
+                       name:@"HudLayerUpdateTextNotification"
+                     object:nil];
+    [notiCenter addObserver:self
+                   selector:@selector(setHealthText:)
+                       name:@"HudLayerUpdateHealthTextNotification"
+                     object:nil];
+
+}
+- (void)onExit
+{
+    [super onExit];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+// -----------------------------------------------------------------------
+#pragma mark - Update UI
+// -----------------------------------------------------------------------
+-(void)showCollectionGump:(NSNotification *)notification
 {
     NSDictionary* userInfo = notification.userInfo;
     
     if (userInfo)
         
     {
-        NSString *text = userInfo[@"textInfo"];
-        CCActionFadeIn *fadeIn = [CCActionFadeIn actionWithDuration:2.0f];
-        CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:2.0f];
-        [userInfoTxt runAction:fadeIn];
-        userInfoTxt.string = text;
-        [userInfoTxt runAction:fadeOut];
+        pickupText = userInfo[@"textInfo"];
         
-
+        CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:1.8f];
+        CCActionFadeIn *show = [CCActionShow action];
+        CCActionFadeOut *hide = [CCActionHide action];
+        CCActionFadeOut *delay = [CCActionDelay actionWithDuration:1.8f];
+        
+        CCActionSequence *showAndHideText= [CCActionSequence actions: [CCActionCallFunc actionWithTarget:self selector:@selector(setText)], fadeOut, [CCActionCallFunc actionWithTarget:self selector:@selector(resetText)], nil];
+        CCActionSequence *showAndHideGump= [CCActionSequence actions: show, delay, hide, nil];
+        
+        [userPickupTxt runAction:showAndHideText];
+        [collectedBase runAction:showAndHideGump];
+        
     }
+}
+- (void)onUpdateZombieText:(NSNotification *)notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    
+    if (userInfo)
+    {
+        NSString* zText = userInfo[@"zombiesKilled"];
+        
+        if (zText)
+        {
+            zombiesKilled.string = pickupText;
+        }
+        else
+        {
+            CCLOG(@"Text parameter invalid for zombies killed!.");
+        }
+    }
+    else
+    {
+        CCLOG(@"invalid user info for zombies killed!");
+    }
+}
+-(void) setText
+{
+    userPickupTxt.string = pickupText;
+}
+-(void) resetText
+{
+    userPickupTxt.string = @"";
+}
+-(void)setHealthTxt
+{
+    userHealthTxt.string = healthText;
+}
+-(void)resetHealthTxt
+{
+    userHealthTxt.string = @"";
+}
+-(void) setHealthText:(NSNotification *)notification
+{
+    NSDictionary* userInfo = notification.userInfo;
+    
+    if (userInfo)
+        
+    {
+        healthText = userInfo[@"textInfo"];
+        
+        CCActionFadeOut *fadeOut = [CCActionFadeOut actionWithDuration:2.5f];
+        
+        CCActionSequence *showAndHideText= [CCActionSequence actions: [CCActionCallFunc actionWithTarget:self selector:@selector(setHealthTxt)], fadeOut, [CCActionCallFunc actionWithTarget:self selector:@selector(resetHealthText)], nil];
+        
+        [userHealthTxt runAction:showAndHideText];
+    }
+}
+-(void) resetHealthText
+{
+    userHealthTxt.string = @"";
 }
 -(void)updateHealth:(NSNotification *)notification
 {
@@ -200,8 +444,8 @@
     if (userInfo)
         
     {
-        NSString *text = userInfo[@"livesLeft"];
-        NSInteger livesLeft = [text integerValue];
+        NSString *lText = userInfo[@"livesLeft"];
+        NSInteger livesLeft = [lText integerValue];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         {
             switch (livesLeft)
@@ -240,163 +484,5 @@
         }
     }
     NSLog(@"Health should be updated...");
-}
-
-// -----------------------------------------------------------------------
-#pragma mark - Button Callbacks
-// -----------------------------------------------------------------------
-
-- (void)onBackClicked:(id)sender
-{
-    // back to intro scene with transition
-    [[CCDirector sharedDirector] replaceScene:[IntroScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionRight duration:1.0f]];
-}
-- (void)onPauseClicked:(id)sender
-{
-    CCScene *pauseScene = [PauseScene node];
-    // back to intro scene with transition
-    [[CCDirector sharedDirector] pushScene:pauseScene];
-    [[OALSimpleAudio sharedInstance] stopEverything];
-
-}
--(void)onShowObjectiveGumpClicked:(id)sender
-{
-    [objectiveRight removeFromParent];
-    [objectiveLeft removeFromParent];
-    [level1Header removeFromParent];
-    [level1Objectives removeFromParent];
-    [self displayObjectiveGump:viewSize];
-}
--(void)shootButtonClicked
-{
-    NSString* notiName2 = @"Level1GameLayerShootGun";
-    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
-                                                        object:self userInfo:nil];
-}
-- (void)hideObjectiveGumpClicked:(id)sender
-{
-    [objectiveRight removeFromParent];
-    [objectiveLeft removeFromParent];
-    [level1Header removeFromParent];
-    [level1Objectives removeFromParent];
-}
-- (void)hideInventoryGumpClicked:(id)sender
-{
-    [daggerIcon removeFromParent];
-    [inventoryCloseGump removeFromParent];
-    [inventoryGump removeFromParent];
-    
-}
-- (void) onShowInventoryGumpClicked:(id)sender
-{
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        
-        [inventoryCloseGump removeFromParent];
-        [inventoryGump removeFromParent];
-        [daggerIcon removeFromParent];
-        
-        inventoryGump = [CCSprite spriteWithImageNamed:@"inventoryGump-iPad.png"];
-        inventoryGump.position = ccp(viewSize.width * 0.50, viewSize.height * 0.50);
-        [self addChild:inventoryGump];
-        
-        inventoryCloseGump = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryCloseBtn-iPad.png"]];
-        [inventoryCloseGump setTarget:self selector:@selector(hideInventoryGumpClicked:)];
-        inventoryCloseGump.position = ccp(viewSize.width * 0.634, viewSize.height * 0.605);
-        [self addChild:inventoryCloseGump];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *value = [defaults stringForKey:@"daggerPickedUp"];
-        if ([value isEqualToString:@"YES"])
-        {
-            daggerIcon = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventory-dagger-iPad.png"]];
-            daggerIcon.position = ccp(inventoryGump.position.x -97,inventoryGump.position.y + 8);
-            [self addChild:daggerIcon];
-        }
-        else
-        {
-            
-        }
-    }
-    else
-    {
-        [inventoryCloseGump removeFromParent];
-        [inventoryGump removeFromParent];
-        [daggerIcon removeFromParent];
-
-        inventoryGump = [CCSprite spriteWithImageNamed:@"inventoryGump-iPhone.png"];
-        inventoryGump.position = ccp(viewSize.width * 0.50, viewSize.height * 0.50);
-        [self addChild:inventoryGump];
-        
-        inventoryCloseGump = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventoryCloseBtn-iPhone.png"]];
-        [inventoryCloseGump setTarget:self selector:@selector(hideInventoryGumpClicked:)];
-        inventoryCloseGump.position = ccp(viewSize.width * 0.621, viewSize.height * 0.625);
-        [self addChild:inventoryCloseGump];
-        
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *value = [defaults stringForKey:@"daggerPickedUp"];
-        NSLog(@"%@", value);
-        if ([value isEqualToString:@"YES"])
-        {
-            daggerIcon = [CCButton buttonWithTitle:@"" spriteFrame:[CCSpriteFrame frameWithImageNamed:@"inventory-dagger-iPhone.png"]];
-            daggerIcon.position = ccp(inventoryGump.position.x - 48,inventoryGump.position.y + 4);
-            [self addChild:daggerIcon];
-        }
-        else
-        {
-            
-        }
-
-        
-    }
-}
-// -----------------------------------------------------------------------
-- (void) onEnter
-{
-    [super onEnter];
-    NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
-    
-    [notiCenter addObserver:self
-                   selector:@selector(onUpdateZombieText:)
-                       name:@"HudLayerUpdateZombieNotification"
-                     object:nil];
-    [notiCenter addObserver:self
-                   selector:@selector(updateHealth:)
-                       name:@"HudLayerUpdateHealthNotification"
-                     object:nil];
-    [notiCenter addObserver:self
-                   selector:@selector(provideUserInfo:)
-                       name:@"HudLayerUpdateTextNotification"
-                     object:nil];
-
-
-}
-- (void)onExit
-{
-    [super onExit];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-- (void)onUpdateZombieText:(NSNotification *)notification
-{
-    NSDictionary* userInfo = notification.userInfo;
-    
-    if (userInfo)
-    {
-        NSString* text = userInfo[@"zombiesKilled"];
-        
-        if (text)
-        {
-            zombiesKilled.string = text;
-        }
-        else
-        {
-            CCLOG(@"Text parameter invalid for zombies killed!.");
-        }
-    }
-    else
-    {
-        CCLOG(@"invalid user info for zombies killed!");
-    }
 }
 @end

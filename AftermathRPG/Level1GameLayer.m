@@ -74,6 +74,7 @@
         [self spawnLevelOneSprites];
         [self schedule:@selector(animateMonsters) interval:12];
         
+        // Setting default of dagger not picked up through NSUserDefaults to be used in HUD Layer
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:@"NO" forKey:@"daggerPickedUp"];
         [defaults synchronize];
@@ -106,13 +107,13 @@
         NSNotificationCenter* notiCenter = [NSNotificationCenter defaultCenter];
         
         [notiCenter addObserver:self
-                       selector:@selector(shootBulletsFromGun)
+                       selector:@selector(shootBulletsFromGun:)
                            name:@"Level1GameLayerShootGun"
                          object:nil];
     }
     return self;
 }
-- (void) shootBulletsFromGun
+- (void) shootBulletsFromGun:(id)sender
 {
     // Checking to see if the bullet current has no actions running, if so then run this sequence of events on the bullet projectile
     if (!self.bullet.numberOfRunningActions)
@@ -127,8 +128,6 @@
         returnBullet = [CCActionMoveTo actionWithDuration:0 position:self.mainChar.position];
         // Action to simply delay the spam of bullets
         bulletDelay = [CCActionDelay actionWithDuration:0.6];
-        
-        
         
         if (charDirection == 0)
         {
@@ -265,7 +264,93 @@
         playerPos.y >= 0 &&
         playerPos.x >= 0)
     {
-        [self setPlayerPosition:playerPos];
+        // Obtaining user's requested position and storing it into CGPoint
+        CGPoint mapTileCoords = [self returnCoordsFromPosition:playerPos];
+        // Obtaining tileGID properties for requested tile position
+        int tileGidCheck = [metaTileLayer tileGIDAt:mapTileCoords];
+        int tileGidCheck2 = [metaTileTwoLayer tileGIDAt:mapTileCoords];
+        
+        // If indeed in the metaLayer, and contains collidable property set to true, then return out of method and prevent location from being set
+        if (tileGidCheck) {
+            NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck];
+            if (properties) {
+                // Setting properties Collidable to be checked, then performing the appropriate action after checking tile
+                NSString *checkCollision = properties[@"Collidable"];
+                NSString *checkCollectable = properties[@"Collectable"];
+                if (checkCollision && [checkCollision isEqualToString:@"True"]) {
+                    // Return out of method / ie. do not call the mainChar.position = position line beneath this conditional
+                    return;
+                    NSLog(@"Meta Tile (Wall Blocker) detected!");
+                }
+                else if (checkCollectable && [checkCollectable isEqualToString:@"True"])
+                {
+                    if (daggerPickedUp == NO)
+                    {
+                        NSLog(@"Meta Tile (Collectable) detected!");
+                        [[OALSimpleAudio sharedInstance] playEffect:@"itemPickup.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
+                        
+                        NSDictionary* userInfo2 = @{@"textInfo" : @"Dagger found!"};
+                        NSString* notiName2 = @"HudLayerUpdateTextNotification";
+                        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                            object:self userInfo:userInfo2];
+                        
+                        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                        [defaults setObject:@"YES" forKey:@"daggerPickedUp"];
+                        [defaults synchronize];
+                        
+                        daggerPickedUp = YES;
+                        CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
+                            [dagger removeFromParentAndCleanup:YES];
+                            holdingDagger = YES;
+                        }];
+                        [dagger runAction:blockAction];
+                    }
+                }
+            }
+        }
+        else if (tileGidCheck2)
+        {
+            NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck2];
+            if (properties) {
+                NSString *checkDeadEnd = properties[@"DeadEnd"];
+                NSString *checkLevelUp = properties[@"LevelUp"];
+                if (checkDeadEnd && [checkDeadEnd isEqualToString:@"True"])
+                {
+                    NSDictionary* userInfo2 = @{@"textInfo" : @"Hazardous Area!"};
+                    NSString* notiName2 = @"HudLayerUpdateTextNotification";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                        object:self userInfo:userInfo2];
+                }
+                else if (checkLevelUp && [checkLevelUp isEqualToString:@"True"])
+                {
+                    if (zombiesDropped >=4)
+                    {
+                        // Go to level up scene
+                        NSLog(@"CheckLevelUpHit");
+                        [[CCDirector sharedDirector] replaceScene:[LevelUpScene scene]
+                                                   withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                        
+                    }
+                    else
+                    {
+                        // Alert user to check map for remaining zombies
+                        NSDictionary* userInfo2 = @{@"textInfo" : @"Clear all the zombies!"};
+                        NSString* notiName2 = @"HudLayerUpdateTextNotification";
+                        [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
+                                                                            object:self userInfo:userInfo2];
+
+                    }
+                }
+                else
+                {
+                    
+                }
+            }
+        }
+        // Setting characters position, granted no collison detected
+        CCActionMoveTo *moveChar = [CCActionMoveTo actionWithDuration:0.5 position:playerPos];
+        CCActionSequence *moveCharacter = [CCActionSequence actions: moveChar, [CCActionDelay actionWithDuration:2.0f], nil];
+        [mainChar runAction:moveCharacter];
     }
     // Setting the center of screen on the character
     [self setCenterOfScreen:mainChar.position];
@@ -274,89 +359,6 @@
 {
     NSLog(@"Setting Player Position!");
 
-   
-    // Obtaining user's requested position and storing it into CGPoint
-    CGPoint mapTileCoords = [self returnCoordsFromPosition:position];
-    // Obtaining tileGID properties for requested tile position
-    int tileGidCheck = [metaTileLayer tileGIDAt:mapTileCoords];
-    int tileGidCheck2 = [metaTileTwoLayer tileGIDAt:mapTileCoords];
-
-    // If indeed in the metaLayer, and contains collidable property set to true, then return out of method and prevent location from being set
-    if (tileGidCheck) {
-        NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck];
-        if (properties) {
-            // Setting properties Collidable to be checked, then performing the appropriate action after checking tile
-            NSString *checkCollision = properties[@"Collidable"];
-            NSString *checkCollectable = properties[@"Collectable"];
-            if (checkCollision && [checkCollision isEqualToString:@"True"]) {
-                // Return out of method / ie. do not call the mainChar.position = position line beneath this conditional
-                return;
-                NSLog(@"Meta Tile (Wall Blocker) detected!");
-            }
-            else if (checkCollectable && [checkCollectable isEqualToString:@"True"])
-            {
-                if (daggerPickedUp == NO)
-                {
-                    NSLog(@"Meta Tile (Collectable) detected!");
-                    [[OALSimpleAudio sharedInstance] playEffect:@"itemPickup.mp3" volume:0.7f pitch:1.0f pan:0 loop:NO];
-                
-                    NSDictionary* userInfo2 = @{@"textInfo" : @"You have found a dagger!"};
-                    NSString* notiName2 = @"HudLayerUpdateTextNotification";
-                    [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
-                                                                    object:self userInfo:userInfo2];
-                    
-                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                    [defaults setObject:@"YES" forKey:@"daggerPickedUp"];
-                    [defaults synchronize];
-
-                    daggerPickedUp = YES;
-                    CCAction *blockAction = [CCActionCallBlock actionWithBlock:^{
-                        [dagger removeFromParentAndCleanup:YES];
-                        holdingDagger = YES;
-                    }];
-                    [dagger runAction:blockAction];
-                }
-            }
-            else
-            {
-                
-            }
-        }
-    }
-    else if (tileGidCheck2)
-    {
-        NSDictionary *properties = [levelOneMap propertiesForGID:tileGidCheck2];
-        if (properties) {
-            NSString *checkDeadEnd = properties[@"DeadEnd"];
-            NSString *checkLevelUp = properties[@"LevelUp"];
-            if (checkDeadEnd && [checkDeadEnd isEqualToString:@"True"])
-            {
-                // Alert user dead end
-                
-            }
-            else if (checkLevelUp && [checkLevelUp isEqualToString:@"True"])
-            {
-                if (zombiesDropped >=4)
-                {
-                    // Go to level up scene
-                    NSLog(@"CheckLevelUpHit");
-                    [[CCDirector sharedDirector] replaceScene:[LevelUpScene scene]
-                                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
-                    
-                }
-                else
-                {
-                    // Alert user to check map for remaining zombies
-                }
-            }
-            else
-            {
-                
-            }
-        }
-    }
-    // Setting characters position, granted no collison detected
-    [mainChar runAction:[CCActionMoveTo actionWithDuration:0.5 position:position]];
 }
 - (void) touchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
@@ -449,11 +451,12 @@
     dagger.position = ccp(x5,y5);
     [self addChild:dagger];
 }
+
+#pragma mark - Collisions
 // Method to call when there is a collision between ammo & a monster npc!
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionMonster:(CCNode *)monster collisionAmmo:(CCNode *)ammo
 {
     [monster stopAllActions];
-    
     
     // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
     
@@ -462,8 +465,8 @@
     CCActionRotateTo* actionSpin = [CCActionRotateBy actionWithDuration:0 angle:90];
     [monster runAction:actionSpin];
     
-    CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.8];
-    CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.5];
+    CCActionDelay *corpseDecayDelay = [CCActionDelay actionWithDuration:0.6];
+    CCActionFadeOut *corpseFade = [CCActionFadeOut actionWithDuration:0.3];
     
     CCActionRemove *removeElement = [CCActionRemove action];
     CCActionSequence* monsterDeathSequence = [CCActionSequence actions:corpseDecayDelay,corpseFade, removeElement, nil];
@@ -473,16 +476,16 @@
 
     return YES;
 }
+
 - (void)zombieKilledUpdateHud
 {
     zombiesDropped++;
     if (zombiesDropped >= 4)
     {
-        NSDictionary* userInfo2 = @{@"textInfo" : @"Zombies cleared, head north of town!"};
+        NSDictionary* userInfo2 = @{@"textInfo" : @"Level clear, head north!"};
         NSString* notiName2 = @"HudLayerUpdateTextNotification";
         [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
                                                             object:self userInfo:userInfo2];
-        
     }
     else
     {
@@ -490,7 +493,6 @@
         NSString* notiName2 = @"HudLayerUpdateTextNotification";
         [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
                                                             object:self userInfo:userInfo2];
-        
     }
     NSDictionary* userInfo = @{@"zombiesKilled" : [NSString stringWithFormat:@"Zombies Killed: %d", zombiesDropped]};
     NSString* notiName = @"HudLayerUpdateZombieNotification";
@@ -501,12 +503,10 @@
 
 - (BOOL)ccPhysicsCollisionBegin:(CCPhysicsCollisionPair *)pair collisionPlayer:(CCNode *)user collisionMonster:(CCNode *)monster
 {
-
     if (holdingDagger)
     {
         [monster stopAllActions];
-        
-        
+    
         // Playing the zombie sound effect with maximized volume, and of course no loop, once the zombie npc is hit
         
         [[OALSimpleAudio sharedInstance] playEffect:@"Zombie.mp3" volume:10.0f pitch:1.0f pan:0 loop:NO];
@@ -522,8 +522,6 @@
         [monster runAction:monsterDeathSequence];
         
         [self zombieKilledUpdateHud];
-        
-
     }
     else
     {
@@ -537,10 +535,9 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:notiName
                                                                 object:self userInfo:userInfo];
             NSDictionary* userInfo2 = @{@"textInfo" : @"-1 life"};
-            NSString* notiName2 = @"HudLayerUpdateTextNotification";
+            NSString* notiName2 = @"HudLayerUpdateHealthTextNotification";
             [[NSNotificationCenter defaultCenter] postNotificationName:notiName2
                                                                 object:self userInfo:userInfo2];
-
         }
         else
         {
@@ -556,6 +553,8 @@
     }
         return NO;
 }
+#pragma mark - Animations
+
 - (void)animateMonsters {
   
     int minimumTime = 3.0;
