@@ -102,6 +102,10 @@
             collectedBase.position = ccp(viewSize.width *0.5,viewSize.height*0.65);
             [self addChild:collectedBase z:5];
         
+            // How to Play label
+            CCLabelTTF *howToPlay = [CCLabelTTF labelWithString:@"How To Play: \n-Tap screen to navigate\n-Tap bullet icon to shoot\n-Follow on screen objectives\nbased on the current level!" fontName:@"Arial" fontSize:12.0f];
+            howToPlay.position = ccp(viewSize.width * 0.88, viewSize.height * 0.86);
+            [self addChild:howToPlay];
             
         }
         else
@@ -159,7 +163,11 @@
             collectedBase.visible = FALSE;
             collectedBase.position = ccp(viewSize.width *0.5,viewSize.height*0.65);
             [self addChild:collectedBase z:5];
-
+            
+            // How to Play label
+            CCLabelTTF *howToPlay = [CCLabelTTF labelWithString:@"How To Play: \n-Tap screen to move\n-Tap bullet icon to shoot\n-Follow objectives" fontName:@"Arial" fontSize:8.0f];
+            howToPlay.position = ccp(viewSize.width * 0.885, viewSize.height * 0.80);
+            [self addChild:howToPlay];
         }
     }
     return self;

@@ -39,7 +39,6 @@
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         CGSize viewSize = [[CCDirector sharedDirector] viewSize];
 
-        // Create a colored background (Dark Grey)
         CCSprite *bgImage = [CCSprite spriteWithImageNamed:@"aftermathBG.png"];
         bgImage.scale = 2.5f;
         [self addChild:bgImage z:-100];
@@ -60,14 +59,12 @@
         [creditsButton setTarget:self selector:@selector(onCreditsClicked:)];
         [self addChild:creditsButton];
 
-
         
-        }
+    }
     else
     {
         CGSize viewSize = [[CCDirector sharedDirector] viewSize];
 
-        // Create a colored background (Dark Grey)
         CCSprite *bgImage = [CCSprite spriteWithImageNamed:@"aftermathBG.png"];
         [self addChild:bgImage z:-100];
 
@@ -101,13 +98,13 @@
 {
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[Level1Scene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.5f]];
 }
 - (void)onCreditsClicked:(id)sender
 {
     // start spinning scene with transition
     [[CCDirector sharedDirector] replaceScene:[CreditsScene scene]
-                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:1.0f]];
+                               withTransition:[CCTransition transitionPushWithDirection:CCTransitionDirectionLeft duration:0.5f]];
 }
 
 // -----------------------------------------------------------------------
